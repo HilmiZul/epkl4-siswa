@@ -1,0 +1,64 @@
+<template>
+  <div class="card shadow-lg">
+    <div class="card-body">
+      <form @submit.prevent="handleLogin">
+        <div v-if="isError" class="mb-4">
+          <div class="alert alert-danger rounded-0 border border-2 border-dark">Kombinasi salah! Coba lagi besok!</div>
+        </div>
+        <div class="mb-4">
+          <label for="email">Email</label>
+          <input v-model="email" type="email" class="form form-control form-control-lg" name="email" id="email" placeholder="ketik email sekolah-mu " required autofocus>
+        </div>
+        <div class="mb-4">
+          <label for="password">Password</label>
+          <input v-model="password" :disabled="email.length < 3" type="password" class="form form-control form-control-lg" name="password" id="password" placeholder="password-nya juga" required>
+        </div>
+        <div class="d-grid gap-2 mt-5">
+          <button :disabled="sending || email.length < 3 || password.length < 5" class="btn btn-success btn-lg">
+            <span v-if="!sending"><i class="bi bi-send"></i> Gass masuk!</span>
+            <span v-else>tunggu bentar...</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <Footer />
+</template>
+
+<script setup>
+definePageMeta({
+  layout: 'login',
+  middleware: 'check-auth'
+})
+useHead({ title: "Login — e-PKL / SMKN 4 Tasikmalaya." })
+
+let client = usePocketBaseClient()
+let user = usePocketBaseUser()
+// console.log(user.value)
+// if(user.value) navigateTo('/')
+let email = ref('')
+let password = ref('')
+let isError = ref(false)
+let sending = ref(false)
+
+async function handleLogin() {
+  isError.value = false
+  sending.value = true
+  try {
+    client.autoCancellation(false)
+    let authData = await client.collection('users_siswa').authWithPassword(
+      email.value,
+      password.value
+    )
+    if(authData) {
+      sending.value = false
+      navigateTo('/')
+    }
+  } catch (error) {
+    isError.value = true
+    sending.value = false
+    password.value = ''
+  }
+}
+</script>
+
