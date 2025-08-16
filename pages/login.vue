@@ -14,7 +14,7 @@
           <input v-model="password" :disabled="email.length < 3" type="password" class="form form-control form-control-lg" name="password" id="password" placeholder="password-nya juga" required>
         </div>
         <div class="d-grid gap-2 mt-5">
-          <button :disabled="sending || email.length < 3 || password.length < 5" class="btn btn-success btn-lg">
+          <button :disabled="sending || email.length < 3 || password.length < 5" class="btn btn-warning btn-lg">
             <span v-if="!sending"><i class="bi bi-send"></i> Gass masuk!</span>
             <span v-else>tunggu bentar...</span>
           </button>

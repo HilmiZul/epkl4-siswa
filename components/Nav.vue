@@ -8,10 +8,10 @@
         <nav>
           <ol class="list-group list-group-flush public-sans">
             <nuxt-link to="/">
-              <li class="list-group-item"><i class="bi bi-pie-chart-fill"></i> Info</li>
+              <li class="list-group-item"><i class="bi bi-info-square"></i> Overview</li>
             </nuxt-link>
             <nuxt-link to="/elemen">
-              <li class="list-group-item"><i class="bi bi-journal-bookmark-fill"></i> Elemen CP</li>
+              <li class="list-group-item"><i class="bi bi-journal-bookmark-fill"></i> Elemen</li>
             </nuxt-link>
             <nuxt-link to="/jurnal">
               <li class="list-group-item"><i class="bi bi-journals"></i> Jurnal Harian</li>
@@ -50,7 +50,7 @@ a:hover > li {
   border-bottom: 2px solid #000 !important;
 }
 .list-group-item:hover {
-  background-color: #b5d2ad;
+  background-color: #fafa96;
 }
 @media screen and (max-width: 992px) {
   .side-nav {

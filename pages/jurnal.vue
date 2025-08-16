@@ -3,19 +3,20 @@
     <div class="card-header">
       <span class="h5"><i class="bi bi-journals"></i> Jurnal Harian</span>
       <span class="float-end journal-button">
-        <button data-bs-toggle="modal" data-bs-target="#buat-jurnal-baru" class="btn btn-info btn-sm"><i class="bi bi-pencil-square"></i> Buat Jurnal Baru</button>
+        <button data-bs-toggle="modal" data-bs-target="#buat-jurnal-baru" class="btn btn-info btn-sm"><i class="bi bi-pencil-square"></i> Buat baru</button>
       </span>
       <div class="modal" id="buat-jurnal-baru" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content rounded-0 border border-2 border-dark shadow-lg">
             <div class="modal-header fw-bold bg-success rounded-0 border-bottom borer-2 border-dark">
-              <i class="bi bi-pencil-square"></i> Buat Jurnal Baru
+              Buat Jurnal Baru
+              <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <form @submit.prevent="buatJurnalBaru">
                 <div class="mb-3">
                   <select v-model="form.elemen" class="form form-control form-select" required>
-                    <option disabled value="" selected>&#8212; Elemen &#8212;</option>
+                    <option disabled value="" selected>&#8212; Pilih Elemen &#8212;</option>
                     <option v-for="elemen in elements" :key="elemen.id" :value="elemen.id">{{ elemen.elemen }}</option>
                   </select>
                 </div>
@@ -27,11 +28,10 @@
                   <label for="foto" class="label-berkas p-2 hand-cursor"><i class="bi bi-camera-fill"></i> Ambil foto kegiatan?</label>
                   <input class="form-control-file" type="file" id="foto" accept="image/*" capture="user" />
                 </div> -->
-                <button :disabled="isPosting || form.elemen.length < 1 || form.deskripsi.length < 50" class="btn btn-success btn-sm me-2" data-bs-dismiss="modal" type="button">
+                <button :disabled="isPosting || form.elemen.length < 1 || form.deskripsi.length < 50" class="btn btn-success btn-sm me-2" data-bs-dismiss="modal">
                   <span v-if="!isPosting"><i class="bi bi-send"></i> Kirim</span>
                   <span v-else>Sedang mengirim</span>
                 </button>
-                <button data-bs-dismiss="modal" class="btn btn-light btn-sm">Tutup</button>
               </form>
             </div>
           </div>
@@ -44,7 +44,7 @@
           <form @submit.prevent="buatJurnalBaru">
             <div class="mb-3">
               <select v-model="form.elemen" class="form form-control form-select" required>
-                <option disabled value="" selected>&#8212; Elemen &#8212;</option>
+                <option disabled value="" selected>&#8212; Pilih Elemen &#8212;</option>
                 <option v-for="elemen in elements" :key="elemen.id" :value="elemen.id">{{ elemen.elemen }}</option>
               </select>
             </div>
@@ -74,8 +74,7 @@
               <Loading v-if="isLoadingJournals" />
               <div v-else v-for="journal in journals.items" :key="journal.id" class="card jurnal-hover">
                 <div class="card-body">
-                  <div><strong>{{ journal.expand.siswa.expand.siswa.nama }}</strong> &bull; <span class="text-muted fst-italic small">{{ journal.created }}</span></div>
-                  <div class="my-2">
+                  <div class="mb-3 small">
                     <span v-if="journal.expand.elemen.elemen == 'Lain-lain'" class="border border-2 border-dark p-1 bg-danger"><i class="bi bi-journal-bookmark-fill"></i>
                       {{ journal.expand.elemen.elemen }}
                     </span>
@@ -83,6 +82,7 @@
                       {{ journal.expand.elemen.elemen }}
                     </span>
                   </div>
+                  <span class="text-muted fst-italic small"><i class="bi bi-calendar2-date"></i> {{ journal.created }}</span>
                   <article class="my-2 pre-text">
                     {{ journal.deskripsi }}
                   </article>
@@ -134,6 +134,7 @@ let form = ref({
 })
 
 async function buatJurnalBaru() {
+  // console.log(form.value)
   isPosting.value = true
   isSaved.value = false
   client.autoCancellation(false)

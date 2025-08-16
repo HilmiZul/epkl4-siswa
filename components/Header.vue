@@ -1,5 +1,5 @@
 <template>
-  <div class="card mb-5 border border-2 border-dark bg-success">
+  <div class="card mb-5 border border-2 border-dark bg-warning">
     <div class="fs-1 text-center lexend-mega py-1">
       <span>e-PKL.</span>
     </div>
