@@ -6,15 +6,15 @@
           <div class="alert alert-danger rounded-0 border border-2 border-dark">Kombinasi salah! Coba lagi besok!</div>
         </div>
         <div class="mb-4">
-          <label for="email">Email</label>
-          <input v-model="email" type="email" class="form form-control form-control-lg" name="email" id="email" placeholder="ketik email sekolah-mu " required autofocus>
+          <label for="email">Username</label>
+          <input v-model="username" type="text" class="form form-control form-control-lg" name="email" id="email" placeholder="gunakan NIS sebagai username" required autofocus>
         </div>
         <div class="mb-4">
           <label for="password">Password</label>
-          <input v-model="password" :disabled="email.length < 3" type="password" class="form form-control form-control-lg" name="password" id="password" placeholder="password-nya juga" required>
+          <input v-model="password" :disabled="username.length < 3" type="password" class="form form-control form-control-lg" name="password" id="password" placeholder="password-nya juga" required>
         </div>
         <div class="d-grid gap-2 mt-5">
-          <button :disabled="sending || email.length < 3 || password.length < 5" class="btn btn-warning btn-lg">
+          <button :disabled="sending || username.length < 3 || password.length < 5" class="btn btn-warning btn-lg">
             <span v-if="!sending"><i class="bi bi-send"></i> Gass masuk!</span>
             <span v-else>tunggu bentar...</span>
           </button>
@@ -36,7 +36,7 @@ let client = usePocketBaseClient()
 let user = usePocketBaseUser()
 // console.log(user.value)
 // if(user.value) navigateTo('/')
-let email = ref('')
+let username = ref('')
 let password = ref('')
 let isError = ref(false)
 let sending = ref(false)
@@ -47,7 +47,7 @@ async function handleLogin() {
   try {
     client.autoCancellation(false)
     let authData = await client.collection('users_siswa').authWithPassword(
-      email.value,
+      username.value,
       password.value
     )
     if(authData) {

@@ -2,7 +2,7 @@
   <div class="card">
     <div class="card-header">
       <span class="h5"><i class="bi bi-journals"></i> Jurnal Harian</span>
-      <span class="float-end journal-button">
+      <span v-if="pemetaan.length > 0" class="float-end journal-button">
         <button data-bs-toggle="modal" data-bs-target="#buat-jurnal-baru" class="btn btn-info btn-sm"><i class="bi bi-pencil-square"></i> Buat baru</button>
       </span>
       <div class="modal" id="buat-jurnal-baru" tabindex="-1" aria-hidden="true">
@@ -40,7 +40,7 @@
     </div>
     <div class="card-body">
       <div class="row">
-        <div class="col-md-4 mb-3 journal-form">
+        <div v-if="pemetaan.length > 0" class="col-md-4 mb-3 journal-form">
           <form @submit.prevent="buatJurnalBaru">
             <div class="mb-3">
               <select v-model="form.elemen" class="form form-control form-select" required>
@@ -123,6 +123,7 @@ let isPosting = ref(false)
 let isSaved = ref(false)
 let elements = ref([])
 let journals = ref([])
+let pemetaan = ref([])
 let perPage = 2
 let form = ref({
   "deskripsi": "",
@@ -212,10 +213,13 @@ async function getElemenCp() {
     })
     if(res_pemetaan) {
       isLoading.value = false
-      form.value.iduka = res_pemetaan[0].iduka
-      form.value.pembimbing = res_pemetaan[0].expand.iduka.pembimbing_sekolah
-      // console.log(res_pemetaan[0].iduka)
-      // console.log(res_pemetaan[0].expand.iduka.pembimbing_sekolah)
+      pemetaan.value = res_pemetaan
+      if(res_pemetaan.length > 0) {
+        form.value.iduka = res_pemetaan[0].iduka
+        form.value.pembimbing = res_pemetaan[0].expand.iduka.pembimbing_sekolah
+        // console.log(res_pemetaan[0].iduka)
+        // console.log(res_pemetaan[0].expand.iduka.pembimbing_sekolah)
+      }
     }
   }
 }

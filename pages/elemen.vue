@@ -4,7 +4,7 @@
       <span class="h5"><i class="bi bi-journal-bookmark-fill"></i> Elemen</span>
     </div>
     <div class="card-body">
-      <div class="alert alert-warning pb-0">
+      <div class="alert alert-warning pb-0 small">
         <ul>
           <li>Berikut Elemen PKL yang sesuai dengan Program Keahlian</li>
           <li>Elemen berikut berkaitan dengan <nuxt-link to="/jurnal" class="link">Jurnal Harian</nuxt-link> yang ditulis</li>
@@ -32,9 +32,6 @@
                   <strong>Tujuan</strong>
                   <p class="pre-text">{{ elemen.tujuan }}</p>
                 </article>
-              </div>
-              <div class="modal-footer">
-                <button class="btn btn-danger" data-bs-dismiss="modal">Tutup</button>
               </div>
             </div>
           </div>

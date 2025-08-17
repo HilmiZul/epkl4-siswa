@@ -3,8 +3,7 @@
     <Header />
     <div class="card shadow-lg">
       <div class="card-body p-0">
-        <div v-if="user" class="lexend-mega text-center py-2 border-2 border-bottom border-dark">Halo, <span class="border-2 border-bottom border-dark">{{ username.toUpperCase() }}</span>! 😆
-        </div>
+        <!-- <div v-if="user" class="lexend-mega text-center py-2 border-2 border-bottom border-dark">Halo, <span class="border-2 border-bottom border-dark">{{ username.toUpperCase() }}</span>! 😆</div> -->
         <nav>
           <ol class="list-group list-group-flush public-sans">
             <nuxt-link to="/">
