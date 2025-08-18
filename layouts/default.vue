@@ -12,7 +12,7 @@
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Lexend+Mega:wght@700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
 
 @font-face {
   font-family: 'Romana BT';
@@ -26,15 +26,15 @@ html, body {
   background: #f5fff2 url('~/assets/img/bg-cloud.png') no-repeat center bottom fixed;
   background-size: cover;
   /*background-color: #a0a0a0;*/
-  font-family: "Public Sans", sans-serif;
+  font-family: "Quicksand", sans-serif;
 }
 @media (min-width: 1400px) {
   .container-fluid {
     max-width: 1500px; /* Your desired custom width */
   }
 }
-.public-sans {
-  font-family: "Public Sans", sans-serif;
+.quicksand {
+  font-family: "Quicksand", sans-serif;
   font-optical-sizing: auto;
   font-weight: 500;
   font-style: normal;
@@ -69,6 +69,7 @@ html, body {
   border: 2px solid #000 !important;
 }
 .btn {
+  font-weight: 600;
   transition: all 0.1s ease-in-out;
   border: 1.9px solid #000000;
   border-radius: 0 !important;
@@ -86,6 +87,7 @@ html, body {
   background-color: #bababa !important;
 }
 .form {
+  font-weight: 550;
   border: 1.9px solid #000000;
   border-radius: 0 !important;
   box-shadow: 0.2rem 0.2rem 0 #000000 !important;
@@ -94,7 +96,11 @@ html, body {
   border-color: #000000;
 }
 label {
-  font-weight: 700;
+  color: #030303;
+  font-size: 1em;
+  font-weight: 600;
+  letter-spacing: .05em;
+  margin-bottom: .3em;
 }
 button.btn-grey {
   background-color: #c1ccd5;
@@ -171,7 +177,7 @@ a.link {
   color: #000;
   border-bottom: 2px dashed #000;
   transition: all .2s ease-in-out;
-  padding-bottom: .2rem;
+  padding-bottom: .05em;
 }
 a.link:hover {
   color: #000;

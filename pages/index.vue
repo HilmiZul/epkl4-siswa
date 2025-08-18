@@ -13,32 +13,32 @@
               <strong>{{ peserta.nama }}</strong>! 😃
             </span>
             <span v-else>&#8212;</span>
-            <div class="row small mt-3">
+            <div class="row mt-3">
               <div class="col-md-3">
                 <div class="mb-3">
                   <div class="text-muted">Kelas</div>
-                  <span v-if="peserta">{{ peserta.kelas }}</span>
+                  <span v-if="peserta" class="fw-bold">{{ peserta.kelas }}</span>
                   <span v-else>&#8212;</span>
                 </div>
               </div>
               <div class="col-md-3">
                 <div class="mb-3">
                   <div class="text-muted">Tempat PKL</div>
-                  <span v-if="iduka">{{ iduka?.items[0].expand.iduka.nama }}</span>
+                  <span v-if="iduka" class="fw-bold">{{ iduka?.items[0].expand.iduka.nama }}</span>
                   <span v-else>Belum pemetaan</span>
                 </div>
               </div>
               <div class="col-md-3">
                 <div class="mb-3">
                   <div class="text-muted">Wilayah</div>
-                  <span v-if="iduka">{{ iduka?.items[0].expand.iduka.wilayah.charAt(0).toUpperCase() + iduka?.items[0].expand.iduka.wilayah.slice(1) }} kota</span>
+                  <span v-if="iduka" class="fw-bold">{{ iduka?.items[0].expand.iduka.wilayah.charAt(0).toUpperCase() + iduka?.items[0].expand.iduka.wilayah.slice(1) }} kota</span>
                   <span v-else>Belum pemetaan</span>
                 </div>
               </div>
               <div class="col-md-3">
                 <div class="mb-3">
                   <div class="text-muted">Guru Pembimbing</div>
-                  <span v-if="iduka">{{ iduka?.items[0].expand.iduka.expand.pembimbing_sekolah.nama }}</span>
+                  <span v-if="iduka" class="fw-bold">{{ iduka?.items[0].expand.iduka.expand.pembimbing_sekolah.nama }}</span>
                   <span v-else>Belum pemetaan</span>
                 </div>
               </div>
@@ -51,7 +51,7 @@
                     <tr v-if="pemetaan.length < 1">
                       <td class="text-muted fst-italic">Belum ada teman/pemetaan</td>
                     </tr>
-                    <tr v-for="(p,i) in pemetaan" :key="p.id">
+                    <tr v-for="(p,i) in pemetaan" :key="p.id" class="fw-bold">
                       <td width="3%">{{ i+1 }}.</td>
                       <td>{{ p.expand.siswa.nama }}</td>
                       <td>{{ p.expand.siswa.kelas }}</td>
@@ -68,7 +68,7 @@
           <nuxt-link class="link" to="/jurnal">
             <div class="card bg-info mb-3">
               <div class="card-body">
-                <div class="small">Jurnal Harian</div>
+                <div class="fw-bold">Jurnal Harian</div>
                 <strong class="fs-4">{{ countJournal }}</strong>
                 <span class="small"> halaman</span>
               </div>
@@ -79,7 +79,7 @@
           <nuxt-link class="link" to="/jurnal">
             <div class="card bg-danger mb-3">
               <div class="card-body">
-                <div class="small">Jurnal belum di validasi</div>
+                <div class="fw-bold">Jurnal belum di validasi</div>
                 <strong class="fs-4">3</strong>
                 <span class="small"> halaman</span>
               </div>
