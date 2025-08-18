@@ -83,17 +83,17 @@
                     </span>
                   </div>
                   <span class="text-muted fst-italic small"><i class="bi bi-calendar2-date"></i> {{ journal.created }}</span>
-                  <article class="my-2 pre-text">
+                  <article class="my-3 pre-text">
                     {{ journal.deskripsi }}
                   </article>
                   <!-- <div class="my-3 foto-container">
                     <img src="https://www.stonebridge.uk.com/blog/wp-content/uploads/2016/05/Web-design-and-development.jpg" alt="foto" class="foto" />
                   </div> -->
-                  <div class="text-muted small">
-                    <span class="text-danger"><i class="bi bi-heart"></i></span> Belum di Validasi
-                  </div>
-                  <div class="small">
+                  <div v-if="journal.isValid" class="small">
                     <span class="text-danger"><i class="bi bi-heart-fill"></i></span> Valid
+                  </div>
+                  <div v-else class="text-muted small">
+                    <span class="text-danger"><i class="bi bi-heart"></i></span> Belum di Validasi
                   </div>
                 </div>
               </div>
@@ -148,13 +148,13 @@ async function buatJurnalBaru() {
   }
 }
 
-async function getJournals() {
-  isLoadingJournals.value = true
+async function getJournals(loading=true) {
+  isLoadingJournals.value = loading
   client.autoCancellation(false)
   let res = await client.collection('jurnal').getList(1, perPage, {
     filter: "siswa='"+user.user.value.id+"'",
     expand: "iduka, pembimbing, siswa.siswa, elemen",
-    sort: "-created"
+    sort: "isValid, -created"
   })
   if(res) {
     isLoadingJournals.value = false
@@ -178,7 +178,7 @@ async function pagination(page) {
   let res = await client.collection('jurnal').getList(page, perPage, {
     filter: "siswa='"+user.user.value.id+"'",
     expand: "iduka, pembimbing, siswa.siswa, elemen",
-    sort: "-created"
+    sort: "isValid, -created"
   })
   if(res) {
     journals.value = res
@@ -230,8 +230,8 @@ onMounted(() => {
   getJournals()
   client.autoCancellation(false)
   client.collection('jurnal').subscribe('*', function(e) {
-    if(e.action == 'create') {
-      getJournals()
+    if(e.action == 'create' || e.action == 'update') {
+      getJournals(false)
     }
   },{})
 })
