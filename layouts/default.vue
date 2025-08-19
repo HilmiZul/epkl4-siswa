@@ -218,6 +218,6 @@ input[type="checkbox"]:not(:checked) {
 }
 .label-berkas {
   width: 100%;
-  border: 2px dashed #000 !important;
+  border: 2px dashed #4f4f4f !important;
 }
 </style>

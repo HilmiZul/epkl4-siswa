@@ -22,12 +22,14 @@
                 </div>
                 <div class="mb-3">
                   <textarea v-model="form.deskripsi" :disabled="form.elemen.length < 1" class="form form-control mb-2" placeholder="Uraikan kegiatan kamu disini..." rows="5" required></textarea>
-                  <span class="text-muted fst-italic small float-end">min 50 karakter</span>
+                  <span class="mb-3 text-muted fst-italic small float-end">min 50 karakter</span>
                 </div>
-                <!-- <div class="mb-3">
-                  <label for="foto" class="label-berkas p-2 hand-cursor"><i class="bi bi-camera-fill"></i> Ambil foto kegiatan?</label>
-                  <input class="form-control-file" type="file" id="foto" accept="image/*" capture="user" />
-                </div> -->
+                <div class="mb-3">
+                  <label for="foto" class="text-muted label-berkas p-2 hand-cursor"><i class="bi bi-camera-fill"></i> Ambil foto kegiatan?</label>
+                  <div v-if="form.foto" class="small fst-italic">Foto: {{ form.foto.name }}</div>
+                  <sup class="text-muted">(opsional)</sup>
+                  <input @change="compressFile" class="form-control-file" type="file" id="foto" accept="image/*" capture="user" />
+                </div>
                 <button :disabled="isPosting || form.elemen.length < 1 || form.deskripsi.length < 50" class="btn btn-success btn-sm me-2" data-bs-dismiss="modal">
                   <span v-if="!isPosting"><i class="bi bi-send"></i> Kirim</span>
                   <span v-else>Sedang mengirim</span>
@@ -50,12 +52,14 @@
             </div>
             <div class="mb-3">
               <textarea v-model="form.deskripsi" :disabled="form.elemen.length < 1" class="form form-control mb-2" placeholder="Uraikan kegiatan kamu disini..." rows="5" required></textarea>
-              <span class="text-muted fst-italic small float-end">min 50 karakter</span>
+              <span class="mb-3 text-muted fst-italic small float-end">min 50 karakter</span>
             </div>
-            <!-- <div class="mb-3">
-              <label for="foto" class="label-berkas p-2 hand-cursor"><i class="bi bi-camera-fill"></i> Ambil foto kegiatan?</label>
-              <input class="form-control-file" type="file" id="foto" accept="image/*" capture="user" />
-            </div> -->
+            <div class="mb-3">
+              <label for="foto" class="text-muted label-berkas p-2 hand-cursor"><i class="bi bi-camera-fill"></i> Ambil foto kegiatan?</label>
+              <div v-if="form.foto" class="small fst-italic">Foto: {{ form.foto.name }}</div>
+              <sup class="text-muted">(opsional)</sup>
+              <input @change="compressFile" class="form-control-file" type="file" id="foto" accept="image/*" capture="user" />
+            </div>
             <button :disabled="isPosting || form.elemen.length < 1 || form.deskripsi.length < 50" class="btn btn-success me-2">
               <span v-if="!isPosting"><i class="bi bi-send"></i> Kirim</span>
               <span v-else>Sedang mengirim</span>
@@ -86,14 +90,27 @@
                   <article class="my-3 pre-text">
                     {{ journal.deskripsi }}
                   </article>
-                  <!-- <div class="my-3 foto-container">
-                    <img src="https://www.stonebridge.uk.com/blog/wp-content/uploads/2016/05/Web-design-and-development.jpg" alt="foto" class="foto" />
-                  </div> -->
+                  <div v-if="journal.foto" class="my-3 foto-container hand-cursor" data-bs-toggle="modal" :data-bs-target="`#foto-${journal.id}`">
+                    <img :src="`http://localhost:8090/api/files/${journal.collectionId}/${journal.id}/${journal.foto}`" :alt="journal.deskripsi" class="foto" />
+                  </div>
                   <div v-if="journal.isValid" class="small">
                     <span class="text-danger"><i class="bi bi-heart-fill"></i></span> Valid
                   </div>
                   <div v-else class="text-muted small">
                     <span class="text-danger"><i class="bi bi-heart"></i></span> Belum di Validasi
+                  </div>
+                </div>
+                <!-- MODAL FOTO PREVIEW -->
+                <div class="modal" :id="`foto-${journal.id}`" aria-hidden="true" tabindex="-1">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button class="btn-close" data-bs-dismiss="modal" label="Close"></button>
+                      </div>
+                      <div class="modal-body p-0">
+                        <img :src="`http://localhost:8090/api/files/${journal.collectionId}/${journal.id}/${journal.foto}`" :alt="journal.deskripsi" class="foto-preview" />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -112,6 +129,8 @@
 </template>
 
 <script setup>
+import Compressor from 'compressorjs'
+
 definePageMeta({ middleware: 'auth' })
 useHead({ title: "Jurnal — e-PKL / SMKN 4 Tasikmalaya." })
 let user = usePocketBaseUser()
@@ -131,8 +150,27 @@ let form = ref({
   "siswa": user.user.value.id,
   "pembimbing": "",
   "iduka": "",
-  "program_keahlian": prokel
+  "program_keahlian": prokel,
+  "foto": ""
 })
+
+function compressFile(e) {
+  // kecilin ukuran file sebelum di unggah!
+  // sedikit nguji mental hahaha
+  // anw, Xiexie Fengyuan :thumb:
+  let file = e.target.files[0]
+  if(!file) return;
+  new Compressor(file, {
+    quality: 0.6,
+    success(result) {
+      form.value.foto = result
+      console.log(form.value.foto)
+    },
+    error(err) {
+      console.error(err.message)
+    }
+  })
+}
 
 async function buatJurnalBaru() {
   // console.log(form.value)
@@ -250,6 +288,10 @@ onMounted(() => {
   height: 100%;
   object-fit: cover;
   object-position: center;
+}
+.foto-preview {
+  width: 100%;
+  height: 100%;
 }
 .jurnal-hover:hover {
   background-color: #f7fddd;
