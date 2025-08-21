@@ -220,4 +220,7 @@ input[type="checkbox"]:not(:checked) {
   width: 100%;
   border: 2px dashed #4f4f4f !important;
 }
+.smallest {
+  font-size: .8em;
+}
 </style>

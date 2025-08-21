@@ -25,9 +25,8 @@
                   <span class="mb-3 text-muted fst-italic small float-end">min 50 karakter</span>
                 </div>
                 <div class="mb-3">
-                  <label for="foto" class="text-muted label-berkas p-2 hand-cursor"><i class="bi bi-camera-fill"></i> Ambil foto kegiatan?</label>
+                  <label for="foto" class="text-muted label-berkas p-2 hand-cursor"><i class="bi bi-camera-fill"></i> Ambil foto kegiatan? <sup class="text-muted">(opsional)</sup></label>
                   <div v-if="form.foto" class="small fst-italic">Foto: {{ form.foto.name }}</div>
-                  <sup class="text-muted">(opsional)</sup>
                   <input @change="compressFile" class="form-control-file" type="file" id="foto" accept="image/*" capture="user" />
                 </div>
                 <button :disabled="isPosting || form.elemen.length < 1 || form.deskripsi.length < 50" class="btn btn-success btn-sm me-2" data-bs-dismiss="modal">
@@ -55,9 +54,8 @@
               <span class="mb-3 text-muted fst-italic small float-end">min 50 karakter</span>
             </div>
             <div class="mb-3">
-              <label for="foto" class="text-muted label-berkas p-2 hand-cursor"><i class="bi bi-camera-fill"></i> Ambil foto kegiatan?</label>
+              <label for="foto" class="text-muted label-berkas p-2 hand-cursor"><i class="bi bi-camera-fill"></i> Ambil foto kegiatan? <sup class="text-muted">(opsional)</sup></label>
               <div v-if="form.foto" class="small fst-italic">Foto: {{ form.foto.name }}</div>
-              <sup class="text-muted">(opsional)</sup>
               <input @change="compressFile" class="form-control-file" type="file" id="foto" accept="image/*" capture="user" />
             </div>
             <button :disabled="isPosting || form.elemen.length < 1 || form.deskripsi.length < 50" class="btn btn-success me-2">
@@ -78,7 +76,7 @@
               <Loading v-if="isLoadingJournals" />
               <div v-else v-for="journal in journals.items" :key="journal.id" class="card jurnal-hover">
                 <div class="card-body">
-                  <div class="mb-3 small">
+                  <div class="mb-3 smallest">
                     <span v-if="journal.expand.elemen.elemen == 'Lain-lain'" class="border border-2 border-dark p-1 bg-danger"><i class="bi bi-journal-bookmark-fill"></i>
                       {{ journal.expand.elemen.elemen }}
                     </span>
