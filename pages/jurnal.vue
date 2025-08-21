@@ -102,9 +102,9 @@
                 </div>
                 <!-- MODAL FOTO PREVIEW -->
                 <div class="modal" :id="`foto-${journal.id}`" aria-hidden="true" tabindex="-1">
-                  <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                      <div class="modal-header">
+                  <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-content rounded-0 border border-2 border-dark shadow-lg">
+                      <div class="modal-header rounded-0">
                         <button class="btn-close" data-bs-dismiss="modal" label="Close"></button>
                       </div>
                       <div class="modal-body p-0">

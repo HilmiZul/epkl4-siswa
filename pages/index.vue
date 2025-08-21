@@ -75,12 +75,12 @@
             </div>
           </nuxt-link>
         </div>
-        <div class="col-lg-3">
+        <div v-if="countJournalNotValid > 0" class="col-lg-3">
           <nuxt-link class="link" to="/jurnal">
             <div class="card bg-danger mb-3">
               <div class="card-body">
                 <div class="fw-bold">Jurnal belum di validasi</div>
-                <strong class="fs-4">3</strong>
+                <strong class="fs-4">{{ countJournalNotValid }}</strong>
                 <span class="small"> halaman</span>
               </div>
             </div>
@@ -104,21 +104,26 @@ let pemetaan = ref([])
 let iduka = ref()
 let peserta = ref()
 
-async function getCountJournal() {
-  isLoading.value = true
+async function getCountJournal(loading=true) {
+  isLoading.value = loading
   client.autoCancellation(false)
   let res_journal = await client.collection('jurnal').getFullList({
     filter: "siswa='"+user.user.value.id+"'",
     fields: "id",
   })
-  if(res_journal) {
+  let res_journal2 = await client.collection('jurnal').getFullList({
+    filter: "siswa='"+user.user.value.id+"' && isValid=false",
+    fields: "id"
+  })
+  if(res_journal && res_journal2) {
     isLoading.value = false
     countJournal.value = res_journal.length
+    countJournalNotValid.value = res_journal2.length
   }
 }
 
-async function getInfo() {
-  isLoading.value = true
+async function getInfo(loading=true) {
+  isLoading.value = loading
   client.autoCancellation(false)
   let res_siswa = await client.collection('siswa').getOne(user.user.value.siswa, {
     expand: "program_keahlian"
@@ -150,7 +155,10 @@ onMounted(() => {
   getInfo()
   client.autoCancellation(false)
   client.collection('pemetaan').subscribe('*', function(e){
-    if(e.action == 'create' || e.action == 'update') getInfo()
+    if(e.action == 'create' || e.action == 'update') getInfo(false)
+  })
+  client.collection('jurnal').subscribe('*', function(e){
+    if(e.action == 'update') getCountJournal(false)
   })
 })
 </script>
