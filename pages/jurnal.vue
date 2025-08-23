@@ -70,6 +70,9 @@
         <div class="col">
           <div class="row">
             <div class="col-md">
+              <div v-if="!isLoadingJournals" class="mb-2 text-center text-muted">Menampilkan
+                <span v-if="journals.items">{{ journals.items.length }}</span>  dari {{ journals.totalItems }} Jurnal
+              </div>
               <div v-if="!isLoadingJournals" class="text-center text-muted fst-italic">
                 <span v-if="journals.totalItems == 0">Belum ada jurnal</span>
               </div>
