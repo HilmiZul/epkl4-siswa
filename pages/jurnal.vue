@@ -70,10 +70,9 @@
         <div class="col">
           <div class="row">
             <div class="col-md">
-              <div v-if="journals" class="text-muted smallest">
-                Halaman {{ journals.page }} dari {{ journals.totalPages }}
-              </div>
-              <div v-if="!isLoadingJournals" class="mb-2 text-muted smallest">Menampilkan
+              <div v-if="!isLoadingJournals" class="mb-2 text-end text-muted small">
+                <span v-if="journals.totalItems" class="float-start">Halaman {{ journals.page }} dari {{ journals.totalPages }}</span>
+                Menampilkan
                 <span v-if="journals.items">{{ journals.items.length }}</span>  dari {{ journals.totalItems }} Jurnal
               </div>
               <div v-if="!isLoadingJournals" class="text-center text-muted fst-italic">
@@ -82,15 +81,15 @@
               <Loading v-if="isLoadingJournals" />
               <div v-else v-for="journal in journals.items" :key="journal.id" class="card jurnal-hover">
                 <div class="card-body">
-                  <div class="mb-3 smallest">
-                    <span v-if="journal.expand.elemen.elemen == 'Lain-lain'" class="border border-2 border-dark p-1 bg-danger"><i class="bi bi-journal-bookmark-fill"></i>
-                      {{ journal.expand.elemen.elemen }}
-                    </span>
-                    <span v-else class="border border-2 border-dark p-1 bg-info"><i class="bi bi-journal-bookmark-fill"></i>
-                      {{ journal.expand.elemen.elemen }}
-                    </span>
+                  <div class="bookmark fs-2">
+                    <div class="bookmark-icon text-danger" v-if="journal.expand.elemen.elemen == 'Lain-lain'"><i class="bi bi-bookmark-fill"></i></div>
+                    <div class="bookmark-icon text-info" v-else><i class="bi bi-bookmark-fill"></i></div>
                   </div>
-                  <span class="text-muted fst-italic small"><i class="bi bi-calendar2-date"></i> {{ journal.created }}</span>
+                  <div class="mb-1 mt-3 smallest fw-bold">
+                    <span v-if="journal.expand.elemen.elemen == 'Lain-lain'">{{ journal.expand.elemen.elemen }}</span>
+                    <span v-else>{{ journal.expand.elemen.elemen }}</span>
+                  </div>
+                  <span class="text-muted fst-italic smallest"><i class="bi bi-calendar2-date"></i> {{ journal.created }}</span>
                   <article class="my-3 pre-text">
                     {{ journal.deskripsi }}
                   </article>
@@ -121,7 +120,10 @@
             </div>
           </div>
           <div class="row my-4 mb-2">
-            <div v-if="!isLoadingJournals" class="col text-end">
+            <div v-if="!isLoadingJournals" class="col">
+              <div v-if="journals" class="text-muted small mb-2">
+                <span v-if="journals.totalItems">Halaman {{ journals.page }} dari {{ journals.totalPages }}</span>
+              </div>
               <button :disabled="journals.page < 2" @click="pagination(journals.page - 1)" class="btn btn-info me-2"><i class="bi bi-arrow-left"></i> sebelumnya</button>
               <button :disabled="journals.page >= journals.totalPages" @click="pagination(journals.page + 1)" class="btn btn-info">lanjut <i class="bi bi-arrow-right"></i></button>
             </div>
@@ -315,5 +317,13 @@ onMounted(() => {
 }
 .pre-text {
   white-space: pre-wrap;
+}
+.bookmark {
+  position: relative;
+}
+.bookmark .bookmark-icon {
+  position: absolute;
+  top: -32px;
+  left: -5px;
 }
 </style>

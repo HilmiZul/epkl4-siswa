@@ -68,9 +68,9 @@
           <nuxt-link class="link" to="/jurnal">
             <div class="card bg-info mb-3">
               <div class="card-body">
-                <div class="fw-bold">Jurnal Harian</div>
                 <strong class="fs-4">{{ countJournal }}</strong>
-                <span class="small"> halaman</span>
+                <div class="small">Jurnal Harian</div>
+                <!-- <span class="small"> halaman</span> -->
               </div>
             </div>
           </nuxt-link>
@@ -79,9 +79,9 @@
           <nuxt-link class="link" to="/jurnal">
             <div class="card bg-danger mb-3">
               <div class="card-body">
-                <div class="fw-bold">Jurnal belum di validasi</div>
                 <strong class="fs-4">{{ countJournalNotValid }}</strong>
-                <span class="small"> halaman</span>
+                <div class="small">Jurnal belum di validasi</div>
+                <!-- <span class="small"> halaman</span> -->
               </div>
             </div>
           </nuxt-link>
