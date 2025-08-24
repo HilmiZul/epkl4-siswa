@@ -70,6 +70,7 @@ html, body {
   color: #bababa;
 }
 .form {
+  font-size: medium;
   font-weight: 550;
   border: 1.9px solid #000000;
   border-radius: 0 !important;
@@ -116,5 +117,22 @@ label {
   font-weight: 600;
   letter-spacing: .05em;
   margin-bottom: .3em;
+}
+a.link {
+  text-decoration: none;
+  color: #000;
+  border-bottom: 2px dashed #000;
+  transition: all .2s ease-in-out;
+  padding-bottom: .05em;
+}
+a.link:hover {
+  color: #000;
+  border-bottom: 2px solid #000;
+}
+.hand-cursor {
+  cursor: pointer;
+}
+.smallest {
+  font-size: small;
 }
 </style>

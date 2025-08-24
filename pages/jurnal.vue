@@ -8,7 +8,7 @@
       <div class="modal" id="buat-jurnal-baru" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content rounded-0 border border-2 border-dark shadow-lg">
-            <div class="modal-header fw-bold bg-success rounded-0 border-bottom borer-2 border-dark">
+            <div class="modal-header fw-bold bg-success rounded-0 border-0 border-bottom border-2 border-dark">
               Buat Jurnal Baru
               <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -105,7 +105,7 @@
                 <div class="modal" :id="`foto-${journal.id}`" aria-hidden="true" tabindex="-1">
                   <div class="modal-dialog modal-dialog-centered modal-lg">
                     <div class="modal-content rounded-0 border border-2 border-dark shadow-lg">
-                      <div class="modal-header rounded-0">
+                      <div class="modal-header rounded-0 border-0 border-bottom border-2 border-dark">
                         <button class="btn-close" data-bs-dismiss="modal" label="Close"></button>
                       </div>
                       <div class="modal-body p-0">
