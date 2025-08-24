@@ -27,7 +27,7 @@
                 <div class="mb-3">
                   <label for="foto" class="text-muted label-berkas p-2 hand-cursor"><i class="bi bi-camera-fill"></i> Ambil foto kegiatan? <sup class="text-muted">(opsional)</sup></label>
                   <div v-if="form.foto" class="small fst-italic">Foto: {{ form.foto.name }}</div>
-                  <input @change="compressFile" class="form-control-file" type="file" id="foto" accept="image/*" capture="user" />
+                  <input @change="compressFile" :disabled="form.elemen.length < 1 || form.deskripsi.length < 50" class="form-control-file" type="file" id="foto" accept="image/*" capture="user" />
                 </div>
                 <button :disabled="isPosting || form.elemen.length < 1 || form.deskripsi.length < 50" class="btn btn-success btn-sm me-2" data-bs-dismiss="modal">
                   <span v-if="!isPosting"><i class="bi bi-send"></i> Kirim</span>
@@ -56,7 +56,7 @@
             <div class="mb-3">
               <label for="foto" class="text-muted label-berkas p-2 hand-cursor"><i class="bi bi-camera-fill"></i> Ambil foto kegiatan? <sup class="text-muted">(opsional)</sup></label>
               <div v-if="form.foto" class="small fst-italic">Foto: {{ form.foto.name }}</div>
-              <input @change="compressFile" class="form-control-file" type="file" id="foto" accept="image/*" capture="user" />
+              <input @change="compressFile" :disabled="form.elemen.length < 1 || form.deskripsi.length < 50" class="form-control-file" type="file" id="foto" accept="image/*" capture="user" />
             </div>
             <button :disabled="isPosting || form.elemen.length < 1 || form.deskripsi.length < 50" class="btn btn-success me-2">
               <span v-if="!isPosting"><i class="bi bi-send"></i> Kirim</span>
@@ -70,7 +70,10 @@
         <div class="col">
           <div class="row">
             <div class="col-md">
-              <div v-if="!isLoadingJournals" class="mb-2 text-center text-muted">Menampilkan
+              <div v-if="journals" class="text-muted smallest">
+                Halaman {{ journals.page }} dari {{ journals.totalPages }}
+              </div>
+              <div v-if="!isLoadingJournals" class="mb-2 text-muted smallest">Menampilkan
                 <span v-if="journals.items">{{ journals.items.length }}</span>  dari {{ journals.totalItems }} Jurnal
               </div>
               <div v-if="!isLoadingJournals" class="text-center text-muted fst-italic">
@@ -144,7 +147,7 @@ let isSaved = ref(false)
 let elements = ref([])
 let journals = ref([])
 let pemetaan = ref([])
-let perPage = 2
+let perPage = 5
 let form = ref({
   "deskripsi": "",
   "elemen": "",
@@ -165,7 +168,6 @@ function compressFile(e) {
     quality: 0.6,
     success(result) {
       form.value.foto = result
-      console.log(form.value.foto)
     },
     error(err) {
       console.error(err.message)
@@ -184,6 +186,7 @@ async function buatJurnalBaru() {
     isSaved.value = true
     form.value.elemen = ""
     form.value.deskripsi = ""
+    form.value.foto = ""
   }
 }
 
