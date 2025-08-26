@@ -94,7 +94,7 @@
                     {{ journal.deskripsi }}
                   </article>
                   <div v-if="journal.foto" class="my-3 foto-container hand-cursor" data-bs-toggle="modal" :data-bs-target="`#foto-${journal.id}`">
-                    <img :src="`http://localhost:8090/api/files/${journal.collectionId}/${journal.id}/${journal.foto}`" :alt="journal.deskripsi" class="foto" />
+													<img :src="`${host}/api/files/${journal.collectionId}/${journal.id}/${journal.foto}`" :alt="journal.deskripsi" class="foto" />
                   </div>
                   <div v-if="journal.isValid" class="small">
                     <span class="text-danger"><i class="bi bi-heart-fill"></i></span> Valid
@@ -111,7 +111,7 @@
                         <button class="btn-close" data-bs-dismiss="modal" label="Close"></button>
                       </div>
                       <div class="modal-body p-0">
-                        <img :src="`http://localhost:8090/api/files/${journal.collectionId}/${journal.id}/${journal.foto}`" :alt="journal.deskripsi" class="foto-preview" />
+															<img :src="`${host}/api/files/${journal.collectionId}/${journal.id}/${journal.foto}`" :alt="journal.deskripsi" class="foto-preview" />
                       </div>
                     </div>
                   </div>
@@ -139,6 +139,8 @@ import Compressor from 'compressorjs'
 
 definePageMeta({ middleware: 'auth' })
 useHead({ title: "Jurnal — e-PKL / SMKN 4 Tasikmalaya." })
+let config = useRuntimeConfig()
+let host = config.public.apiBaseUrl+":"+config.public.apiPort
 let user = usePocketBaseUser()
 let client = usePocketBaseClient()
 let prokel = user.user.value.program_keahlian
