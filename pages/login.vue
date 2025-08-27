@@ -30,9 +30,12 @@
               <button class="btn-close" label="Close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body small">
-              <div class="mb-3">
-                <input v-model="keyword" @input="getStudents" class="form form-control" type="search" placeholder="🔎 Cari nama kamu">
-              </div>
+              <form @submit.prevent="cariPesertaByNama">
+                <div class="input-group mb-3">
+                  <input v-model="keyword" class="form form-control" type="search" placeholder="🔎 Ketik nama kamu">
+                  <button class="btn btn-warning">Cari</button>
+                </div>
+              </form>
               <Loading v-if="isLoading" col="12" row="1" />
               <div v-else-if="students && students.totalItems < 1" class="my-3 text-center fw-bold">Tidak ditemukan</div>
               <ul v-else class="list-group mb-3">
@@ -41,8 +44,8 @@
                   <div class="text-grey small">{{ student.nama }}</div>
                 </li>
               </ul>
-              <button :disabled="students.page < 2" @click="pagination(students.page - 1)" class="btn btn-warning btn-sm me-2 float-start"><i class="bi bi-arrow-left"></i> sebelumnya</button>
-              <button :disabled="students.page >= students.totalPages" @click="pagination(students.page + 1)" class="btn btn-warning btn-sm float-end">lanjut <i class="bi bi-arrow-right"></i></button>
+              <!-- <button :disabled="students.page < 2" @click="pagination(students.page - 1)" class="btn btn-warning btn-sm me-2 float-start"><i class="bi bi-arrow-left"></i> sebelumnya</button>
+              <button :disabled="students.page >= students.totalPages" @click="pagination(students.page + 1)" class="btn btn-warning btn-sm float-end">lanjut <i class="bi bi-arrow-right"></i></button> -->
             </div>
           </div>
         </div>
@@ -67,7 +70,7 @@ let username = ref('')
 let password = ref('')
 let isError = ref(false)
 let sending = ref(false)
-let isLoading = ref(true)
+let isLoading = ref(false)
 let perPage = ref(10)
 let students = ref([])
 let keyword = ref('')
@@ -92,21 +95,22 @@ async function handleLogin() {
   }
 }
 
-async function getStudents() {
+async function cariPesertaByNama() {
   isLoading.vaue = true
   let queryFilter = ""
   if(keyword.value.length > 0) {
     queryFilter = "nama~'"+keyword.value+"'"
-  }
-  client.autoCancellation(false)
-  let res = await client.collection('siswa').getList(1, perPage.value, {
-    filter: queryFilter,
-    expand: "program_keahlian",
-    sort: "program_keahlian, kelas, nama"
-  })
-  if(res) {
-    isLoading.value = false
-    students.value = res
+    client.autoCancellation(false)
+    let res = await client.collection('siswa').getList(1, perPage.value, {
+      filter: queryFilter,
+      sort: "kelas, nama"
+    })
+    if(res) {
+      isLoading.value = false
+      students.value = res
+    }
+  } else {
+    students.value = []
   }
 }
 
@@ -122,7 +126,5 @@ async function pagination(page) {
     students.value = res
   }
 }
-
-onMounted(() => getStudents())
 </script>
 
