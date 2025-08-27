@@ -13,7 +13,7 @@
         </div>
         <div class="mb-4">
           <label for="password">Password</label>
-          <input v-model="password" :disabled="username.length < 3" type="password" class="form form-control form-control-lg" name="password" id="password" placeholder="ketik password-nya" required>
+          <input v-model="password" :disabled="username.length < 3" type="password" class="form form-control form-control-lg" name="password" id="password" placeholder="jangan lupa password-nya" required>
         </div>
         <div class="d-grid gap-2 mt-5">
           <button :disabled="sending || username.length < 3 || password.length < 5" class="btn btn-warning btn-lg">
@@ -31,9 +31,10 @@
             </div>
             <div class="modal-body small">
               <div class="mb-3">
-                <input v-model="keyword" @input="getStudents" class="form form-control" type="search" placeholder="🔎 Cari bedasarkan nama kamu">
+                <input v-model="keyword" @input="getStudents" class="form form-control" type="search" placeholder="🔎 Cari nama kamu">
               </div>
-              <div v-if="students && students.totalItems < 1" class="my-3 text-center fw-bold">Tidak ditemukan</div>
+              <Loading v-if="isLoading" col="12" row="1" />
+              <div v-else-if="students && students.totalItems < 1" class="my-3 text-center fw-bold">Tidak ditemukan</div>
               <ul v-else class="list-group mb-3">
                 <li v-for="student in students.items" :key="student.id" class="list-group-item">
                   <strong>{{ student.nis }}</strong>
