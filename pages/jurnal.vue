@@ -160,7 +160,7 @@ let isSaved = ref(false)
 let elements = ref([])
 let journals = ref([])
 let pemetaan = ref([])
-let perPage = 2
+let perPage = 5 
 let form = ref({
   "deskripsi": "",
   "elemen": "",
