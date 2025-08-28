@@ -2,7 +2,7 @@
   <div class="card">
     <div class="card-header">
       <span class="h5"><i class="bi bi-journals"></i> Jurnal Harian</span>
-      <span v-if="pemetaan.length > 0" class="float-end journal-button">
+      <span v-if="pemetaan.length > 0 && !havePostJournalToday" class="float-end journal-button">
         <button data-bs-toggle="modal" data-bs-target="#buat-jurnal-baru" class="btn btn-info btn-sm"><i class="bi bi-pencil-square"></i> Buat baru</button>
       </span>
       <div class="modal" id="buat-jurnal-baru" tabindex="-1" aria-hidden="true">
@@ -82,8 +82,8 @@
               <div v-else v-for="journal in journals.items" :key="journal.id" class="card jurnal-hover">
                 <div class="card-body">
                   <div class="bookmark fs-2">
-                    <div class="bookmark-icon text-danger" v-if="journal.expand.elemen.elemen == 'Lain-lain'"><i class="bi bi-bookmark-fill"></i></div>
-                    <div class="bookmark-icon text-info" v-else><i class="bi bi-bookmark-fill"></i></div>
+                    <div v-if="journal.expand.elemen.elemen == 'Lain-lain'" class="bookmark-icon text-danger"><i class="bi bi-bookmark-fill"></i></div>
+                    <div v-else class="bookmark-icon text-info"><i class="bi bi-bookmark-fill"></i></div>
                   </div>
                   <div class="mb-1 mt-3 smallest fw-bold">
                     <span v-if="journal.expand.elemen.elemen == 'Lain-lain'">{{ journal.expand.elemen.elemen }}</span>
@@ -160,7 +160,7 @@ let isSaved = ref(false)
 let elements = ref([])
 let journals = ref([])
 let pemetaan = ref([])
-let perPage = 5 
+let perPage = 5
 let form = ref({
   "deskripsi": "",
   "elemen": "",
@@ -171,6 +171,29 @@ let form = ref({
   "foto": ""
 })
 let isMovingPage = ref(false)
+let havePostJournalToday = ref(false)
+let today = useServerDay()
+
+async function isTodayPostJournal() {
+  client.autoCancellation(false)
+  let response = await client.collection('jurnal')
+    .getFirstListItem("siswa='"+user.user.value.id+"'",{
+      sort: "-created"
+    })
+  if(response) {
+    let res = response
+    const date = new Date(res.created);
+    const options = {
+      dateStyle: "long",
+    }
+    res.created = new Intl.DateTimeFormat('id-ID', options).format(date)
+    // memeriksa jurnal hari ini, jika belum mengirim maka tombol buat jurnal muncul
+    // jika sudah maka tombol buat jurnal akan hilang :D
+    if(res.created == today) {
+      havePostJournalToday.value = true
+    }
+  }
+}
 
 function compressFile(e) {
   // kecilin ukuran file sebelum di unggah!
@@ -286,10 +309,12 @@ async function getElemenCp() {
 onMounted(() => {
   getElemenCp()
   getJournals()
+  isTodayPostJournal()
   client.autoCancellation(false)
   client.collection('jurnal').subscribe('*', function(e) {
-    if(e.action == 'create' || e.action == 'update') {
+    if(e.action == 'create' || e.action == 'update' || e.action) {
       getJournals(false)
+      isTodayPostJournal()
     }
   },{})
 })
