@@ -41,7 +41,7 @@
     </div>
     <div class="card-body">
       <div class="row">
-        <div v-if="pemetaan.length > 0" class="col-md-4 mb-3 journal-form">
+        <!-- <div v-if="pemetaan.length > 0" class="col-md-4 mb-3 journal-form">
           <form @submit.prevent="buatJurnalBaru">
             <div class="mb-3">
               <select v-model="form.elemen" class="form form-control form-select" required>
@@ -66,8 +66,8 @@
               <span class="text-grey fst-italic">Berhasil terkirim</span>
             </div>
           </form>
-        </div>
-        <div class="col">
+        </div> -->
+        <div class="col-md-12">
           <div class="row">
             <div class="col-md">
               <div v-if="!isLoadingJournals" class="mb-2 text-end text-muted small">
@@ -120,12 +120,21 @@
             </div>
           </div>
           <div class="row my-4 mb-2">
-            <div v-if="!isLoadingJournals" class="col">
-              <div v-if="journals" class="text-muted small mb-2">
-                <span v-if="journals.totalItems">Halaman {{ journals.page }} dari {{ journals.totalPages }}</span>
+            <div v-if="!isLoadingJournals" class="col-md-12">
+              <div v-if="isMovingPage" class="text-muted small mb-2 fst-italic">sedang berpindah halaman</div>
+              <div v-else>
+                <div v-if="journals || isMovingPage" class="text-muted small mb-2">
+                  <span v-if="journals.totalItems">Halaman {{ journals.page }} dari {{ journals.totalPages }}</span>
+                </div>
               </div>
-              <button :disabled="journals.page < 2" @click="pagination(journals.page - 1)" class="btn btn-info me-2"><i class="bi bi-arrow-left"></i> sebelumnya</button>
-              <button :disabled="journals.page >= journals.totalPages" @click="pagination(journals.page + 1)" class="btn btn-info">lanjut <i class="bi bi-arrow-right"></i></button>
+              <button :disabled="isMovingPage || journals.page < 2" @click="pagination(journals.page - 1, false)" class="btn btn-info me-2">
+                <span v-if="isMovingPage">bentar</span>
+                <span v-else><i class="bi bi-arrow-left"></i> sebelumnya</span>
+              </button>
+              <button :disabled="isMovingPage || journals.page >= journals.totalPages" @click="pagination(journals.page + 1, false)" class="btn btn-info">
+                <span v-if="isMovingPage">bentar</span>
+                <span v-else>lanjut <i class="bi bi-arrow-right"></i></span>
+              </button>
             </div>
           </div>
         </div>
@@ -151,7 +160,7 @@ let isSaved = ref(false)
 let elements = ref([])
 let journals = ref([])
 let pemetaan = ref([])
-let perPage = 5
+let perPage = 2
 let form = ref({
   "deskripsi": "",
   "elemen": "",
@@ -161,6 +170,7 @@ let form = ref({
   "program_keahlian": prokel,
   "foto": ""
 })
+let isMovingPage = ref(false)
 
 function compressFile(e) {
   // kecilin ukuran file sebelum di unggah!
@@ -218,8 +228,9 @@ async function getJournals(loading=true) {
   }
 }
 
-async function pagination(page) {
-  isLoadingJournals.value = true
+async function pagination(page, loading=true) {
+  isLoadingJournals.value = loading
+  isMovingPage.value = true
   client.autoCancellation(false)
   let res = await client.collection('jurnal').getList(page, perPage, {
     filter: "siswa='"+user.user.value.id+"'",
@@ -237,6 +248,7 @@ async function pagination(page) {
       journals.value.items[i].created = new Intl.DateTimeFormat('id-ID', options).format(date);
     }
     isLoadingJournals.value = false
+    isMovingPage.value = false
   }
 }
 
@@ -312,11 +324,11 @@ onMounted(() => {
     display: none;
   }
 }
-@media screen and (min-width: 992px) {
+/*@media screen and (min-width: 992px) {
   .journal-button {
     display: none;
   }
-}
+}*/
 .pre-text {
   white-space: pre-wrap;
 }
