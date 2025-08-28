@@ -9,7 +9,7 @@
         <div class="mb-4">
           <label for="email">Username</label>
           <input v-model="username" type="text" class="form form-control form-control-lg mb-2" name="email" id="email" placeholder="gunakan NIS" required autofocus>
-          <span data-bs-toggle="modal" data-bs-target="#lupa-nis" class="float-end smallest hand-cursor text-muted link">Lupa NIS sendiri? 😁</span>
+					<!-- <span data-bs-toggle="modal" data-bs-target="#lupa-nis" class="float-end smallest hand-cursor text-muted link">Lupa NIS sendiri? 😁</span> -->
         </div>
         <div class="mb-4">
           <label for="password">Password</label>
@@ -22,7 +22,7 @@
           </button>
         </div>
       </form>
-      <div class="modal" id="lupa-nis" tabindex="-1" aria-hidden="true">
+      <!-- <div class="modal" id="lupa-nis" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg">
           <div class="modal-content rounded-0 border border-2 border-dark">
             <div class="modal-header bg-warning rounded-0 border-0 border-bottom border-2 border-dark">
@@ -44,12 +44,12 @@
                   <div class="text-grey small">{{ student.nama }}</div>
                 </li>
               </ul>
-              <!-- <button :disabled="students.page < 2" @click="pagination(students.page - 1)" class="btn btn-warning btn-sm me-2 float-start"><i class="bi bi-arrow-left"></i> sebelumnya</button>
-              <button :disabled="students.page >= students.totalPages" @click="pagination(students.page + 1)" class="btn btn-warning btn-sm float-end">lanjut <i class="bi bi-arrow-right"></i></button> -->
+              <button :disabled="students.page < 2" @click="pagination(students.page - 1)" class="btn btn-warning btn-sm me-2 float-start"><i class="bi bi-arrow-left"></i> sebelumnya</button>
+              <button :disabled="students.page >= students.totalPages" @click="pagination(students.page + 1)" class="btn btn-warning btn-sm float-end">lanjut <i class="bi bi-arrow-right"></i></button> 
             </div>
           </div>
         </div>
-      </div>
+			</div> -->
     </div>
   </div>
   <Footer />
