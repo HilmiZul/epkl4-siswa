@@ -14,29 +14,23 @@
         </ul>
       </div>
       <loading v-if="isLoading" />
-      <ul v-else v-for="elemen in elements" :key="elemen.id" class="list-group rounded-0">
-        <nuxt-link data-bs-toggle="modal" :data-bs-target="`#elemen-${elemen.id}`" class="list-group-item hand-cursor"><i class="bi bi-chevron-right"></i> {{ elemen.elemen }}</nuxt-link>
-        <div :id="`elemen-${elemen.id}`" class="modal" tabindex="-1" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content rounded-0 border border-2 border-dark shadow-lg">
-              <div class="modal-header fw-bold bg-success rounded-0 border-bottom borer-2 border-dark">
-                {{ elemen.elemen }}
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aira-label="Close"></button>
-              </div>
-              <div class="modal-body small">
-                <article>
-                  <strong>CP</strong>
-                  <p>{{ elemen.cp }}</p>
-                </article>
-                <article>
-                  <strong>Tujuan</strong>
-                  <p class="pre-text">{{ elemen.tujuan }}</p>
-                </article>
-              </div>
+      <div v-if="elements" class="accordion accordion-flush" id="accordion-parent">
+        <div v-for="elemen in elements" :key="elemen.id" class="accordion-item border-bottom border-1 border-dark">
+          <div class="accordion-header fw-bold">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" :data-bs-target="`#flush-${elemen.id}`" aria-expanded="false" :aria-controls="`flush-${elemen.id}`">
+              {{ elemen.elemen }}
+            </button>
+          </div>
+          <div :id="`flush-${elemen.id}`" class="accordion-collapse collapse" data-bs-parent="#accordion-parent">
+            <div class="accordion-body">
+              <strong>CP</strong>
+              <p>{{ elemen.cp }}</p>
+              <strong>Tujuan</strong>
+              <p class="pre-text">{{ elemen.tujuan }}</p>
             </div>
           </div>
         </div>
-      </ul>
+      </div>
     </div>
   </div>
 </template>
