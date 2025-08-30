@@ -67,4 +67,7 @@ onMounted(() => getElemenCp())
 .pre-text {
   white-space: pre-wrap;
 }
+button:focus {
+  box-shadow: none !important;
+}
 </style>
