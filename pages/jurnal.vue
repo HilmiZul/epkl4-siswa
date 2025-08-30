@@ -94,7 +94,7 @@
                     {{ journal.deskripsi }}
                   </article>
                   <div v-if="journal.foto" class="my-3 foto-container hand-cursor" data-bs-toggle="modal" :data-bs-target="`#foto-${journal.id}`">
-													<img :src="`${host}/api/files/${journal.collectionId}/${journal.id}/${journal.foto}`" :alt="journal.deskripsi" class="foto" />
+                    <img :src="`${host}/api/files/${journal.collectionId}/${journal.id}/${journal.foto}`" :alt="journal.deskripsi" class="foto" />
                   </div>
                   <div v-if="journal.isValid" class="small">
                     <span class="text-danger"><i class="bi bi-heart-fill"></i></span> Valid
@@ -105,13 +105,13 @@
                 </div>
                 <!-- MODAL FOTO PREVIEW -->
                 <div class="modal" :id="`foto-${journal.id}`" aria-hidden="true" tabindex="-1">
-                  <div class="modal-dialog modal-dialog-centered modal-lg">
+                  <div class="modal-dialog modal-dialog-centered modal-xl">
                     <div class="modal-content rounded-0 border border-2 border-dark shadow-lg">
                       <div class="modal-header rounded-0 border-0 border-bottom border-2 border-dark">
                         <button class="btn-close" data-bs-dismiss="modal" label="Close"></button>
                       </div>
                       <div class="modal-body p-0">
-															<img :src="`${host}/api/files/${journal.collectionId}/${journal.id}/${journal.foto}`" :alt="journal.deskripsi" class="foto-preview" />
+                        <img :src="`${host}/api/files/${journal.collectionId}/${journal.id}/${journal.foto}`" :alt="journal.deskripsi" class="foto-preview" />
                       </div>
                     </div>
                   </div>
