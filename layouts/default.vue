@@ -6,6 +6,7 @@
       <div class="col-lg-9">
         <slot />
       </div>
+      <Footer class="footer-mobile-view" />
     </div>
   </div>
 </template>
@@ -222,5 +223,10 @@ input[type="checkbox"]:not(:checked) {
 }
 .smallest {
   font-size: .8em;
+}
+@media screen and (min-width: 992px) {
+  .footer-mobile-view {
+    display: none;
+  }
 }
 </style>
