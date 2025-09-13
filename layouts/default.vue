@@ -184,6 +184,15 @@ a.link:hover {
   color: #000;
   border-bottom: 2px solid #000;
 }
+a.link-footer {
+  text-decoration: none;
+  color: inherit;
+  transition: all .1s ease-in-out;
+  padding-bottom: .01rem;
+}
+a.link-footer:hover {
+  border-bottom: 1px solid #777777
+}
 input[type="checkbox"]:checked {
   transform: scale(1.3);
   height: 1.2em;
