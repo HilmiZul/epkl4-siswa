@@ -3,7 +3,7 @@
   "version": "2.0.2",
   "author": "Zul Hilmi",
   "description": "Kehadiran dan Jurnal Peserta PKL.",
-  "license": "ISC",
+  "license": "MIT",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
