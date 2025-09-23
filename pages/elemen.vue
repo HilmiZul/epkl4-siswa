@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <div class="card-header">
-      <span class="h5"><i class="bi bi-journal-bookmark-fill"></i> Elemen</span>
+      <span class="h4"><i class="bi bi-journal-bookmark-fill"></i> Elemen</span>
     </div>
     <div class="card-body">
       <div class="alert alert-warning pb-0 small">
