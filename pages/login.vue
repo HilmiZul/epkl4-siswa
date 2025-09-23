@@ -45,7 +45,7 @@
                 </li>
               </ul>
               <button :disabled="students.page < 2" @click="pagination(students.page - 1)" class="btn btn-warning btn-sm me-2 float-start"><i class="bi bi-arrow-left"></i> sebelumnya</button>
-              <button :disabled="students.page >= students.totalPages" @click="pagination(students.page + 1)" class="btn btn-warning btn-sm float-end">lanjut <i class="bi bi-arrow-right"></i></button> 
+              <button :disabled="students.page >= students.totalPages" @click="pagination(students.page + 1)" class="btn btn-warning btn-sm float-end">lanjut <i class="bi bi-arrow-right"></i></button>
             </div>
           </div>
         </div>
@@ -80,7 +80,7 @@ async function handleLogin() {
   sending.value = true
   try {
     client.autoCancellation(false)
-    let authData = await client.collection('users_siswa').authWithPassword(
+    let authData = await client.collection('student_users').authWithPassword(
       username.value,
       password.value
     )
