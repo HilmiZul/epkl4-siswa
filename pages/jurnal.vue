@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <div class="card-header">
-      <span class="h5"><i class="bi bi-journals"></i> Jurnal Harian</span>
+      <span class="h4"><i class="bi bi-journals"></i> Jurnal Harian</span>
       <span v-if="pemetaan.length > 0 && !havePostJournalToday" class="float-end journal-button">
         <button data-bs-toggle="modal" data-bs-target="#buat-jurnal-baru" class="btn btn-info btn-sm"><i class="bi bi-pencil-square"></i> Buat baru</button>
       </span>
@@ -76,7 +76,10 @@
                 <span v-if="journals.items">{{ journals.items.length }}</span>  dari {{ journals.totalItems }} Jurnal
               </div>
               <div v-if="!isLoadingJournals" class="text-center text-muted fst-italic">
-                <span v-if="journals.totalItems == 0">Belum ada jurnal</span>
+                <span v-if="journals.totalItems == 0">
+                  <div class="fs-1 pt-5"><i class="bi bi-journals"></i></div>
+                  Belum ada jurnal
+                </span>
               </div>
               <Loading v-if="isLoadingJournals" />
               <div v-else v-for="journal in journals.items" :key="journal.id" class="card jurnal-hover">
@@ -176,23 +179,27 @@ let today = useServerDay()
 let maxLenDesc = ref(50)
 
 async function isTodayPostJournal() {
-  client.autoCancellation(false)
-  let response = await client.collection('jurnal')
-    .getFirstListItem("siswa='"+user.user.value.id+"'",{
-      sort: "-created"
-    })
-  if(response) {
-    let res = response
-    const date = new Date(res.created);
-    const options = {
-      dateStyle: "long",
+  try {
+    client.autoCancellation(false)
+    let response = await client.collection('jurnal')
+      .getFirstListItem("siswa='"+user.user.value.id+"'",{
+        sort: "-created"
+      })
+    if(response) {
+      let res = response
+      const date = new Date(res.created);
+      const options = {
+        dateStyle: "long",
+      }
+      res.created = new Intl.DateTimeFormat('id-ID', options).format(date)
+      // memeriksa jurnal hari ini, jika belum mengirim maka tombol buat jurnal muncul
+      // jika sudah maka tombol buat jurnal akan hilang :D
+      if(res.created == today) {
+        havePostJournalToday.value = true
+      }
     }
-    res.created = new Intl.DateTimeFormat('id-ID', options).format(date)
-    // memeriksa jurnal hari ini, jika belum mengirim maka tombol buat jurnal muncul
-    // jika sudah maka tombol buat jurnal akan hilang :D
-    if(res.created == today) {
-      havePostJournalToday.value = true
-    }
+  } catch(error) {
+    console.error("Belum membuat jurnal.")
   }
 }
 
@@ -283,7 +290,7 @@ async function getElemenCp() {
     filter: "program_keahlian='"+prokel+"'",
     sort: 'created'
   })
-  let res_user = await client.collection('users_siswa').getOne(user.user.value.id, {
+  let res_user = await client.collection('student_users').getOne(user.user.value.id, {
     expand: "siswa"
   })
 
