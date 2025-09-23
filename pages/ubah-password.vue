@@ -56,7 +56,7 @@ async function ubahPassword() {
   isErrorOldPass.value = false
   if(form.value.password == form.value.passwordConfirm) {
     try {
-      let data = await client.collection('users_siswa').update(user.user.value.id, form.value)
+      let data = await client.collection('student_users').update(user.user.value.id, form.value)
       if(data) {
         isSending.value = false
         isSaved.value = true
