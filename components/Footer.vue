@@ -2,23 +2,22 @@
   <div>
     <footer class="my-4 text-muted text-center smallest metropolis">
       v{{ version }} <br>
-      &copy;2018 - {{ year }} <span class="fw-bold">e-PKL</span>. <br>
-      Cooked by <nuxt-link to="#" data-bs-toggle="modal" data-bs-target="#cooked" class="link-footer">{{ author }}</nuxt-link>.
+      &copy;2018 - {{ year }} <span class="fw-bold hand-cursor link-footer" data-bs-toggle="modal" data-bs-target="#cooked">e-PKL</span>. <br>
     </footer>
-    <div class="modal" id="cooked" tabindex="-1" aria-hidden="false">
+    <div class="modal" id="cooked" tabindex="-1" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content rounded-0 border border-3 border-dark shadow-lg text-muted">
-          <div class="modal-header border-bottom border-3 border-dark bg-warning rounded-0">
+          <div class="modal-header border-bottom border-3 border-dark bg-success rounded-0">
             <span class="fs-5 fw-bold">What is e-PKL?</span>
             <button class="btn-close" label="Close" data-bs-dismiss="modal"></button>
           </div>
           <div class="modal-body small">
             <p>
               <strong>e-PKL</strong> (<strong>PKL</strong> stand for Praktik Kerja Lapangan) is an internship mapping app for students.
-              I made this project is just for fun, because the Head of the Software Engineering Department (Deni Ridwan) challenged me to make an app that can generate letters.
+              I made this project is just for fun, because the Head of the Software Engineering Department challenged me to make an app that can generate letters.
             </p>
             <p>
-              Original written in Python (with Django Framework) since 2018 and translated to Javascript (with Vue Framework) in 2022.
+              Original written in Python (with Django Framework) since 2018 and rewrite to Javascript (with Vue Framework) in 2022.
             </p>
             <p>
               This project is an open source software under MIT Licensed. Feel free if you want to contribute to this <nuxt-link to="https://github.com/hilmizul/epkl4" target="_blank" class="link-footer">project</nuxt-link>.
