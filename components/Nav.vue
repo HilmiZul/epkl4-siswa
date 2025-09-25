@@ -15,12 +15,12 @@
             <nuxt-link to="/jurnal">
               <li class="list-group-item"><i class="bi bi-journals"></i> Jurnal Harian</li>
             </nuxt-link>
+            <nuxt-link to="/sertifikat">
+              <li class="list-group-item"><i class="bi bi-patch-check"></i> Sertifikat</li>
+            </nuxt-link>
             <nuxt-link to="/ubah-password">
               <li class="list-group-item"><i class="bi bi-key"></i> Ubah Password</li>
             </nuxt-link>
-            <!-- <nuxt-link to="/verifikasi">
-              <li class="list-group-item"><i class="bi bi-patch-check-fill"></i> Verifikasi</li>
-            </nuxt-link> -->
             <nuxt-link to="/logout">
               <li class="list-group-item text-danger"><i class="bi bi-box-arrow-right"></i> Keluar</li>
             </nuxt-link>
