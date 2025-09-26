@@ -17,9 +17,9 @@
           <li class="nav-item">
             <nuxt-link class="nav-link" to="/jurnal"><i class="bi bi-journals"></i> Jurnal Harian</nuxt-link>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <nuxt-link class="nav-link" to="/sertifikat"><i class="bi bi-patch-check"></i> Sertifikat</nuxt-link>
-          </li>
+          </li> -->
           <li class="nav-item">
             <nuxt-link class="nav-link" to="/ubah-password"><i class="bi bi-key"></i> Ubah Password</nuxt-link>
           </li>
