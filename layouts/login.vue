@@ -144,4 +144,14 @@ a.link-footer {
 a.link-footer:hover {
   border-bottom: 1px solid #777777
 }
+table {
+  font-size: medium;
+}
+table thead {
+  font-size: medium;
+}
+table th {
+  background-color: #000 !important;
+  color: #fff;
+}
 </style>
