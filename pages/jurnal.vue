@@ -22,7 +22,7 @@
                 </div>
                 <div class="mb-3">
                   <textarea v-model="form.deskripsi" :disabled="form.elemen.length < 1" @input="removeSingleSpaceIfEmpty" class="form form-control mb-2" placeholder="Uraikan kegiatan kamu disini..." rows="5" required></textarea>
-                  <span class="mb-3 text-muted fst-italic small float-end">{{ form.deskripsi.length }}/{{ maxLenDesc }} karakter atau lebih</span>
+                  <span class="mb-3 text-muted fst-italic small float-end">{{ form.deskripsi.length }} karakter</span>
                 </div>
                 <div class="mb-3">
                   <label for="foto" class="text-muted label-berkas p-2 hand-cursor"><i class="bi bi-camera-fill"></i> Ambil foto kegiatan? <sup class="text-muted">(opsional)</sup></label>
