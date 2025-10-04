@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <div class="card-header">
-      <span class="h4"><i class="bi bi-journals"></i> Jurnal Harian</span>
+      <span class="h4 fw-bold"><i class="bi bi-journals"></i> Jurnal Harian</span>
       <span v-if="pemetaan.length > 0 && !havePostJournalToday" class="float-end journal-button">
         <button data-bs-toggle="modal" data-bs-target="#buat-jurnal-baru" class="btn btn-info btn-sm"><i class="bi bi-pencil-square"></i> Buat baru</button>
       </span>
@@ -75,13 +75,13 @@
                 Menampilkan
                 <span v-if="journals.items">{{ journals.items.length }}</span>  dari {{ journals.totalItems }} Jurnal
               </div>
-              <div v-if="!isLoadingJournals" class="text-center text-muted fst-italic">
+              <div v-if="!isLoadingJournals" class="text-center text-muted fw-bold fs-4">
                 <span v-if="journals.totalItems == 0">
                   <div class="fs-1 pt-5"><i class="bi bi-journals"></i></div>
                   Belum ada jurnal
                 </span>
               </div>
-              <Loading v-if="isLoadingJournals" />
+              <Loading class="py-3" v-if="isLoadingJournals" />
               <div v-else v-for="journal in journals.items" :key="journal.id" class="card jurnal-hover">
                 <div class="card-body">
                   <div class="bookmark fs-2">
@@ -199,7 +199,6 @@ async function isTodayPostJournal() {
       }
     }
   } catch(error) {
-    console.error("Belum membuat jurnal.")
   }
 }
 
