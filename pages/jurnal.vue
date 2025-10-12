@@ -9,27 +9,32 @@
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content rounded-0 border border-2 border-dark shadow-lg">
             <div class="modal-header fw-bold bg-success rounded-0 border-0 border-bottom border-2 border-dark">
-              Buat Jurnal Baru
+              <i class="bi bi-pencil-square me-2"></i> Buat Jurnal Baru
               <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <form @submit.prevent="buatJurnalBaru">
-                <div class="mb-3">
-                  <select v-model="form.elemen" class="form form-control form-select" required>
+                <div class="mb-4">
+                  <label for="elemen">Elemen</label>
+                  <select v-model="form.elemen" id="elemen" class="form form-control form-select" required>
                     <option disabled value="" selected>&#8212; Pilih Elemen &#8212;</option>
                     <option v-for="elemen in elements" :key="elemen.id" :value="elemen.id">{{ elemen.elemen }}</option>
                   </select>
                 </div>
-                <div class="mb-3">
-                  <textarea v-model="form.deskripsi" :disabled="form.elemen.length < 1" @input="removeSingleSpaceIfEmpty" class="form form-control mb-2" placeholder="Uraikan kegiatan kamu disini..." rows="5" required></textarea>
-                  <span class="mb-3 text-muted fst-italic small float-end">{{ form.deskripsi.length }} karakter</span>
+                <div class="mb-4">
+                  <label for="deskripsi">Uraian Kegiatan</label>
+                  <textarea v-model="form.deskripsi" :disabled="form.elemen.length < 1" @input="removeSingleSpaceIfEmpty" id="deskripsi" class="form form-control mb-2" placeholder="Uraikan kegiatan kamu disini minimal 125 karakter..." rows="5" required></textarea>
+                  <span class="mb-3 fw-bold small">
+                    <i v-if="form.deskripsi.length > 124" class="bi bi-check-circle-fill text-success"></i>
+                    {{ form.deskripsi.length }} <span v-if="form.deskripsi.length < 125" class="text-muted">/ 125 karakter</span>
+                  </span>
                 </div>
-                <div class="mb-3">
-                  <label for="foto" class="text-muted label-berkas p-2 hand-cursor"><i class="bi bi-camera-fill"></i> Ambil foto kegiatan? <sup class="text-muted">(opsional)</sup></label>
+                <div class="mb-4">
+                  <label for="foto" class="text-muted label-berkas p-2 hand-cursor"><i class="bi bi-camera-fill"></i> Ambil foto kegiatan</label>
                   <div v-if="form.foto" class="small fst-italic">Foto: {{ form.foto.name }}</div>
-                  <input @change="compressFile" :disabled="form.elemen.length < 1 || form.deskripsi.length < 50" class="form-control-file" type="file" id="foto" accept="image/*" capture="user" />
+                  <input @change="compressFile" :disabled="form.elemen.length < 1 || form.deskripsi.length < 125" class="form-control-file" type="file" id="foto" accept="image/*" capture="user" required />
                 </div>
-                <button :disabled="isPosting || form.elemen.length < 1 || form.deskripsi.length < 50" class="btn btn-success btn-sm me-2" data-bs-dismiss="modal">
+                <button :disabled="isPosting || (form.foto && form.deskripsi.length < 125)" class="btn btn-success me-2" data-bs-dismiss="modal">
                   <span v-if="!isPosting"><i class="bi bi-send"></i> Kirim</span>
                   <span v-else>Sedang mengirim</span>
                 </button>
