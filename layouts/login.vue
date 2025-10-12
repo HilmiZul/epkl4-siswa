@@ -55,7 +55,7 @@ html, body {
 .btn {
   font-weight: 600;
   transition: all 0.1s ease-in-out;
-  border: 1.9px solid #000000;
+  /*border: 1.9px solid #000000;*/
   border-radius: 0 !important;
   box-shadow: 0.2rem 0.2rem 0 #000000 !important;
 }
@@ -70,7 +70,6 @@ html, body {
   color: #bababa;
 }
 .form {
-  font-size: medium;
   font-weight: 550;
   border: 2px solid #000000;
   border-radius: 0 !important;

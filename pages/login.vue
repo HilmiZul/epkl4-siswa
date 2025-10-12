@@ -16,8 +16,8 @@
           <input v-model="password" :disabled="username.length < 3" type="password" class="form form-control form-control-lg" name="password" id="password" placeholder="jangan lupa password-nya" required>
         </div>
         <div class="d-grid gap-2 mt-5">
-          <button :disabled="sending || username.length < 3 || password.length < 5" class="btn btn-warning btn-lg">
-            <span v-if="!sending"><i class="bi bi-send"></i> Gass masuk!</span>
+          <button :disabled="sending || username.length < 3 || password.length < 5" class="btn btn-warning btn-lg border border-3 border-dark">
+            <span v-if="!sending"><i class="bi bi-send"></i> Masuk</span>
             <span v-else>tunggu bentar...</span>
           </button>
         </div>
