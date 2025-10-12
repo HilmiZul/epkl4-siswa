@@ -13,7 +13,7 @@
           <form @submit.prevent="buatBaru">
             <div class="mb-4">
               <label for="fotonilai">Foto Halaman Nilai Jurnal (JPG/PNG)</label>
-              <input @change="compressFile" class="form form-control" type="file" id="fotonilai" accept="image/*" capture="user" required />
+              <input @change="compressFile" class="form form-control" type="file" id="fotonilai" accept="image/*" capture="environment" required />
             </div>
             <div class="mb-4">
               <label for="el_softskill">Nilai Internalisasi dan penerapan soft skills</label>
