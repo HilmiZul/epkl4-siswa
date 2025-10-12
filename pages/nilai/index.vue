@@ -16,10 +16,10 @@
         <div v-if="isCertificate" class="row">
           <div class="col-lg-6">
             <form @submit.prevent="updateNilai">
-              <div class="mb-4">
+              <!-- <div class="mb-4">
                 <label for="fotonilai">Foto Halaman Nilai Jurnal (JPG/PNG)</label>
                 <input @change="compressFile" class="form form-control" type="file" id="fotonilai" accept="image/*" capture="user" />
-              </div>
+              </div> -->
               <div class="mb-4">
                 <label for="el_softskill">Nilai Internalisasi dan penerapan soft skills</label>
                 <input v-model="form.nilai_elemen1" type="number" min="0" max="100" id="el_softskill" class="form form-control" required>
@@ -47,7 +47,7 @@
               <div class="mb-4">
                 <label for="logo_iduka">Logo IDUKA</label>
                 <div class="my-2"><img :src="`${host}/api/files/${certificate.collectionId}/${certificate.id}/${certificate.logo}`" alt="Foto jurnal nilai" width="70"></div>
-                <input @change="compressFileLogo" class="form form-control" type="file" id="logo_iduka" accept="image/*" />
+                <!-- <input @change="compressFileLogo" class="form form-control" type="file" id="logo_iduka" accept="image/*" /> -->
               </div>
               <button :disabled="isSending" class="btn btn-success me-2 mb-2">
                 <span v-if="isSending">Sedang menyimpan</span>
@@ -100,7 +100,7 @@
             </div> -->
           </div>
           <div class="col-lg-6">
-            <div class="fw-bold pb-2">Pratinjau Nilai</div>
+            <div class="fw-bold pb-3">Pratinjau Nilai Elemen</div>
             <img :src="`${host}/api/files/${certificate.collectionId}/${certificate.id}/${certificate.foto_jurnal_nilai}`" alt="Foto jurnal nilai" width="100%">
           </div>
         </div>
@@ -147,8 +147,6 @@ let form = ref({
   "siswa": "",
   "nama_pimpinan": "",
   "nip": "",
-  "foto_jurnal_nilai": "",
-  "logo": "",
 })
 
 async function updateNilai() {
