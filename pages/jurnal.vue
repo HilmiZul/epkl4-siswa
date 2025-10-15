@@ -2,10 +2,12 @@
   <div class="card">
     <div class="card-header">
       <span class="h4 fw-bold"><i class="bi bi-journals"></i> Jurnal Harian</span>
-      <span v-if="pemetaan.length > 0 && !havePostJournalToday" class="float-end journal-button">
-        <button data-bs-toggle="modal" data-bs-target="#buat-jurnal-baru" class="btn btn-info btn-sm"><i class="bi bi-pencil-square"></i> Buat baru</button>
+      <span v-if="$device.isMobile">
+        <span v-if="pemetaan.length > 0 && !havePostJournalToday" class="float-end journal-button">
+          <button data-bs-toggle="modal" data-bs-target="#buat-jurnal-baru" class="btn btn-info btn-sm"><i class="bi bi-pencil-square"></i> Buat baru</button>
+        </span>
       </span>
-      <div class="modal" id="buat-jurnal-baru" tabindex="-1" aria-hidden="true">
+      <div v-if="$device.isMobile" class="modal" id="buat-jurnal-baru" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content rounded-0 border border-2 border-dark shadow-lg">
             <div class="modal-header fw-bold bg-success rounded-0 border-0 border-bottom border-2 border-dark">
@@ -154,6 +156,7 @@ import Compressor from 'compressorjs'
 
 definePageMeta({ middleware: 'auth' })
 useHead({ title: "Jurnal — e-PKL / SMKN 4 Tasikmalaya." })
+let { isMobile } = useDevice()
 let config = useRuntimeConfig()
 let host = config.public.apiBaseUrl+":"+config.public.apiPort
 let user = usePocketBaseUser()
