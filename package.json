@@ -1,6 +1,6 @@
 {
   "name": "epkl4-siswa",
-  "version": "2.1.2",
+  "version": "2.2.0",
   "author": "Zul Hilmi",
   "description": "Kehadiran dan Jurnal Peserta PKL.",
   "license": "MIT",
@@ -12,6 +12,7 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@nuxtjs/device": "^3.2.4",
     "bootstrap": "5.2",
     "bootstrap-icons": "1.13.1",
     "compressorjs": "^1.2.1",
