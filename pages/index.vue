@@ -40,8 +40,8 @@
                   <div class="text-muted">Guru Pembimbing</div>
                   <span v-if="iduka?.totalItems < 0" class="fw-bold">Belum pemetaan</span>
                   <span v-else>
-                    <span v-if="iduka?.items[0].expand.iduka.pembimbing_sekolah == '' || iduka?.items[0].expand.iduka.pembimbing_sekolah == '-'">Belum pemetaan</span>
-                    <span v-else>{{ iduka?.items[0].expand.iduka.pembimbing_sekolah?.nama }}</span>
+                    <span v-if="iduka?.items[0].expand.iduka?.pembimbing_sekolah == '' || iduka?.items[0].expand.iduka?.pembimbing_sekolah == '-'">Belum pemetaan</span>
+                    <span v-else class="fw-bold">{{ iduka?.items[0].expand.iduka?.expand.pembimbing_sekolah.nama }}</span>
                   </span>
                 </div>
               </div>
