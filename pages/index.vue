@@ -38,6 +38,7 @@
               <div class="col-md-3">
                 <div class="mb-3">
                   <div class="text-muted">Guru Pembimbing</div>
+                  <span v-if="emptyPemetaan">Belum pemetaan</span>
                   <span v-if="iduka?.totalItems < 0" class="fw-bold">Belum pemetaan</span>
                   <span v-else>
                     <span v-if="iduka?.items[0].expand.iduka?.pembimbing_sekolah == '' || iduka?.items[0].expand.iduka?.pembimbing_sekolah == '-'">Belum pemetaan</span>
@@ -106,6 +107,7 @@ let countJournalNotValid = ref(0)
 let pemetaan = ref([])
 let iduka = ref()
 let peserta = ref()
+let emptyPemetaan = ref(false)
 
 async function getCountJournal(loading=true) {
   isLoading.value = loading
@@ -149,6 +151,8 @@ async function getInfo(loading=true) {
         // console.log(res_pemetaan)
         // console.log(user.user.value.siswa)
       }
+    } else {
+      emptyPemetaan.value = true
     }
   }
 }
