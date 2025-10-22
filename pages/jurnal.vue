@@ -36,7 +36,7 @@
                   <div v-if="form.foto" class="small fst-italic">Foto: {{ form.foto.name }}</div>
                   <input @change="compressFile" :disabled="form.elemen.length < 1 || form.deskripsi.length < 125" class="form-control-file" type="file" id="foto" accept="image/*" capture="user" required />
                 </div>
-                <button :disabled="isPosting || (form.foto && form.deskripsi.length < 125)" class="btn btn-success me-2" data-bs-dismiss="modal">
+                <button :disabled="isPosting || (form.foto && form.deskripsi.length < 125)" class="btn btn-success me-2 border border-2 border-dark" data-bs-dismiss="modal">
                   <span v-if="!isPosting"><i class="bi bi-send"></i> Kirim</span>
                   <span v-else>Sedang mengirim</span>
                 </button>
