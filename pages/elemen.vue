@@ -15,10 +15,10 @@
       </div>
       <loading v-if="isLoading" />
       <div v-if="elements" class="accordion accordion-flush border border-2 border-dark shadow-lg" id="accordion-parent">
-        <div v-for="elemen in elements" :key="elemen.id" class="accordion-item border-bottom border-2 border-dark">
+        <div v-for="(elemen,i) in elements" :key="elemen.id" class="accordion-item border-bottom border-2 border-dark">
           <div class="accordion-header">
             <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" :data-bs-target="`#flush-${elemen.id}`" aria-expanded="false" :aria-controls="`flush-${elemen.id}`">
-              {{ elemen.elemen }}
+              <span class="badge bg-warning border border-2 border-dark me-2">{{ i+1 }}</span> {{ elemen.elemen }}
             </button>
           </div>
           <div :id="`flush-${elemen.id}`" class="accordion-collapse collapse" data-bs-parent="#accordion-parent">
