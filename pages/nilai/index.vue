@@ -15,6 +15,10 @@
       <div v-else>
         <div v-if="isCertificate" class="row">
           <div class="col-lg-12">
+            <loading v-if="isLoading" />
+            <div v-else-if="!certificate.isVerify" class="alert alert-warning">
+              <i class="bi bi-info-circle"></i> Nilai belum di verifikasi Pembimbing
+            </div>
             <form @submit.prevent="updateNilai">
               <div class="row">
                 <div class="col-lg-6">
@@ -41,31 +45,33 @@
                     <span class="fw-bold">{{ form.nilai_elemen4 }}</span>
                     <!-- <input  type="number" min="0" max="100" id="el_wirausaha" class="form form-control" required> -->
                   </div>
-                  <div class="mb-4">
-                    <div class="fw-bold text-muted">Total: <span class="text-dark">{{ form.nilai_elemen1 + form.nilai_elemen2 + form.nilai_elemen3 + form.nilai_elemen4 }}</span></div>
-                  </div>
+                  <!-- <div class="mb-4">
+                    <div class="fw-bold badge bg-info border border-1 border-dark">Total: {{ form.nilai_elemen1 + form.nilai_elemen2 + form.nilai_elemen3 + form.nilai_elemen4 }}</div>
+                  </div> -->
                   <div v-if="$device.isMobile" class="mb-4">
                     <label for="fotonilai">Upload ulang halaman nilai?</label>
                     <input @change="compressFile" class="form form-control" type="file" id="fotonilai" accept="image/*" capture="environment" />
                     <div v-if="isErrorCompressOrExt" class="my-2 fst-italic text-muted text-danger small">Silahkan periksa kembali file-nya (jpg/png).</div>
                   </div>
-                  <hr>
-                  <div class="mb-4 form-check form-switch">
+                  <hr v-if="!certificate.isVerify">
+                  <div v-if="!certificate.isVerify" class="mb-4 form-check form-switch">
                     <input v-model="form.isEntrust" :checked="form.isEntrust" class="form-check-input" type="checkbox" id="entrust" switch>
                     <label for="entrust">Buatkan Sertifikat di Sekolah?</label>
                   </div>
                   <div v-if="form.isEntrust">
                     <div class="mb-4">
-                      <label for="pj_penandatangan">Pejabat Penandatangan</label>
-                      <input v-model="form.pj_penandatangan" type="text" id="pj_penandatangan" class="form form-control" placeholder="Contoh: CEO, Direktur, Kepala Dinas..." required>
+                      <div v-if="certificate.isVerify" class="text-muted fw-bold">Pejabat Penandatangan</div>
+                      <label v-else for="pj_penandatangan">Pejabat Penandatangan</label>
+                      <span v-if="certificate.isVerify" class="fw-bold">{{ certificate.pj_penandatangan }}</span>
+                      <input v-else v-model="form.pj_penandatangan" type="text" id="pj_penandatangan" class="form form-control" placeholder="Contoh: CEO, Direktur, Kepala Dinas..." required>
                     </div>
                     <div class="mb-4">
                       <label for="logo_iduka">Logo IDUKA</label>
                       <div v-if="tempLogoImg" class="my-2"><img :src="`${host}/api/files/${certificate.collectionId}/${certificate.id}/${tempLogoImg}`" alt="Foto jurnal nilai" width="70"></div>
-                      <input @change="compressFileLogo" class="form form-control" type="file" id="logo_iduka" accept="image/*" />
+                      <input v-if="!certificate.isVerify" @change="compressFileLogo" class="form form-control" type="file" id="logo_iduka" accept="image/*" />
                     </div>
                   </div>
-                  <button :disabled="isSending" class="btn btn-success me-2 mb-2 border border-2 border-dark">
+                  <button v-if="!certificate.isVerify" :disabled="isSending" class="btn btn-success me-2 mb-2 border border-2 border-dark">
                     <span v-if="isSending">Sedang menyimpan</span>
                     <span v-else>Simpan</span>
                   </button>
@@ -163,7 +169,8 @@ let form = ref({
   "pj_penandatangan": "",
   "foto_jurnal_nilai": "",
   "logo": "",
-  "isEntrust": false
+  "isEntrust": false,
+  "isVerify": ""
 })
 
 async function updateNilai() {
