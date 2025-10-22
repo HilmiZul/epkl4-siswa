@@ -9,7 +9,7 @@
     <div class="card-body">
       <Loading v-if="isLoadingMetaPemetaan" />
       <div v-else class="row">
-        <div class="col-lg-6">
+        <div v-if="$device.isMobile" class="col-lg-6">
           <form @submit.prevent="buatBaru">
             <div class="mb-4 form-check form-switch">
               <input v-model="form.isEntrust" class="form-check-input" type="checkbox" id="entrust" switch>
@@ -26,34 +26,39 @@
             </div>
             <div class="mb-4">
               <label for="el_hardskill">Nilai Elemen 2</label>
-              <input v-model="form.nilai_elemen2" type="number" min="0" max="100" id="el_hardskill" class="form form-control" required>
+              <input :disabled="form.nilai_elemen1 < 1" v-model="form.nilai_elemen2" type="number" min="0" max="100" id="el_hardskill" class="form form-control" required>
             </div>
             <div class="mb-4">
               <label for="el_pengembangan_hardskill">Nilai Elemen 3</label>
-              <input v-model="form.nilai_elemen3" type="number" min="0" max="100" id="el_pengembangan_hardskill" class="form form-control" required>
+              <input :disabled="form.nilai_elemen2 < 1" v-model="form.nilai_elemen3" type="number" min="0" max="100" id="el_pengembangan_hardskill" class="form form-control" required>
             </div>
             <div class="mb-4">
               <label for="el_wirausaha">Nilai Elemen 4</label>
-              <input v-model="form.nilai_elemen4" type="number" min="0" max="100" id="el_wirausaha" class="form form-control" required>
+              <input :disabled="form.nilai_elemen2 < 1" v-model="form.nilai_elemen4" type="number" min="0" max="100" id="el_wirausaha" class="form form-control" required>
             </div>
             <div v-if="form.isEntrust">
               <hr>
               <div class="mb-4">
                 <label for="pj_penandatangan">Pejabat Penandatangan</label>
-                <input v-model="form.pj_penandatangan" type="text" id="pj_penandatangan" class="form form-control" placeholder="Contoh: CEO, Direktur, Kepala Dinas..." required>
+                <input :disabled="form.nilai_elemen4 < 1" v-model="form.pj_penandatangan" type="text" id="pj_penandatangan" class="form form-control" placeholder="Contoh: CEO, Direktur, Kepala Dinas..." required>
               </div>
               <div class="mb-4">
                 <label for="logo_iduka">Logo IDUKA</label>
                 <input @change="compressFileLogo" class="form form-control" type="file" id="logo_iduka" accept="image/*" required />
               </div>
             </div>
-            <button :disabled="isSending" class="btn btn-success me-2 border border-2 border-dark">
+            <button :disabled="isSending || form.nilai_elemen1 < 1 || form.nilai_elemen2 < 1 || form.nilai_elemen3 < 1 || form.nilai_elemen4 < 1" class="btn btn-success me-2 border border-2 border-dark">
               <span v-if="isSending">Sedang menyimpan</span>
               <span v-else>Simpan</span>
             </button>
             <nuxt-link to="/nilai" class="btn btn-warning border border-2 border-dark">Kembali</nuxt-link>
             <span v-if="isSaved" class="ms-3 small fst-italic text-muted">Nilai berhasil diajukan!</span>
           </form>
+        </div>
+        <div v-else class="col-lg-12">
+          <div class="alert alert-warning border border-2 border-dark">
+            Silahkan gunakan <em>Smartphone</em>!
+          </div>
         </div>
       </div>
     </div>
