@@ -17,7 +17,7 @@
           <div class="col-lg-12">
             <loading v-if="isLoading" />
             <div v-else-if="!certificate.isVerify" class="alert alert-warning">
-              <i class="bi bi-info-circle"></i> Nilai belum di verifikasi Pembimbing
+              <i class="bi bi-info-circle"></i> Nilai belum diverifikasi Pembimbing
             </div>
             <form @submit.prevent="updateNilai">
               <div class="row">
