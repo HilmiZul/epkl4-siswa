@@ -15,9 +15,9 @@
             <nuxt-link to="/jurnal">
               <li class="list-group-item"><i class="bi bi-journals"></i> Jurnal Harian</li>
             </nuxt-link>
-            <!-- <nuxt-link to="/nilai">
-              <li class="list-group-item"><i class="bi bi-patch-check"></i> Nilai Sertifikat</li>
-            </nuxt-link> -->
+            <nuxt-link to="/nilai">
+              <li class="list-group-item"><i class="bi bi-patch-check"></i> Nilai</li>
+            </nuxt-link>
             <nuxt-link to="/ubah-password">
               <li class="list-group-item"><i class="bi bi-key"></i> Ubah Password</li>
             </nuxt-link>
