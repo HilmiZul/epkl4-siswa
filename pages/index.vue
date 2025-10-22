@@ -49,7 +49,7 @@
             </div>
             <div class="row small mb-3">
               <div class="col-lg-6">
-                <div class="text-muted mb-1 fw-medium">Teman yang juga satu tempat:</div>
+                <div class="text-muted mb-1 fw-medium">Teman satu tim:</div>
                 <table class="table table-striped border-0">
                   <tbody>
                     <tr v-if="pemetaan.length < 1">
