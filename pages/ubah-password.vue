@@ -21,7 +21,7 @@
               <label for="passwordConfirm">Konfirmasi password baru</label>
               <input v-model="form.passwordConfirm" :disabled="form.password.length < 8" type="password" id="newPassword" class="form form-control" placeholder="ketik ulang password baru" required>
             </div>
-            <button :disabled="isSending || form.oldPassword.length < 8 || form.password.length < 8 || form.passwordConfirm.length < 8" class="btn btn-success me-2">
+            <button :disabled="isSending || form.oldPassword.length < 8 || form.password.length < 8 || form.passwordConfirm.length < 8" class="btn btn-success me-2 border border-2 border-dark">
               <span v-if="!isSending">Simpan</span>
               <span v-else>Sedang menyimpan</span>
             </button>
