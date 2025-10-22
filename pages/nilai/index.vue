@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <div class="card-header">
-      <span class="h4 fw-bold"><i class="bi bi-patch-check"></i> Nilai Sertifikat</span>
+      <span class="h4 fw-bold"><i class="bi bi-patch-check"></i> Nilai</span>
       <!-- <span v-if="!isLoading" class="float-end">
         <nuxt-link v-if="!isCertificate" to="/nilai/tambah" class="btn btn-info btn-sm"><i class="bi bi-plus-lg"></i> Buat Baru</nuxt-link>
       </span> -->
@@ -14,46 +14,64 @@
       </div>
       <div v-else>
         <div v-if="isCertificate" class="row">
-          <div class="col-lg-6">
+          <div class="col-lg-12">
             <form @submit.prevent="updateNilai">
-              <!-- <div class="mb-4">
-                <label for="fotonilai">Foto Halaman Nilai Jurnal (JPG/PNG)</label>
-                <input @change="compressFile" class="form form-control" type="file" id="fotonilai" accept="image/*" capture="user" />
-              </div> -->
-              <div class="mb-4">
-                <label for="el_softskill">Nilai Internalisasi dan penerapan soft skills</label>
-                <input v-model="form.nilai_elemen1" type="number" min="0" max="100" id="el_softskill" class="form form-control" required>
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="mb-4">
+                    <div class="fw-bold pb-2"><i class="bi bi-image-fill"></i> Pratinjau Nilai Elemen</div>
+                    <img :src="`${host}/api/files/${certificate.collectionId}/${certificate.id}/${tempNilaiImg}`" alt="Foto jurnal nilai" width="100%" class="border border-2 border-dark mb-2">
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="mb-4">
+                    <div class="text-muted fw-bold">Nilai Elemen 1</div>
+                    <span class="fw-bold">{{ form.nilai_elemen1 }}</span>
+                  </div>
+                  <div class="mb-4">
+                    <div class="text-muted fw-bold">Nilai Elemen 2</div>
+                    <span class="fw-bold">{{ form.nilai_elemen2 }}</span>
+                  </div>
+                  <div class="mb-4">
+                    <div class="text-muted fw-bold">Nilai Elemen 3</div>
+                    <span class="fw-bold">{{ form.nilai_elemen3 }}</span>
+                  </div>
+                  <div class="mb-4">
+                    <div class="text-muted fw-bold">Nilai Elemen 4</div>
+                    <span class="fw-bold">{{ form.nilai_elemen4 }}</span>
+                    <!-- <input  type="number" min="0" max="100" id="el_wirausaha" class="form form-control" required> -->
+                  </div>
+                  <div class="mb-4">
+                    <div class="fw-bold text-muted">Total: <span class="text-dark">{{ form.nilai_elemen1 + form.nilai_elemen2 + form.nilai_elemen3 + form.nilai_elemen4 }}</span></div>
+                  </div>
+                  <div v-if="$device.isMobile" class="mb-4">
+                    <label for="fotonilai">Upload ulang halaman nilai?</label>
+                    <input @change="compressFile" class="form form-control" type="file" id="fotonilai" accept="image/*" capture="environment" />
+                    <div v-if="isErrorCompressOrExt" class="my-2 fst-italic text-muted text-danger small">Silahkan periksa kembali file-nya (jpg/png).</div>
+                  </div>
+                  <hr>
+                  <div class="mb-4 form-check form-switch">
+                    <input v-model="form.isEntrust" :checked="form.isEntrust" class="form-check-input" type="checkbox" id="entrust" switch>
+                    <label for="entrust">Buatkan Sertifikat di Sekolah?</label>
+                  </div>
+                  <div v-if="form.isEntrust">
+                    <div class="mb-4">
+                      <label for="pj_penandatangan">Pejabat Penandatangan</label>
+                      <input v-model="form.pj_penandatangan" type="text" id="pj_penandatangan" class="form form-control" placeholder="Contoh: CEO, Direktur, Kepala Dinas..." required>
+                    </div>
+                    <div class="mb-4">
+                      <label for="logo_iduka">Logo IDUKA</label>
+                      <div v-if="tempLogoImg" class="my-2"><img :src="`${host}/api/files/${certificate.collectionId}/${certificate.id}/${tempLogoImg}`" alt="Foto jurnal nilai" width="70"></div>
+                      <input @change="compressFileLogo" class="form form-control" type="file" id="logo_iduka" accept="image/*" />
+                    </div>
+                  </div>
+                  <button :disabled="isSending" class="btn btn-success me-2 mb-2 border border-2 border-dark">
+                    <span v-if="isSending">Sedang menyimpan</span>
+                    <span v-else>Simpan</span>
+                  </button>
+                  <span v-if="isSaved" class="ms-2 mb-2 small fst-italic text-muted fw-bold">Berhasil diperbaharui!</span>
+                </div>
               </div>
-              <div class="mb-4">
-                <label for="el_hardskill">Nilai Penerapan hard skills</label>
-                <input v-model="form.nilai_elemen2" type="number" min="0" max="100" id="el_hardskill" class="form form-control" required>
-              </div>
-              <div class="mb-4">
-                <label for="el_pengembangan_hardskill">Peningkatan dan pengembangan hard skills</label>
-                <input v-model="form.nilai_elemen3" type="number" min="0" max="100" id="el_pengembangan_hardskill" class="form form-control" required>
-              </div>
-              <div class="mb-4">
-                <label for="el_wirausaha">Nilai Penyiapan Kemandirian Berwirausaha</label>
-                <input v-model="form.nilai_elemen4" type="number" min="0" max="100" id="el_wirausaha" class="form form-control" required>
-              </div>
-              <div class="mb-4">
-                <label for="pimpinan">Nama Pimpinan</label>
-                <input v-model="form.nama_pimpinan" type="text" id="pimpinan" class="form form-control" placeholder="Nama Lengkap dan Gelar" required>
-              </div>
-              <div class="mb-4">
-                <label for="nip">Nomor Induk</label>
-                <input v-model="form.nip" type="text" id="nip" class="form form-control" placeholder="Nomor Induk Pimpinan" required>
-              </div>
-              <div class="mb-4">
-                <label for="logo_iduka">Logo IDUKA</label>
-                <div class="my-2"><img :src="`${host}/api/files/${certificate.collectionId}/${certificate.id}/${certificate.logo}`" alt="Foto jurnal nilai" width="70"></div>
-                <!-- <input @change="compressFileLogo" class="form form-control" type="file" id="logo_iduka" accept="image/*" /> -->
-              </div>
-              <button :disabled="isSending" class="btn btn-success me-2 mb-2">
-                <span v-if="isSending">Sedang menyimpan</span>
-                <span v-else>Simpan</span>
-              </button>
-              <span v-if="isSaved" class="ms-2 mb-2 small fst-italic text-muted">Berhasil diperbaharui!</span>
             </form>
             <!-- <div class="card my-3 hand-cursor" data-bs-toggle="modal" data-bs-target="#preview">
               <div class="card-body">
@@ -99,18 +117,14 @@
               </div>
             </div> -->
           </div>
-          <div class="col-lg-6">
-            <div class="fw-bold pb-3">Pratinjau Nilai Elemen</div>
-            <img :src="`${host}/api/files/${certificate.collectionId}/${certificate.id}/${certificate.foto_jurnal_nilai}`" alt="Foto jurnal nilai" width="100%">
-          </div>
         </div>
         <div v-else class="row">
           <div class="col-lg-12">
             <div class="text-center fs-4 fw-bold text-muted py-5">
               <i class="bi bi-patch-check fs-1"></i> <br>
-              Belum ada Nilai Sertifikat.
+              Belum Ada Nilai
               <div v-if="meta_pemetaan" class="mt-3">
-                <nuxt-link to="/nilai/tambah" class="btn btn-info"><i class="bi bi-plus-lg"></i> Buat Baru</nuxt-link>
+                <nuxt-link to="/nilai/tambah" class="btn btn-info border border-2 border-dark"><i class="bi bi-plus-lg"></i> Buat Pengajuan</nuxt-link>
               </div>
             </div>
           </div>
@@ -123,7 +137,7 @@
 <script setup>
 import Compressor from 'compressorjs'
 definePageMeta({ middleware: 'auth' })
-useHead({ title: "Nilai Sertifikat — e-PKL / SMKN 4 Tasikmalaya." })
+useHead({ title: "Nilai — e-PKL / SMKN 4 Tasikmalaya." })
 let user = usePocketBaseUser()
 let client = usePocketBaseClient()
 let config = useRuntimeConfig()
@@ -132,21 +146,24 @@ let isLoading = ref(true)
 let isSending = ref(false)
 let isSaved = ref(false)
 let isError = ref(false)
+let isErrorCompressOrExt = ref(false)
 let isCertificate = ref(false)
 let isLoadingMetaPemetaan = ref(true)
 let prokel = user.user.value.program_keahlian
 let siswa_id = user.user.value.siswa
 let meta_pemetaan = ref()
 let certificate = ref()
+let tempLogoImg = ref()
+let tempNilaiImg = ref()
 let form = ref({
   "nilai_elemen1": 0,
   "nilai_elemen2": 0,
   "nilai_elemen3": 0,
   "nilai_elemen4": 0,
-  "iduka": "",
-  "siswa": "",
-  "nama_pimpinan": "",
-  "nip": "",
+  "pj_penandatangan": "",
+  "foto_jurnal_nilai": "",
+  "logo": "",
+  "isEntrust": false
 })
 
 async function updateNilai() {
@@ -155,7 +172,7 @@ async function updateNilai() {
   isSending.value = true
   isSaved.value = false
   try {
-    let res = await client.collection('sertifikat').update(certificate.value.id, form.value)
+    let res = await client.collection('nilai').update(certificate.value.id, form.value)
     if(res) {
       isSending.value = false
       isSaved.value = true
@@ -167,17 +184,19 @@ async function updateNilai() {
   }
 }
 
-async function getSertifikat() {
-  isLoading.value = true
-  isCertificate.value = false
+async function getNilai(loading=true, isCert=false) {
+  isLoading.value = loading
+  isCertificate.value = isCert
   client.autoCancellation(false)
   try {
-    let res = await client.collection('sertifikat').getFirstListItem(`siswa='${siswa_id}'`, {
+    let res = await client.collection('nilai').getFirstListItem(`siswa='${siswa_id}'`, {
       expand: "iduka, siswa"
     })
     if(res) {
       certificate.value = res
       form.value = res
+      tempLogoImg.value = certificate.value.logo
+      tempNilaiImg.value = certificate.value.foto_jurnal_nilai
       isLoading.value = false
       isCertificate.value = true
     }
@@ -204,16 +223,17 @@ async function getIdukaByPeserta() {
 }
 
 function compressFile(e) {
+  isErrorCompressOrExt.value = false
   let file = e.target.files[0]
   if(!file) return;
   new Compressor(file, {
     quality: 0.6,
     success(result) {
-      console.log(result)
       form.value.foto_jurnal_nilai = result
     },
     error(err) {
       console.error(err.message)
+      isErrorCompressOrExt.value = true
     }
   })
 }
@@ -224,7 +244,6 @@ function compressFileLogo(e) {
   new Compressor(file, {
     quality: 0.6,
     success(result) {
-      console.log(result)
       form.value.logo = result
     },
     error(err) {
@@ -234,7 +253,14 @@ function compressFileLogo(e) {
 }
 
 onMounted(() => {
-  getSertifikat()
+  getNilai()
   getIdukaByPeserta()
+  client.autoCancellation(false)
+  client.collection('nilai').subscribe('*', function(e) {
+    // getNilai params:
+    // - isLoading nilai default na true
+    // - isCert nilai default na false
+    if(e.action == 'update') getNilai(false, true)
+  },{})
 })
 </script>
