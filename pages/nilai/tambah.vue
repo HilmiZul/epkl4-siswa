@@ -88,7 +88,7 @@ let form = ref({
   "foto_jurnal_nilai": "",
   "iduka": "",
   "siswa": "",
-  "prokel": prokel,
+  "program_keahlian": prokel,
   "pj_penandatangan": "",
   "logo": "",
   "isEntrust": false,
