@@ -4,7 +4,7 @@
       <span class="h4 fw-bold"><i class="bi bi-journals"></i> Jurnal Harian</span>
       <span v-if="$device.isMobile">
         <span v-if="pemetaan.length > 0 && !havePostJournalToday" class="float-end journal-button">
-          <button data-bs-toggle="modal" data-bs-target="#buat-jurnal-baru" class="btn btn-info btn-sm"><i class="bi bi-pencil-square"></i> Buat baru</button>
+          <button data-bs-toggle="modal" data-bs-target="#buat-jurnal-baru" class="btn btn-info btn-sm border border-2 border-dark"><i class="bi bi-pencil-square"></i> Buat baru</button>
         </span>
       </span>
       <div v-if="$device.isMobile" class="modal" id="buat-jurnal-baru" tabindex="-1" aria-hidden="true">
@@ -137,10 +137,10 @@
                   <span v-if="journals.totalItems">Halaman {{ journals.page }} dari {{ journals.totalPages }}</span>
                 </div>
               </div>
-              <button :disabled="isMovingPage || journals.page < 2" @click="pagination(journals.page - 1, false)" class="btn btn-info me-2">
+              <button :disabled="isMovingPage || journals.page < 2" @click="pagination(journals.page - 1, false)" class="btn btn-info me-2 border border-2 border-dark">
                 sebelumnya
               </button>
-              <button :disabled="isMovingPage || journals.page >= journals.totalPages" @click="pagination(journals.page + 1, false)" class="btn btn-info">
+              <button :disabled="isMovingPage || journals.page >= journals.totalPages" @click="pagination(journals.page + 1, false)" class="btn btn-info border border-2 border-dark">
                 lanjut
               </button>
             </div>
