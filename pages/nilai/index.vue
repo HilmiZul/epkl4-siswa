@@ -16,8 +16,8 @@
         <div v-if="isCertificate" class="row">
           <div class="col-lg-12">
             <loading v-if="isLoading" />
-            <div v-else-if="!certificate.isVerify" class="alert alert-warning">
-              <i class="bi bi-info-circle"></i> Nilai belum diverifikasi Pembimbing
+            <div v-else-if="!certificate.isValid" class="alert alert-warning">
+              <i class="bi bi-info-circle"></i> Nilai belum divalidasi Pembimbing
             </div>
             <form @submit.prevent="updateNilai">
               <div class="row">
@@ -53,25 +53,25 @@
                     <input @change="compressFile" class="form form-control" type="file" id="fotonilai" accept="image/*" capture="environment" />
                     <div v-if="isErrorCompressOrExt" class="my-2 fst-italic text-muted text-danger small">Silahkan periksa kembali file-nya (jpg/png).</div>
                   </div>
-                  <hr v-if="!certificate.isVerify">
-                  <div v-if="!certificate.isVerify" class="mb-4 form-check form-switch">
+                  <hr v-if="!certificate.isValid">
+                  <div v-if="!certificate.isValid" class="mb-4 form-check form-switch">
                     <input v-model="form.isEntrust" :checked="form.isEntrust" class="form-check-input" type="checkbox" id="entrust" switch>
                     <label for="entrust">Buatkan Sertifikat di Sekolah?</label>
                   </div>
                   <div v-if="form.isEntrust">
                     <div class="mb-4">
-                      <div v-if="certificate.isVerify" class="text-muted fw-bold">Pejabat Penandatangan</div>
+                      <div v-if="certificate.isValid" class="text-muted fw-bold">Pejabat Penandatangan</div>
                       <label v-else for="pj_penandatangan">Pejabat Penandatangan</label>
-                      <span v-if="certificate.isVerify" class="fw-bold">{{ certificate.pj_penandatangan }}</span>
+                      <span v-if="certificate.isValid" class="fw-bold">{{ certificate.pj_penandatangan }}</span>
                       <input v-else v-model="form.pj_penandatangan" type="text" id="pj_penandatangan" class="form form-control" placeholder="Contoh: CEO, Direktur, Kepala Dinas..." required>
                     </div>
                     <div class="mb-4">
                       <label for="logo_iduka">Logo IDUKA</label>
                       <div v-if="tempLogoImg" class="my-2"><img :src="`${host}/api/files/${certificate.collectionId}/${certificate.id}/${tempLogoImg}`" alt="Foto jurnal nilai" width="70"></div>
-                      <input v-if="!certificate.isVerify" @change="compressFileLogo" class="form form-control" type="file" id="logo_iduka" accept="image/*" />
+                      <input v-if="!certificate.isValid" @change="compressFileLogo" class="form form-control" type="file" id="logo_iduka" accept="image/*" />
                     </div>
                   </div>
-                  <button v-if="!certificate.isVerify" :disabled="isSending" class="btn btn-success me-2 mb-2 border border-2 border-dark">
+                  <button v-if="!certificate.isValid" :disabled="isSending" class="btn btn-success me-2 mb-2 border border-2 border-dark">
                     <span v-if="isSending">Sedang menyimpan</span>
                     <span v-else>Simpan</span>
                   </button>
@@ -170,7 +170,7 @@ let form = ref({
   "foto_jurnal_nilai": "",
   "logo": "",
   "isEntrust": false,
-  "isVerify": ""
+  "isValid": ""
 })
 
 async function updateNilai() {

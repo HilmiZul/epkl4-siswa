@@ -92,7 +92,7 @@ let form = ref({
   "pj_penandatangan": "",
   "logo": "",
   "isEntrust": false,
-  "isVerify": false,
+  "isValid": false,
 })
 
 async function buatBaru() {
