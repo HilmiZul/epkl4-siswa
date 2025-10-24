@@ -48,7 +48,7 @@
                   <!-- <div class="mb-4">
                     <div class="fw-bold badge bg-info border border-1 border-dark">Total: {{ form.nilai_elemen1 + form.nilai_elemen2 + form.nilai_elemen3 + form.nilai_elemen4 }}</div>
                   </div> -->
-                  <div v-if="$device.isMobile" class="mb-4">
+                  <div v-if="$device.isMobile && !certificate.isValid" class="mb-4">
                     <label for="fotonilai">Upload ulang halaman nilai?</label>
                     <input @change="compressFile" class="form form-control" type="file" id="fotonilai" accept="image/*" capture="environment" />
                     <div v-if="isErrorCompressOrExt" class="my-2 fst-italic text-muted text-danger small">Silahkan periksa kembali file-nya (jpg/png).</div>
