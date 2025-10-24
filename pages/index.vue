@@ -23,7 +23,9 @@
               </div>
               <div class="col-md-3">
                 <div class="mb-3">
-                  <div class="text-muted">Tempat PKL</div>
+                  <nuxt-link to="/iduka" class="link">
+                    <div class="text-muted">Tempat PKL <i class="bi bi-pencil-square"></i></div>
+                  </nuxt-link>
                   <span v-if="iduka" class="fw-bold">{{ iduka?.items[0].expand.iduka.nama }}</span>
                   <span v-else>Belum pemetaan</span>
                 </div>
