@@ -8,16 +8,16 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav text-center fw-bold">
-          <li class="nav-item">
+          <li v-if="!$device.isMobile" class="nav-item">
             <nuxt-link  class="nav-link" to="/"><i class="bi bi-info-square"></i> Overview</nuxt-link>
           </li>
-          <li class="nav-item">
+          <li v-if="!$device.isMobile" class="nav-item">
             <nuxt-link  class="nav-link" to="/elemen"><i class="bi bi-journal-bookmark-fill"></i> Elemen</nuxt-link>
           </li>
-          <li class="nav-item">
+          <li v-if="!$device.isMobile" class="nav-item">
             <nuxt-link class="nav-link" to="/jurnal"><i class="bi bi-journals"></i> Jurnal Harian</nuxt-link>
           </li>
-          <li class="nav-item">
+          <li v-if="!$device.isMobile" class="nav-item">
             <nuxt-link class="nav-link" to="/nilai"><i class="bi bi-patch-check"></i> Nilai</nuxt-link>
           </li>
           <li class="nav-item">
