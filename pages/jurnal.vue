@@ -106,15 +106,15 @@
                   <div v-if="journal.foto" class="my-3 foto-container hand-cursor" data-bs-toggle="modal" :data-bs-target="`#foto-${journal.id}`">
                     <img :src="`${host}/api/files/${journal.collectionId}/${journal.id}/${journal.foto}`" :alt="journal.deskripsi" class="foto" />
                   </div>
-                  <div v-if="journal.isValid" class="small">
+                  <div v-if="journal.isValid" class="small fw-bold">
                     <span class="text-danger"><i class="bi bi-heart-fill"></i></span> Valid
                   </div>
-                  <div v-else class="text-muted small">
+                  <div v-else class="text-muted small fw-bold">
                     <span class="text-danger"><i class="bi bi-heart"></i></span> Belum di Validasi
                   </div>
                 </div>
                 <!-- MODAL FOTO PREVIEW -->
-                <div class="modal" :id="`foto-${journal.id}`" aria-hidden="true" tabindex="-1">
+                <div v-if="journal.foto" class="modal" :id="`foto-${journal.id}`" aria-hidden="true" tabindex="-1">
                   <div class="modal-dialog modal-dialog-centered modal-xl">
                     <div class="modal-content rounded-0 border border-2 border-dark shadow-lg">
                       <div class="modal-header rounded-0 border-0 border-bottom border-2 border-dark">
