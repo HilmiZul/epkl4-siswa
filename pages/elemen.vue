@@ -5,12 +5,9 @@
     </div>
     <div class="card-body">
       <div class="alert alert-warning pb-0 small">
-        <ul>
-          <li>Berikut Elemen PKL yang sesuai dengan Program Keahlian</li>
-          <li>Elemen berikut berkaitan dengan <nuxt-link to="/jurnal" class="link">Jurnal Harian</nuxt-link> yang ditulis</li>
-          <li>Setiap Jurnal kegiatan harus memiliki elemen</li>
-          <li><code>Lain-lain</code> adalah pilihan di luar konteks elemen</li>
-          <li>Klik item berikut untuk melihat CP dan Tujuan Pembelajaran</li>
+        <ul class="px-2">
+          <li>Elemen berikut berkaitan dengan <nuxt-link to="/jurnal" class="link">Jurnal</nuxt-link></li>
+          <li><code>Lain-lain</code> adalah opsi di luar konteks elemen</li>
         </ul>
       </div>
       <loading v-if="isLoading" />
