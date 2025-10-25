@@ -25,7 +25,7 @@
   src: url('~/assets/font/Metropolis-Regular.otf');
 }
 html, body {
-  background: #f5fff2 url('~/assets/img/bg-cloud.png') no-repeat center bottom fixed;
+  background: #fff url('~/assets/img/bg-cloud.png') no-repeat center bottom fixed;
   background-size: cover;
   /*background-color: #a0a0a0;*/
   font-family: "Quicksand", sans-serif;
