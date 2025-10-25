@@ -1,9 +1,15 @@
 <template>
   <div class="card">
-    <div class="card-header h4 fw-bold"><i class="bi bi-buildings"></i> {{ form.nama }}
+    <div class="card-header h4 fw-bold"><i class="bi bi-buildings"></i>
+      <span v-if="meta_pemetaan">{{ form.nama }}</span>
+      <span v-else> IDUKA</span>
     </div>
     <div class="card-body">
       <loading v-if="isLoading" />
+      <div v-if="!meta_pemetaan" class="text-center text-muted pb-5">
+        <div class="fs-1 pt-5"><i class="bi bi-database"></i></div>
+        <span class="fw-bold fs-4">Belum pemetaan tempat PKL</span>
+      </div>
       <div v-else class="row">
         <div class="col-md-6">
           <form @submit.prevent="updateIduka">
@@ -51,16 +57,23 @@ let form = ref({
   "email": "loading",
   "pembimbing_iduka": "loading",
 })
+let meta_pemetaan = ref()
 
 async function getIdukaByIdPeserta(loading=true) {
   isLoading.value = loading
   client.autoCancellation(false)
-  let res = await client.collection('pemetaan').getFirstListItem(`siswa="${peserta_id}"`, {
-    expand: "iduka"
-  })
-  if(res) {
+  try {
+    let res = await client.collection('pemetaan').getFirstListItem(`siswa="${peserta_id}"`, {
+      expand: "iduka"
+    })
+    if(res) {
+      isLoading.value = false
+      form.value = res.expand.iduka
+      meta_pemetaan.value = res.expand.iduka
+    }
+  } catch {
+    meta_pemetaan.value = ""
     isLoading.value = false
-    form.value = res.expand.iduka
   }
 }
 
