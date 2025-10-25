@@ -152,6 +152,9 @@ button.btn-grey:hover {
 .text-info {
   color: rgb(54, 162, 235) !important;
 }
+.text-warning {
+  color: #fafa96 !important;
+}
 table {
   font-size: medium;
 }
