@@ -56,7 +56,7 @@
                       <td class="align-content-center" width="2%"><span class="badge bg-warning border border-2 border-dark">{{ i+1 }}</span></td>
                       <td>
                         <span class="fw-bold">{{ p.expand.siswa.nama }}</span> <br>
-                        <span class="small text-muted">{{ p.expand.siswa.kelas }}</span>
+                        <span class="smallest text-muted">{{ p.expand.siswa.kelas }}</span>
                       </td>
                     </tr>
                   </tbody>
