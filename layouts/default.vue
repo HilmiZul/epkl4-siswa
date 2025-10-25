@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid mb-5">
     <div class="row mt-3">
-      <Navbar />
+      <NavbarTop />
       <Nav />
       <div class="col-lg-9">
         <slot />
