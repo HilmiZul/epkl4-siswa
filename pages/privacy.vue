@@ -8,7 +8,7 @@
     </div>
     <div class="card-body text-dark">
       <p class="text-muted small">
-        Diperbaharui pada 30 September 2025
+        Diperbaharui pada 25 Oktober 2025
       </p>
       <p>
         Kebijakan Privasi ini bertujuan untuk membantu Anda memahami data yang kami kumpulkan. Dengan
@@ -26,14 +26,21 @@
         setiap hari
         sebanyak jumlah peserta didik.
       </p>
+      <div class="fw-bold">Informasi Nilai</div>
+      <p>
+        Kami juga mengumpulkan dan menyimpan nilai PKL yang dibuat/diajukan oleh peserta didik.
+      </p>
       <h5 class="fw-bold text-grey">Bagaimana Kami Menggunakan Informasi Anda</h5>
       <p>
         Informasi personal Anda kami gunakan untuk pembagian otoritas pada masing-masing program keahlian diantaranya
         mengelola Elemen Mapel PKL, Guru Pembimbing, IDUKA dan Jurnal harian.
       </p>
       <p>
-        Kami juga menggunakan jurnal harian peserta untuk mengelompokkan aktivitas harian yang sesuai dengan
+        Kami menggunakan jurnal harian peserta untuk mengelompokkan aktivitas harian yang sesuai dengan
         Elemen Mapel PKL serta digunakan untuk analitik data.
+      </p>
+      <p>
+        Kami juga menggunakan nilai peserta didik untuk Rapor PKL dan/atau pencetakan Sertifikat.
       </p>
       <h5 class="fw-bold text-grey">Bagaimana Kami Menjaga Keamanan Informasi Anda</h5>
       <p>
@@ -42,6 +49,8 @@
         bentuk karakter asli. Selain itu kami membatasi akses terhadap semua informasi yang tersimpan pada
         aplikasi e-PKL, dengan kata lain hanya yang memiliki akun dan otoritas tertentu yang dapat mengakses informasi
         didalam aplikasi e-PKL.
+        Apabila seluruh/salah satu informasi terekspos dan disalahgunakan dengan/tanpa sengaja oleh Anda,
+        maka itu menjadi tanggung jawab yang bersangkutan.
         Kami tidak akan menggunakan informasi Anda untuk hal-hal lain diluar aplikasi e-PKL.
       </p>
     </div>

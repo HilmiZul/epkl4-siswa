@@ -8,7 +8,7 @@
     </div>
     <div class="card-body text-dark">
       <p class="text-muted small">
-        Diperbaharui pada 30 September 2025
+        Diperbaharui pada 25 Oktober 2025
       </p>
       <h5 class="fw-bold text-grey">Akun Anggota e-PKL</h5>
       <ul>
@@ -49,6 +49,15 @@
           </table>
         </li>
         <li>Guru Pembimbing tidak akan memvalidasi jurnal selain yang tercantum diatas.</li>
+        <li>Dilarang mengunggah foto dan teks yang mengandung SARA.</li>
+        <li>Segala bentuk teks dan foto yang diunggah adalah tanggung jawab yang bersangkutan.</li>
+      </ul>
+      <h5 class="fw-bold text-grey">Terkait Nilai</h5>
+      <ul>
+        <li>Nilai akan digunakan untuk Rapor PKL dan/atau penitipan Sertifikat bagi IDUKA yang tidak dapat menerbitkan.</li>
+        <li>Peserta didik meminta nilai kepada instruktur/pembimbing IDUKA yang ditulis pada halaman Nilai PKL dibuku jurnal.</li>
+        <li>Peserta didik harus mengajukan nilai PKL yang diberikan oleh instruktur/pembimbing IDUKA pada halaman Nilai e-PKL.</li>
+        <li>Nilai yang diajukan akan diperiksa oleh pembimbing sekolah sampai dinyatakan valid.</li>
       </ul>
     </div>
   </div>
