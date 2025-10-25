@@ -77,7 +77,7 @@
         <div class="col-md-12">
           <div class="row">
             <div class="col-md">
-              <div v-if="!isLoadingJournals" class="mb-2 text-end text-muted small">
+              <div v-if="!isLoadingJournals" class="mb-3 text-end text-muted smallest">
                 <span v-if="journals.totalItems" class="float-start">Halaman {{ journals.page }} dari {{ journals.totalPages }}</span>
                 Menampilkan
                 <span v-if="journals.items">{{ journals.items.length }}</span>  dari {{ journals.totalItems }} Jurnal
@@ -99,7 +99,7 @@
                     <span v-if="journal.expand.elemen.elemen == 'Lain-lain'">{{ journal.expand.elemen.elemen }}</span>
                     <span v-else>{{ journal.expand.elemen.elemen }}</span>
                   </div>
-                  <span class="text-muted fst-italic smallest"><i class="bi bi-calendar2-date"></i> {{ journal.created }}</span>
+                  <span class="text-muted smallest"><i class="bi bi-calendar2-date"></i> {{ journal.created }}</span>
                   <article class="my-3 pre-text">
                     {{ journal.deskripsi }}
                   </article>
