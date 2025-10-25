@@ -1,12 +1,11 @@
 <template>
   <div class="card">
-    <div class="card-header h4 fw-bold"><i class="bi bi-buildings"></i> Identitas IDUKA</div>
+    <div class="card-header h4 fw-bold"><i class="bi bi-buildings"></i> {{ form.nama }}
+    </div>
     <div class="card-body">
       <loading v-if="isLoading" />
       <div v-else class="row">
         <div class="col-md-6">
-          <div class="fw-bold fs-5">{{ form.nama }}</div>
-          <hr>
           <form @submit.prevent="updateIduka">
             <div class="mb-4">
               <label for="pimpinan">Pimpinan <span class="text-danger">*</span></label>
