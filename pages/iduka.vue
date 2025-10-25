@@ -21,7 +21,7 @@
             </div>
             <div class="mb-4">
               <label for="instruktur">Instruktur/Pembimbing <span class="text-danger">*</span></label>
-              <input v-model="form.pembimbing_iduka" :disabled="isLoading || isSaving" type="text" id="instruktur" class="form form-control" placeholder="nama pembimbing lo kantor" required>
+              <input v-model="form.pembimbing_iduka" :disabled="isLoading || isSaving" type="text" id="instruktur" class="form form-control" placeholder="nama pembimbing dikantor" required>
             </div>
             <button :disabled="isSaving" class="btn btn-success border border-2 border-dark">
               <span v-if="isSaving">Sedang menyimpan</span>
