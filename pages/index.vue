@@ -1,7 +1,8 @@
 <template>
   <div class="card">
     <div class="card-header">
-      <span v-if="peserta" class="h4 fw-bold">{{ peserta.nama }}</span>
+      <span v-if="isLoading" class="fst-italic text-muted">loading</span>
+      <span v-else-if="!isLoading && peserta" class="h4 fw-bold">{{ peserta.nama }}</span>
     </div>
     <div class="card-body">
       <div class="row">
@@ -19,7 +20,7 @@
               <div class="col-md-3">
                 <div class="mb-3">
                   <nuxt-link to="/iduka" class="link">
-                    <div class="text-muted">Tempat PKL <i class="bi bi-pencil-square"></i></div>
+                    <div class="text-muted">Tempat PKL <i v-if="iduka" class="bi bi-pencil-square"></i></div>
                   </nuxt-link>
                   <span v-if="iduka" class="fw-bold">{{ iduka?.items[0].expand.iduka.nama }}</span>
                   <span v-else>Belum pemetaan</span>
