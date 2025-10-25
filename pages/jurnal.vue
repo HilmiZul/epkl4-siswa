@@ -79,12 +79,11 @@
             <div class="col-md">
               <div v-if="!isLoadingJournals" class="mb-3 text-end text-muted smallest">
                 <span v-if="journals.totalItems" class="float-start">Halaman {{ journals.page }} dari {{ journals.totalPages }}</span>
-                Menampilkan
-                <span v-if="journals.items">{{ journals.items.length }}</span>  dari {{ journals.totalItems }} Jurnal
+                <span v-if="journals.totalItems">Menampilkan{{ journals.items.length }}  dari {{ journals.totalItems }} Jurnal</span>
               </div>
               <div v-if="!isLoadingJournals" class="text-center text-muted fw-bold fs-4">
                 <span v-if="journals.totalItems == 0">
-                  <div class="fs-1 pt-5"><i class="bi bi-journals"></i></div>
+                  <div class="fs-1 pt-5"><i class="bi bi-database"></i></div>
                   Belum ada jurnal
                 </span>
               </div>
@@ -138,10 +137,10 @@
                   <span v-if="journals.totalItems">Halaman {{ journals.page }} dari {{ journals.totalPages }}</span>
                 </div>
               </div>
-              <button :disabled="isMovingPage || journals.page < 2" @click="pagination(journals.page - 1, false)" class="btn btn-info me-2 border border-2 border-dark">
+              <button v-if="journals.totalItems" :disabled="isMovingPage || journals.page < 2" @click="pagination(journals.page - 1, false)" class="btn btn-info me-2 border border-2 border-dark">
                 sebelumnya
               </button>
-              <button :disabled="isMovingPage || journals.page >= journals.totalPages" @click="pagination(journals.page + 1, false)" class="btn btn-info border border-2 border-dark">
+              <button v-if="journals.totalItems" :disabled="isMovingPage || journals.page >= journals.totalPages" @click="pagination(journals.page + 1, false)" class="btn btn-info border border-2 border-dark">
                 lanjut
               </button>
             </div>

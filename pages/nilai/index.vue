@@ -127,8 +127,8 @@
         <div v-else class="row">
           <div class="col-lg-12">
             <div class="text-center fs-4 fw-bold text-muted py-5">
-              <i class="bi bi-patch-check fs-1"></i> <br>
-              Belum Ada Nilai
+              <i class="bi bi-database fs-1"></i> <br>
+              Belum ada nilai
               <div v-if="meta_pemetaan" class="mt-3">
                 <nuxt-link to="/nilai/tambah" class="btn btn-info border border-2 border-dark"><i class="bi bi-plus-lg"></i> Buat Pengajuan</nuxt-link>
               </div>

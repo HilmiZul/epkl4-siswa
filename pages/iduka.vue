@@ -6,12 +6,14 @@
     </div>
     <div class="card-body">
       <loading v-if="isLoading" />
-      <div v-if="!meta_pemetaan" class="text-center text-muted pb-5">
-        <div class="fs-1 pt-5"><i class="bi bi-database"></i></div>
-        <span class="fw-bold fs-4">Belum pemetaan tempat PKL</span>
-      </div>
       <div v-else class="row">
-        <div class="col-md-6">
+        <div v-if="!meta_pemetaan" class="col-md-12">
+          <div class="text-center text-muted pb-5">
+            <div class="fs-1 pt-5"><i class="bi bi-database"></i></div>
+            <span class="fw-bold fs-4">Belum pemetaan tempat</span>
+          </div>
+        </div>
+        <div v-else class="col-md-6">
           <form @submit.prevent="updateIduka">
             <div class="mb-4">
               <label for="pimpinan">Pimpinan <span class="text-danger">*</span></label>
