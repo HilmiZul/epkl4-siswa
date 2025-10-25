@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid mb-5">
+  <div class="container-fluid mb-6">
     <div class="row mt-3">
       <NavbarTop />
       <Nav />
@@ -7,7 +7,7 @@
         <slot />
       </div>
       <NavFixedBottom v-if="$device.isMobile" />
-      <Footer class="footer-mobile-view" />
+      <!-- <Footer class="footer-mobile-view" /> -->
     </div>
   </div>
 </template>
@@ -25,7 +25,7 @@
   src: url('~/assets/font/Metropolis-Regular.otf');
 }
 html, body {
-  background: #fff url('~/assets/img/bg-cloud.png') no-repeat center bottom fixed;
+  background: #fff url('~/assets/img/bg.webp') no-repeat center bottom fixed;
   background-size: cover;
   /*background-color: #a0a0a0;*/
   font-family: "Quicksand", sans-serif;
@@ -241,5 +241,8 @@ input[type="checkbox"]:not(:checked) {
   .footer-mobile-view {
     display: none;
   }
+}
+.mb-6 {
+  margin-bottom: 5.5em;;
 }
 </style>
