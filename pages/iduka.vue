@@ -1,8 +1,8 @@
 <template>
   <div class="card">
-    <div class="card-header h4 fw-bold"><i class="bi bi-buildings"></i>
+    <div class="card-header h4 fw-bold"><i class="bi bi-buildings"></i>&nbsp;
       <span v-if="meta_pemetaan">{{ form.nama }}</span>
-      <span v-else> IDUKA</span>
+      <span v-else>IDUKA</span>
     </div>
     <div class="card-body">
       <loading v-if="isLoading" />
