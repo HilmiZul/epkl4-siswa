@@ -16,7 +16,7 @@
               <li class="list-group-item"><i class="bi bi-journal-bookmark-fill"></i> Elemen</li>
             </nuxt-link>
             <nuxt-link to="/jurnal">
-              <li class="list-group-item"><i class="bi bi-journals"></i> Jurnal Harian</li>
+              <li class="list-group-item"><i class="bi bi-journals"></i> Jurnal</li>
             </nuxt-link>
             <nuxt-link to="/nilai">
               <li class="list-group-item"><i class="bi bi-patch-check"></i> Nilai</li>
