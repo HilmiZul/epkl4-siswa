@@ -56,8 +56,8 @@
       <ul>
         <li>Nilai akan digunakan untuk Rapor PKL dan/atau penitipan Sertifikat bagi IDUKA yang tidak dapat menerbitkan.</li>
         <li>Peserta didik meminta nilai kepada instruktur/pembimbing IDUKA yang ditulis pada halaman Nilai PKL dibuku jurnal.</li>
-        <li>Peserta didik harus mengajukan nilai PKL yang diberikan oleh instruktur/pembimbing IDUKA pada aplikasi e-PKL.</li>
-        <li>Nilai yang diajukan akan diperiksa oleh pembimbing sekolah sampai dinyatakan valid.</li>
+        <li>Peserta didik harus menyerahkan nilai PKL yang diberikan oleh instruktur/pembimbing IDUKA pada aplikasi e-PKL.</li>
+        <li>Nilai yang diserahkan akan diperiksa oleh Guru pembimbing disekolah sampai dinyatakan valid.</li>
       </ul>
     </div>
   </div>
