@@ -18,7 +18,7 @@
             <nuxt-link  class="nav-link" to="/elemen"><i class="bi bi-journal-bookmark-fill"></i> Elemen</nuxt-link>
           </li>
           <li v-if="!$device.isMobile" class="nav-item">
-            <nuxt-link class="nav-link" to="/jurnal"><i class="bi bi-journals"></i> Jurnal Harian</nuxt-link>
+            <nuxt-link class="nav-link" to="/jurnal"><i class="bi bi-journals"></i> Jurnal</nuxt-link>
           </li>
           <li v-if="!$device.isMobile" class="nav-item">
             <nuxt-link class="nav-link" to="/nilai"><i class="bi bi-patch-check"></i> Nilai</nuxt-link>
