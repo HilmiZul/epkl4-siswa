@@ -1,19 +1,14 @@
 <template>
   <div class="card">
     <div class="card-header">
-      <span class="h4 fw-bold"><i class="bi bi-house-door"></i> Home</span>
+      <span v-if="peserta" class="h4 fw-bold">{{ peserta.nama }}</span>
     </div>
     <div class="card-body">
       <div class="row">
         <div class="col-md-12">
           <Loading v-if="isLoading" />
           <div v-else>
-            Hola,
-            <span v-if="peserta">
-              <strong>{{ peserta.nama }}</strong>! 😃
-            </span>
-            <span v-else>&#8212;</span>
-            <div class="row mt-3">
+            <div class="row">
               <div class="col-md-3">
                 <div class="mb-3">
                   <div class="text-muted">Kelas</div>

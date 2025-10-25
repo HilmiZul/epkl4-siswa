@@ -1,10 +1,10 @@
 <template>
-  <nav class="navbar navbar-expand-lg bg-body-tertiary bg-white border-top border-bottom border-3 border-dark mb-3">
+  <nav class="navbar navbar-expand-lg bg-body-tertiary bg-white border-top border-bottom border-3 border-dark mb-3 p-1">
     <div class="container-fluid">
       <nuxt-link v-if="user" class="navbar-brand lexend-mega text-grey" to="/"><span class="border-3 smallest">{{ username }}</span></nuxt-link>
       <button class="navbar-toggler rounded-0 border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <i class="bi-three-dots-vertical fs-1 text-dark"></i>
+        <i class="bi-three-dots-vertical text-dark"></i>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav text-center fw-bold">
