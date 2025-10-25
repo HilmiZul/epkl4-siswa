@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <div class="card-header">
-      <span class="h4 fw-bold"><i class="bi bi-journals"></i> Jurnal Harian</span>
+      <span class="h4 fw-bold"><i class="bi bi-journals"></i> Jurnal</span>
       <span v-if="$device.isMobile">
         <span v-if="pemetaan.length > 0 && !havePostJournalToday" class="float-end journal-button">
           <button data-bs-toggle="modal" data-bs-target="#buat-jurnal-baru" class="btn btn-info btn-sm border border-2 border-dark"><i class="bi bi-pencil-square"></i> Buat baru</button>
@@ -11,7 +11,7 @@
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content rounded-0 border border-2 border-dark shadow-lg">
             <div class="modal-header fw-bold bg-success rounded-0 border-0 border-bottom border-2 border-dark">
-              <i class="bi bi-pencil-square me-2"></i> Buat Jurnal Baru
+              <i class="bi bi-pencil-square me-2"></i> Buat Jurnal
               <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -116,8 +116,9 @@
                 <!-- MODAL FOTO PREVIEW -->
                 <div v-if="journal.foto" class="modal" :id="`foto-${journal.id}`" aria-hidden="true" tabindex="-1">
                   <div class="modal-dialog modal-dialog-centered modal-xl">
-                    <div class="modal-content rounded-0 border border-2 border-dark shadow-lg">
-                      <div class="modal-header rounded-0 border-0 border-bottom border-2 border-dark">
+                    <div class="modal-content rounded-0 border border-3 border-dark shadow-lg">
+                      <div class="modal-header rounded-0 border-0 border-bottom border-3 border-dark fw-bold">
+                        Preview
                         <button class="btn-close" data-bs-dismiss="modal" label="Close"></button>
                       </div>
                       <div class="modal-body p-0">
