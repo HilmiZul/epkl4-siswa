@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <div class="card-header">
-      <span class="h4 fw-bold">Buat Pengajuan Nilai</span>
+      <span class="h4 fw-bold">Serahkan Nilai</span>
       <span class="float-end">
         <nuxt-link to="/nilai" class="btn btn-warning btn-sm border border-2 border-dark">Kembali</nuxt-link>
       </span>
@@ -48,11 +48,11 @@
               </div>
             </div>
             <button :disabled="isSending || form.nilai_elemen1 < 1 || form.nilai_elemen2 < 1 || form.nilai_elemen3 < 1 || form.nilai_elemen4 < 1" class="btn btn-success me-2 border border-2 border-dark">
-              <span v-if="isSending">Sedang menyimpan</span>
-              <span v-else>Simpan</span>
+              <span v-if="isSending">Sedang mengirim</span>
+              <span v-else>Serahkan</span>
             </button>
             <nuxt-link to="/nilai" class="btn btn-warning border border-2 border-dark">Kembali</nuxt-link>
-            <span v-if="isSaved" class="ms-3 small fst-italic text-muted">Nilai berhasil diajukan!</span>
+            <span v-if="isSaved" class="ms-3 small fst-italic text-muted">Nilai berhasil diserahkan!</span>
           </form>
         </div>
         <div v-else class="col-lg-12">

@@ -130,7 +130,7 @@
               <i class="bi bi-database fs-1"></i> <br>
               Belum ada nilai
               <div v-if="meta_pemetaan" class="mt-3">
-                <nuxt-link to="/nilai/tambah" class="btn btn-info border border-2 border-dark"><i class="bi bi-plus-lg"></i> Buat Pengajuan</nuxt-link>
+                <nuxt-link to="/nilai/tambah" class="btn btn-info border border-2 border-dark"><i class="bi bi-send"></i> Serahkan nilai</nuxt-link>
               </div>
             </div>
           </div>
