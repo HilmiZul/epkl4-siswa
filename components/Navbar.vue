@@ -9,7 +9,10 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav text-center fw-bold">
           <li v-if="!$device.isMobile" class="nav-item">
-            <nuxt-link  class="nav-link" to="/"><i class="bi bi-info-square"></i> Overview</nuxt-link>
+            <nuxt-link  class="nav-link" to="/"><i class="bi bi-house-door"></i> Home</nuxt-link>
+          </li>
+          <li v-if="!$device.isMobile" class="nav-item">
+            <nuxt-link  class="nav-link" to="/iduka"><i class="bi bi-buildings"></i> IDUKA</nuxt-link>
           </li>
           <li v-if="!$device.isMobile" class="nav-item">
             <nuxt-link  class="nav-link" to="/elemen"><i class="bi bi-journal-bookmark-fill"></i> Elemen</nuxt-link>

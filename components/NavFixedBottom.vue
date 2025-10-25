@@ -8,20 +8,26 @@
             <span class="smallest">Home</span>
           </nuxt-link>
         </li>
+        <li class="nav-item">
+          <nuxt-link class="nav-link" to="/iduka" :activeClass="activeClass">
+            <i class="bi bi-buildings fs-5"></i> <br>
+            <span class="smallest">IDUKA</span>
+          </nuxt-link>
+        </li>
         <li class="nav-item mx-4">
-          <nuxt-link class="nav-link" to="/elemen">
+          <nuxt-link class="nav-link" to="/elemen" :activeClass="activeClass">
             <i class="bi bi-journal-bookmark-fill fs-5"></i> <br>
             <span class="smallest">Elemen</span>
           </nuxt-link>
         </li>
         <li class="nav-item me-4">
-          <nuxt-link class="nav-link" to="/jurnal">
+          <nuxt-link class="nav-link" to="/jurnal" :activeClass="activeClass">
             <i class="bi bi-journals fs-5"></i> <br>
             <span class="smallest">Jurnal</span>
           </nuxt-link>
         </li>
         <li class="nav-item">
-          <nuxt-link class="nav-link" href="/nilai">
+          <nuxt-link class="nav-link" href="/nilai" :activeClass="activeClass">
             <i class="bi bi-patch-check fs-5"></i> <br>
             <span class="smallest">Nilai</span>
           </nuxt-link>

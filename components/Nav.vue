@@ -7,7 +7,10 @@
         <nav>
           <ol class="list-group list-group-flush quicksand fw-bold">
             <nuxt-link to="/">
-              <li class="list-group-item"><i class="bi bi-info-square"></i> Overview</li>
+              <li class="list-group-item"><i class="bi bi-house-door"></i> Home</li>
+            </nuxt-link>
+            <nuxt-link to="/iduka">
+              <li class="list-group-item"><i class="bi bi-buildings"></i> IDUKA</li>
             </nuxt-link>
             <nuxt-link to="/elemen">
               <li class="list-group-item"><i class="bi bi-journal-bookmark-fill"></i> Elemen</li>
