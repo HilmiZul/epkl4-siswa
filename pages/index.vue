@@ -50,17 +50,19 @@
               </div>
             </div>
             <div class="row small mb-3">
-              <div class="col-lg-6">
+              <div class="col-lg-12">
                 <div class="text-muted mb-1 fw-medium">Teman satu tim:</div>
                 <table class="table table-striped border-0">
                   <tbody>
                     <tr v-if="pemetaan.length < 1">
                       <td class="text-muted fst-italic">Belum ada teman/pemetaan</td>
                     </tr>
-                    <tr v-for="(p,i) in pemetaan" :key="p.id" class="fw-bold">
-                      <td width="3%">{{ i+1 }}.</td>
-                      <td>{{ p.expand.siswa.nama }}</td>
-                      <td>{{ p.expand.siswa.kelas }}</td>
+                    <tr v-for="(p,i) in pemetaan" :key="p.id">
+                      <td class="align-content-center" width="2%"><span class="badge bg-warning border border-2 border-dark">{{ i+1 }}</span></td>
+                      <td>
+                        <span class="fw-bold">{{ p.expand.siswa.nama }}</span> <br>
+                        <span class="small text-muted">{{ p.expand.siswa.kelas }}</span>
+                      </td>
                     </tr>
                   </tbody>
                 </table>
