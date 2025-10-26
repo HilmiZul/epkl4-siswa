@@ -79,7 +79,7 @@
             <div class="col-md">
               <div v-if="!isLoadingJournals" class="mb-3 text-end text-muted smallest">
                 <span v-if="journals.totalItems" class="float-start">Halaman {{ journals.page }} dari {{ journals.totalPages }}</span>
-                <span v-if="journals.totalItems">Menampilkan{{ journals.items.length }}  dari {{ journals.totalItems }} Jurnal</span>
+                <span v-if="journals.totalItems">Menampilkan {{ journals.items.length }}  dari {{ journals.totalItems }} Jurnal</span>
               </div>
               <div v-if="!isLoadingJournals" class="text-center text-muted fw-bold fs-4">
                 <span v-if="journals.totalItems == 0">
