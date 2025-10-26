@@ -2,7 +2,7 @@
   <div class="card">
     <div class="card-header">
       <span v-if="isLoading" class="fst-italic text-muted">loading</span>
-      <span v-else-if="!isLoading && peserta" class="fw-bold">{{ peserta.nama.charAt(0).toUpperCase()+peserta.nama.toLowerCase() }}</span>
+      <span v-else-if="!isLoading && peserta" class="fw-bold">{{ peserta.nama.charAt(0).toUpperCase()+peserta.nama.toLowerCase().slice(1) }}</span>
     </div>
     <div class="card-body">
       <div class="row">
