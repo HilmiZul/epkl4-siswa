@@ -3,21 +3,15 @@
     <div class="container-fluid justify-content-around">
       <ul class="navbar-nav text-center fw-bold">
         <li class="nav-item me-3">
-          <nuxt-link class="nav-link  text-dark" to="/iduka" :activeClass="activeClass">
-            <i class="bi bi-buildings fs-5"></i> <br>
-            <span class="smallest">IDUKA</span>
-          </nuxt-link>
-        </li>
-        <li class="nav-item me-3">
-          <nuxt-link class="nav-link  text-dark" to="/elemen" :activeClass="activeClass">
-            <i class="bi bi-journal-bookmark-fill fs-5"></i> <br>
-            <span class="smallest">Elemen</span>
-          </nuxt-link>
-        </li>
-        <li class="nav-item me-3">
           <nuxt-link class="nav-link text-dark" to="/" :activeClass="activeClass">
             <i class="bi bi-house-door fs-5"></i> <br>
             <span class="smallest">Home</span>
+          </nuxt-link>
+        </li>
+        <li class="nav-item me-3">
+          <nuxt-link class="nav-link  text-dark" to="/iduka" :activeClass="activeClass">
+            <i class="bi bi-buildings fs-5"></i> <br>
+            <span class="smallest">IDUKA</span>
           </nuxt-link>
         </li>
         <li class="nav-item me-3">
@@ -26,10 +20,16 @@
             <span class="smallest">Jurnal</span>
           </nuxt-link>
         </li>
-        <li class="nav-item">
-          <nuxt-link class="nav-link  text-dark" href="/nilai" :activeClass="activeClass">
+        <li class="nav-item me-3">
+          <nuxt-link class="nav-link text-dark" href="/nilai" :activeClass="activeClass">
             <i class="bi bi-patch-check fs-5"></i> <br>
             <span class="smallest">Nilai</span>
+          </nuxt-link>
+        </li>
+        <li class="nav-item">
+          <nuxt-link class="nav-link  text-dark" to="/elemen" :activeClass="activeClass">
+            <i class="bi bi-journal-bookmark-fill fs-5"></i> <br>
+            <span class="smallest">Elemen</span>
           </nuxt-link>
         </li>
         <!-- <li class="nav-item">
