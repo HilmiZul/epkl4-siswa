@@ -48,38 +48,13 @@
     </div>
     <div class="card-body">
       <div class="row">
-        <!-- <div v-if="pemetaan.length > 0" class="col-md-4 mb-3 journal-form">
-          <form @submit.prevent="buatJurnalBaru">
-            <div class="mb-3">
-              <select v-model="form.elemen" class="form form-control form-select" required>
-                <option disabled value="" selected>&#8212; Pilih Elemen &#8212;</option>
-                <option v-for="elemen in elements" :key="elemen.id" :value="elemen.id">{{ elemen.elemen }}</option>
-              </select>
-            </div>
-            <div class="mb-3">
-              <textarea v-model="form.deskripsi" :disabled="form.elemen.length < 1" class="form form-control mb-2" placeholder="Uraikan kegiatan kamu disini..." rows="5" required></textarea>
-              <span class="mb-3 text-muted fst-italic small float-end">min 50 karakter</span>
-            </div>
-            <div class="mb-3">
-              <label for="foto" class="text-muted label-berkas p-2 hand-cursor"><i class="bi bi-camera-fill"></i> Ambil foto kegiatan? <sup class="text-muted">(opsional)</sup></label>
-              <div v-if="form.foto" class="small fst-italic">Foto: {{ form.foto.name }}</div>
-              <input @change="compressFile" :disabled="form.elemen.length < 1 || form.deskripsi.length < 50" class="form-control-file" type="file" id="foto" accept="image/*" capture="user" />
-            </div>
-            <button :disabled="isPosting || form.elemen.length < 1 || form.deskripsi.length < 50" class="btn btn-success me-2">
-              <span v-if="!isPosting"><i class="bi bi-send"></i> Kirim</span>
-              <span v-else>Sedang mengirim</span>
-            </button>
-            <div v-if="isSaved" class="mt-3">
-              <span class="text-grey fst-italic">Berhasil terkirim</span>
-            </div>
-          </form>
-        </div> -->
         <div class="col-md-12">
           <div class="row">
-            <div class="col-md">
-              <div v-if="!isLoadingJournals" class="mb-3 text-end text-muted smallest">
-                <span v-if="journals.totalItems" class="float-start">Halaman {{ journals.page }} dari {{ journals.totalPages }}</span>
-                <span v-if="journals.totalItems">Menampilkan {{ journals.items.length }}  dari {{ journals.totalItems }} Jurnal</span>
+            <div class="col-md-12 p-0">
+              <div v-if="!isLoadingJournals" class="mb-3 mx-3 text-end text-muted smallest">
+                <span v-if="journals.totalItems" class="float-start">Halaman <span class="fw-bold">{{ journals.page }}</span> dari <span class="fw-bold">{{ journals.totalPages }}</span></span>
+                <!-- <span v-if="journals.totalItems">Menampilkan {{ journals.items.length }}  dari {{ journals.totalItems }} Jurnal</span> -->
+                <span v-if="journals.totalItems"><span class="fw-bold">{{ journals.totalItems }}</span> Jurnal</span>
               </div>
               <div v-if="!isLoadingJournals" class="text-center text-muted fw-bold fs-4">
                 <span v-if="journals.totalItems == 0">
@@ -88,15 +63,15 @@
                 </span>
               </div>
               <Loading class="py-3" v-if="isLoadingJournals" />
-              <div v-else v-for="journal in journals.items" :key="journal.id" class="card jurnal-hover">
+              <div v-else v-for="journal in journals.items" :key="journal.id" class="card jurnal-hover jurnal-item no-shadow">
                 <div class="card-body">
-                  <div class="bookmark fs-2">
+                  <!-- <div class="bookmark fs-2">
                     <div v-if="journal.expand.elemen.elemen == 'Lain-lain'" class="bookmark-icon text-danger"><i class="bi bi-bookmark-fill"></i></div>
                     <div v-else class="bookmark-icon text-info"><i class="bi bi-bookmark-fill"></i></div>
-                  </div>
-                  <div class="mb-1 mt-3 smallest fw-bold">
-                    <span v-if="journal.expand.elemen.elemen == 'Lain-lain'">{{ journal.expand.elemen.elemen }}</span>
-                    <span v-else>{{ journal.expand.elemen.elemen }}</span>
+                  </div> -->
+                  <div class="mb-1 smallest fw-bold text-muted">
+                    <span v-if="journal.expand.elemen.elemen == 'Lain-lain'"><i class="bi bi-bookmark-fill text-danger"></i> {{ journal.expand.elemen.elemen }}</span>
+                    <span v-else><i class="bi bi-bookmark-fill text-info"></i> {{ journal.expand.elemen.elemen }}</span>
                   </div>
                   <span class="text-muted smallest"><i class="bi bi-calendar2-date"></i> {{ journal.created }}</span>
                   <article class="my-3 pre-text">
@@ -105,10 +80,10 @@
                   <div v-if="journal.foto" class="my-3 foto-container hand-cursor" data-bs-toggle="modal" :data-bs-target="`#foto-${journal.id}`">
                     <img :src="`${host}/api/files/${journal.collectionId}/${journal.id}/${journal.foto}`" :alt="journal.deskripsi" class="foto" />
                   </div>
-                  <div v-if="journal.isValid" class="small fw-bold">
+                  <div v-if="journal.isValid" class="text-muted small">
                     <span class="text-danger"><i class="bi bi-heart-fill"></i></span> Valid
                   </div>
-                  <div v-else class="text-muted small fw-bold">
+                  <div v-else class="text-muted small">
                     <span class="text-danger"><i class="bi bi-heart"></i></span> Belum di Validasi
                   </div>
                 </div>
@@ -129,11 +104,11 @@
               </div>
             </div>
           </div>
-          <div class="row my-4 mb-2">
+          <div class="row my-3 mb-2">
             <div v-if="!isLoadingJournals" class="col-md-12">
-              <div v-if="isMovingPage" class="text-muted small mb-2 fst-italic">sedang berpindah halaman</div>
+              <div v-if="isMovingPage" class="text-muted smallest mb-2 fst-italic">sedang berpindah halaman</div>
               <div v-else>
-                <div v-if="journals || isMovingPage" class="text-muted small mb-2">
+                <div v-if="journals || isMovingPage" class="text-muted smallest mb-2">
                   <span v-if="journals.totalItems">Halaman {{ journals.page }} dari {{ journals.totalPages }}</span>
                 </div>
               </div>
@@ -355,7 +330,7 @@ onMounted(() => {
   height: 100%;
 }
 .jurnal-hover:hover {
-  background-color: #f7fddd;
+  background-color: #f9f9f9;
 }
 .bg-danger {
   background-color: rgb(255, 99, 132) !important;
@@ -378,7 +353,14 @@ onMounted(() => {
 }
 .bookmark .bookmark-icon {
   position: absolute;
-  top: -32px;
-  left: -5px;
+  top: -20px;
+  right: -5px;
+}
+.jurnal-item {
+  border: none !important;
+  border-bottom: 1px solid #000 !important
+}
+.no-shadow {
+  box-shadow: none !important;
 }
 </style>
