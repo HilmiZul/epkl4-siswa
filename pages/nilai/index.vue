@@ -194,7 +194,10 @@ let form = ref({
   "foto_jurnal_nilai": "",
   "logo": "",
   "isEntrust": false,
-  "isValid": ""
+  "isValid": "",
+  "nama_pj_penandatangan": "",
+  "nomor_pegawai": "",
+  "nomor_sertifikat": "",
 })
 
 async function updateNilai() {
