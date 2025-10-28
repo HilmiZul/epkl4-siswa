@@ -61,9 +61,33 @@
                   <div v-if="form.isEntrust">
                     <div class="mb-4">
                       <div v-if="certificate.isValid" class="text-muted fw-bold">Pejabat Penandatangan</div>
-                      <label v-else for="pj_penandatangan">Pejabat Penandatangan</label>
+                      <label v-else for="pj_penandatangan">Pejabat Penandatangan <span class="text-danger">*</span></label>
                       <span v-if="certificate.isValid" class="fw-bold">{{ certificate.pj_penandatangan }}</span>
                       <input v-else v-model="form.pj_penandatangan" type="text" id="pj_penandatangan" class="form form-control" placeholder="Contoh: CEO, Direktur, Kepala Dinas..." required>
+                    </div>
+                    <div class="mb-4">
+                      <div v-if="certificate.isValid" class="text-muted fw-bold">Nama Pejabat Penandatangan</div>
+                      <label v-else for="nama_pj_penandatangan">Nama Pejabat Penandatangan <span class="text-danger">*</span></label>
+                      <span v-if="certificate.isValid" class="fw-bold">{{ certificate.nama_pj_penandatangan }}</span>
+                      <input v-else :disabled="form.pj_penandatangan < 1" v-model="form.nama_pj_penandatangan" type="text" id="nama_pj_penandatangan" class="form form-control" placeholder="Tulis mama lengkapnya..." required>
+                    </div>
+                    <div class="mb-4">
+                      <div v-if="certificate.isValid" class="text-muted fw-bold">Nomor Pegawai</div>
+                      <label v-else for="nomor_pegawai">Nomor Pegawai</label>
+                      <span v-if="certificate.isValid" class="fw-bold">
+                        <span v-if="certificate.nomor_pegawai">{{ certificate.nomor_pegawai }}</span>
+                        <span v-else>&#8212;</span>
+                      </span>
+                      <input v-else v-model="form.nomor_pegawai" type="text" id="nomor_pegawai" class="form form-control" placeholder="Kosongkan jika tidak ada" >
+                    </div>
+                    <div class="mb-4">
+                      <div v-if="certificate.isValid" class="text-muted fw-bold">Nomor Sertifikat</div>
+                      <label v-else for="nomor_sertifikat">Nomor Sertifikat</label>
+                      <span v-if="certificate.isValid" class="fw-bold">
+                        <span v-if="certificate.nomor_sertifikat">{{ certificate.nomor_sertifikat }}</span>
+                        <span v-else>&#8212;</span>
+                      </span>
+                      <input v-else v-model="form.nomor_sertifikat" type="text" id="nomor_sertifikat" class="form form-control" placeholder="Kosongkat jika tidak ada" >
                     </div>
                     <div class="mb-4">
                       <label for="logo_iduka">Logo IDUKA</label>

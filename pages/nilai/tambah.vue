@@ -11,40 +11,51 @@
       <div v-else class="row">
         <div v-if="$device.isMobile" class="col-lg-6">
           <form @submit.prevent="buatBaru">
+            <div class="mb-4">
+              <label for="fotonilai">Foto Halaman Nilai <span class="text-danger">*</span></label>
+              <input @change="compressFile" class="form form-control" type="file" id="fotonilai" accept="image/*" capture="environment" required />
+            </div>
+            <div class="mb-4">
+              <label for="el_softskill">Nilai Elemen 1 <span class="text-danger">*</span></label>
+              <input v-model="form.nilai_elemen1" type="number" min="0" max="100" id="el_softskill" class="form form-control" required>
+            </div>
+            <div class="mb-4">
+              <label for="el_hardskill">Nilai Elemen 2 <span class="text-danger">*</span></label>
+              <input :disabled="form.nilai_elemen1 < 1" v-model="form.nilai_elemen2" type="number" min="0" max="100" id="el_hardskill" class="form form-control" required>
+            </div>
+            <div class="mb-4">
+              <label for="el_pengembangan_hardskill">Nilai Elemen 3 <span class="text-danger">*</span></label>
+              <input :disabled="form.nilai_elemen2 < 1" v-model="form.nilai_elemen3" type="number" min="0" max="100" id="el_pengembangan_hardskill" class="form form-control" required>
+            </div>
+            <div class="mb-4">
+              <label for="el_wirausaha">Nilai Elemen 4 <span class="text-danger">*</span></label>
+              <input :disabled="form.nilai_elemen2 < 1" v-model="form.nilai_elemen4" type="number" min="0" max="100" id="el_wirausaha" class="form form-control" required>
+            </div>
+            <hr>
             <div class="mb-4 form-check form-switch">
               <input v-model="form.isEntrust" class="form-check-input" type="checkbox" id="entrust" switch>
               <label for="entrust">Buatkan Sertifikat di Sekolah?</label>
             </div>
-            <hr>
-            <div class="mb-4">
-              <label for="fotonilai">Foto Halaman Nilai</label>
-              <input @change="compressFile" class="form form-control" type="file" id="fotonilai" accept="image/*" capture="environment" required />
-            </div>
-            <div class="mb-4">
-              <label for="el_softskill">Nilai Elemen 1</label>
-              <input v-model="form.nilai_elemen1" type="number" min="0" max="100" id="el_softskill" class="form form-control" required>
-            </div>
-            <div class="mb-4">
-              <label for="el_hardskill">Nilai Elemen 2</label>
-              <input :disabled="form.nilai_elemen1 < 1" v-model="form.nilai_elemen2" type="number" min="0" max="100" id="el_hardskill" class="form form-control" required>
-            </div>
-            <div class="mb-4">
-              <label for="el_pengembangan_hardskill">Nilai Elemen 3</label>
-              <input :disabled="form.nilai_elemen2 < 1" v-model="form.nilai_elemen3" type="number" min="0" max="100" id="el_pengembangan_hardskill" class="form form-control" required>
-            </div>
-            <div class="mb-4">
-              <label for="el_wirausaha">Nilai Elemen 4</label>
-              <input :disabled="form.nilai_elemen2 < 1" v-model="form.nilai_elemen4" type="number" min="0" max="100" id="el_wirausaha" class="form form-control" required>
-            </div>
             <div v-if="form.isEntrust">
-              <hr>
               <div class="mb-4">
-                <label for="pj_penandatangan">Pejabat Penandatangan</label>
+                <label for="pj_penandatangan">Pejabat Penandatangan <span class="text-danger">*</span></label>
                 <input :disabled="form.nilai_elemen4 < 1" v-model="form.pj_penandatangan" type="text" id="pj_penandatangan" class="form form-control" placeholder="Contoh: CEO, Direktur, Kepala Dinas..." required>
               </div>
               <div class="mb-4">
-                <label for="logo_iduka">Logo IDUKA</label>
-                <input @change="compressFileLogo" class="form form-control" type="file" id="logo_iduka" accept="image/*" required />
+                <label for="nama_pj_penandatangan">Nama Pejabat Penandatangan <span class="text-danger">*</span></label>
+                <input :disabled="form.pj_penandatangan < 1" v-model="form.nama_pj_penandatangan" type="text" id="nama_pj_penandatangan" class="form form-control" placeholder="Tulis mama lengkapnya..." required>
+              </div>
+              <div class="mb-4">
+                <label for="nomor_pegawai">Nomor Pegawai</label>
+                <input :disabled="form.nama_pj_penandatangan < 1" v-model="form.nomor_pegawai" type="text" id="nomor_pegawai" class="form form-control" placeholder="Kosongkan jika tidak ada">
+              </div>
+              <div class="mb-4">
+                <label for="nomor_sertifikat">Nomor Sertifikat</label>
+                <input :disabled="form.nomor_pegawai < 1" v-model="form.nomor_sertifikat" type="text" id="nomor_sertifikat" class="form form-control" placeholder="Kosongkat jika tidak ada">
+              </div>
+              <div class="mb-4">
+                <label for="logo_iduka">Logo IDUKA <span class="text-muted">(apabila punya)</span></label>
+                <input @change="compressFileLogo" class="form form-control" type="file" id="logo_iduka" accept="image/*" />
               </div>
             </div>
             <button :disabled="isSending || form.nilai_elemen1 < 1 || form.nilai_elemen2 < 1 || form.nilai_elemen3 < 1 || form.nilai_elemen4 < 1" class="btn btn-success me-2 border border-2 border-dark">
@@ -93,6 +104,9 @@ let form = ref({
   "logo": "",
   "isEntrust": false,
   "isValid": false,
+  "nama_pj_penandatangan": "",
+  "nomor_sertifikat": "",
+  "nomor_pegawai": ""
 })
 
 async function buatBaru() {
