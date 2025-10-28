@@ -53,7 +53,7 @@
                     <input @change="compressFile" class="form form-control" type="file" id="fotonilai" accept="image/*" capture="environment" />
                     <div v-if="isErrorCompressOrExt" class="my-2 fst-italic text-muted text-danger small">Silahkan periksa kembali file-nya (jpg/png).</div>
                   </div>
-                  <hr v-if="!certificate.isValid">
+                  <hr v-if="!certificate.isValid || certificate.isEntrust">
                   <div v-if="!certificate.isValid" class="mb-4 form-check form-switch">
                     <input v-model="form.isEntrust" :checked="form.isEntrust" class="form-check-input" type="checkbox" id="entrust" switch>
                     <label for="entrust">Buatkan Sertifikat di Sekolah?</label>
