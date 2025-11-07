@@ -3,7 +3,7 @@
     <div class="card-header">
       <span class="h4 fw-bold">Serahkan Nilai</span>
       <span class="float-end">
-        <nuxt-link to="/nilai" class="btn btn-warning btn-sm border border-2 border-dark">Kembali</nuxt-link>
+        <nuxt-link to="/nilai" class="btn btn-light btn-sm border border-2 border-dark">Kembali</nuxt-link>
       </span>
     </div>
     <div class="card-body">
@@ -58,11 +58,11 @@
                 <input @change="compressFileLogo" class="form form-control" type="file" id="logo_iduka" accept="image/*" />
               </div>
             </div>
-            <button :disabled="isSending || form.nilai_elemen1 < 1 || form.nilai_elemen2 < 1 || form.nilai_elemen3 < 1 || form.nilai_elemen4 < 1" class="btn btn-success me-2 border border-2 border-dark">
+            <button :disabled="isSending || form.nilai_elemen1 < 1 || form.nilai_elemen2 < 1 || form.nilai_elemen3 < 1 || form.nilai_elemen4 < 1" class="btn btn-info me-2 border border-2 border-dark">
               <span v-if="isSending">Sedang mengirim</span>
               <span v-else>Serahkan</span>
             </button>
-            <nuxt-link to="/nilai" class="btn btn-warning border border-2 border-dark">Kembali</nuxt-link>
+            <nuxt-link to="/nilai" class="btn btn-light border border-2 border-dark">Kembali</nuxt-link>
             <span v-if="isSaved" class="ms-3 small fst-italic text-muted">Nilai berhasil diserahkan!</span>
           </form>
         </div>

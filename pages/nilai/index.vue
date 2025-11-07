@@ -95,7 +95,7 @@
                       <input v-if="!certificate.isValid" @change="compressFileLogo" class="form form-control" type="file" id="logo_iduka" accept="image/*" />
                     </div>
                   </div>
-                  <button v-if="!certificate.isValid" :disabled="isSending" class="btn btn-success me-2 mb-2 border border-2 border-dark">
+                  <button v-if="!certificate.isValid" :disabled="isSending" class="btn btn-info me-2 mb-2 border border-2 border-dark">
                     <span v-if="isSending">Sedang menyimpan</span>
                     <span v-else>Simpan</span>
                   </button>

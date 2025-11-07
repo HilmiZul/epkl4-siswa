@@ -15,7 +15,7 @@
         <div v-for="(elemen,i) in elements" :key="elemen.id" class="accordion-item border-bottom border-2 border-dark">
           <div class="accordion-header">
             <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" :data-bs-target="`#flush-${elemen.id}`" aria-expanded="false" :aria-controls="`flush-${elemen.id}`">
-              <span class="badge bg-warning border border-2 border-dark me-2">{{ i+1 }}</span> {{ elemen.elemen }}
+              <span class="badge text-dark border border-2 border-dark me-2">{{ i+1 }}</span> {{ elemen.elemen }}
             </button>
           </div>
           <div :id="`flush-${elemen.id}`" class="accordion-collapse collapse" data-bs-parent="#accordion-parent">

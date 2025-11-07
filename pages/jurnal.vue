@@ -10,7 +10,7 @@
       <div v-if="$device.isMobile" class="modal" id="buat-jurnal-baru" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content rounded-0 border border-2 border-dark shadow-lg">
-            <div class="modal-header fw-bold bg-success rounded-0 border-0 border-bottom border-2 border-dark">
+            <div class="modal-header fw-bold bg-info rounded-0 border-0 border-bottom border-2 border-dark">
               <i class="bi bi-pencil-square me-2"></i> Buat Jurnal
               <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -36,7 +36,7 @@
                   <div v-if="form.foto" class="small fst-italic">Foto: {{ form.foto.name }}</div>
                   <input @change="compressFile" :disabled="form.elemen.length < 1 || form.deskripsi.length < 125" class="form-control-file" type="file" id="foto" accept="image/*" capture="user" required />
                 </div>
-                <button :disabled="isPosting || (form.foto && form.deskripsi.length < 125)" class="btn btn-success me-2 border border-2 border-dark" data-bs-dismiss="modal">
+                <button :disabled="isPosting || (form.foto && form.deskripsi.length < 125)" class="btn btn-info me-2 border border-2 border-dark" data-bs-dismiss="modal">
                   <span v-if="!isPosting"><i class="bi bi-send"></i> Kirim</span>
                   <span v-else>Sedang mengirim</span>
                 </button>
