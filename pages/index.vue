@@ -54,7 +54,7 @@
                       <td class="text-muted fst-italic">Belum ada teman/pemetaan</td>
                     </tr>
                     <tr v-for="(p,i) in pemetaan" :key="p.id">
-                      <td class="align-content-center" width="2%"><span class="badge bg-warning border border-2 border-dark">{{ i+1 }}</span></td>
+                      <td width="2%"><span class="badge text-dark border border-2 border-dark">{{ i+1 }}</span></td>
                       <td>
                         <span class="fw-bold">{{ p.expand.siswa.nama }}</span> <br>
                         <span class="smallest text-muted">{{ p.expand.siswa.kelas }}</span>
