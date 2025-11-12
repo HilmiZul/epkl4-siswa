@@ -4,7 +4,7 @@
       <h3 class="text-center fw-bold mb-4">LOGIN</h3>
       <form @submit.prevent="handleLogin">
         <div v-if="isError" class="mb-4">
-          <div class="alert alert-danger rounded-0 border border-2 border-dark">Kombinasi salah! Coba lagi besok!</div>
+          <div class="alert alert-danger rounded-0 border border-2 border-dark">Kombinasi salah. <br> Silahkan periksa kembali!</div>
         </div>
         <div class="mb-4">
           <label for="email">Username</label>
