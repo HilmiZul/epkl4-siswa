@@ -8,7 +8,7 @@
     </div>
     <div class="card-body text-dark">
       <p class="text-muted small">
-        Diperbaharui pada 25 Oktober 2025
+        Diperbaharui pada 13 November 2025
       </p>
       <p>
         Kebijakan Privasi ini bertujuan untuk membantu Anda memahami data yang kami kumpulkan. Dengan
@@ -50,7 +50,7 @@
         aplikasi e-PKL, dengan kata lain hanya yang memiliki akun dan otoritas tertentu yang dapat mengakses informasi
         didalam aplikasi e-PKL.
         Apabila seluruh/salah satu informasi terekspos dan disalahgunakan dengan/tanpa sengaja oleh Anda,
-        maka itu menjadi tanggung jawab yang bersangkutan.
+        maka itu menjadi tanggung jawab Anda.
         Kami tidak akan menggunakan informasi Anda untuk hal-hal lain diluar aplikasi e-PKL.
       </p>
     </div>
