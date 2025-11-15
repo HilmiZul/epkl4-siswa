@@ -8,7 +8,7 @@
     </div>
     <div class="card-body text-dark">
       <p class="text-muted small">
-        Diperbaharui pada 25 Oktober 2025
+        Diperbaharui pada 15 November 2025
       </p>
       <h5 class="fw-bold text-grey">Akun Anggota e-PKL</h5>
       <ul>
@@ -19,6 +19,11 @@
       </ul>
       <h5 class="fw-bold text-grey">Terkait Elemen</h5>
       <ul>
+        <li>
+          Berdasarkan keputusan <nuxt-link to="https://kurikulum.kemdikbud.go.id/file/1687442514_manage_file.pdf" target="_blank">Kepala Badan Standar, Kurikulum, dan Asesmen Pendidikan (BSKAP)</nuxt-link>
+          Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi yang mendasari hukum utama mengatur elemen Capaian Pembelajaran untuk mata pelajaran
+          PKK dan PKL dalam kurikulum merdeka.
+        </li>
         <li>Elemen berisi CP dan tujuan Mapel PKL.</li>
         <li>Elemen ini akan digunakan oleh peserta didik untuk mengisi Jurnal Harian.</li>
         <li>Jobdesc yang tidak sesuai dengan elemen dan bukan lintas keahlian, gunakan <strong>Lain-lain</strong>.</li>
@@ -35,15 +40,15 @@
             <tbody>
               <tr>
                 <td><i class="bi bi-bookmark-fill text-primary"></i> Pita Biru</td>
-                <td>Sesuai dengan elemen yang dipilih</td>
+                <td>: Sesuai dengan elemen yang dipilih</td>
               </tr>
               <tr>
                 <td><i class="bi bi-bookmark-fill text-primary"></i> Pita Biru</td>
-                <td>Ada hubungannya dengan elemen yang dipilih</td>
+                <td>: Ada hubungannya dengan elemen yang dipilih</td>
               </tr>
               <tr>
                 <td> <i class="bi bi-bookmark-fill text-danger"></i> Pita Merah</td>
-                <td>Lintas konsentrasi keahlian atau aktivitas masih berhubungan dengan pekerjaan</td>
+                <td>: Lintas konsentrasi keahlian atau aktivitas masih berhubungan dengan pekerjaan</td>
               </tr>
             </tbody>
           </table>
