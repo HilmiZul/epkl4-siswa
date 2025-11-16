@@ -23,7 +23,7 @@
               Original written in Python (with Django Framework) since 2018 and rewrite to Javascript (with Vue Framework) in 2022.
             </p>
             <p>
-              This project is an open source software under MIT Licensed. Feel free if you want to contribute to this <nuxt-link to="https://github.com/hilmizul/epkl4" target="_blank" class="link-footer">project</nuxt-link>.
+              This project is an open source software under MIT Licensed. Feel free if you want to contribute to this <nuxt-link to="https://github.com/hilmizul/epkl4-siswa" target="_blank" class="link-footer">project</nuxt-link>.
             </p>
             <div class="pt-3">
               Best regards,
