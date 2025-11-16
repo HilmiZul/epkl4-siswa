@@ -1,6 +1,6 @@
 <template>
   <div>
-    <footer class="my-4 text-muted text-center smallest">
+    <footer class="my-4 fw-bold text-center smallest">
       v{{ version }} <br>
       <nuxt-link class="hand-cursor link-footer" to="/privacy">Privacy</nuxt-link> |
       <nuxt-link class="hand-cursor link-footer" to="/terms">Terms</nuxt-link> <br>
