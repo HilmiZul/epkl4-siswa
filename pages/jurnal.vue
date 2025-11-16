@@ -51,10 +51,10 @@
         <div class="col-md-12">
           <div class="row">
             <div class="col-md-12 p-0">
-              <div v-if="!isLoadingJournals" class="mb-3 mx-3 text-end text-muted smallest">
-                <span v-if="journals.totalItems" class="float-start">Halaman <span class="fw-bold">{{ journals.page }}</span> dari <span class="fw-bold">{{ journals.totalPages }}</span></span>
+              <div v-if="!isLoadingJournals" class="mx-3 text-center text-muted smallest">
+                <!-- <span v-if="journals.totalItems" class="float-start">Halaman <span class="fw-bold">{{ journals.page }}</span> dari <span class="fw-bold">{{ journals.totalPages }}</span></span> -->
                 <!-- <span v-if="journals.totalItems">Menampilkan {{ journals.items.length }}  dari {{ journals.totalItems }} Jurnal</span> -->
-                <span v-if="journals.totalItems"><span class="fw-bold">{{ journals.totalItems }}</span> Jurnal</span>
+                <span v-if="journals.totalItems">{{ journals.totalItems }} Jurnal</span>
               </div>
               <div v-if="!isLoadingJournals" class="text-center text-muted fw-bold fs-4">
                 <span v-if="journals.totalItems == 0">
