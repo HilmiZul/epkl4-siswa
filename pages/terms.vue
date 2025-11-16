@@ -8,7 +8,7 @@
     </div>
     <div class="card-body text-dark">
       <p class="text-muted small">
-        Diperbaharui pada 15 November 2025
+        Diperbaharui pada 16 November 2025
       </p>
       <h5 class="fw-bold text-grey">Akun Anggota e-PKL</h5>
       <ul>
@@ -60,9 +60,8 @@
       <h5 class="fw-bold text-grey">Terkait Nilai</h5>
       <ul>
         <li>Nilai akan digunakan untuk Rapor PKL dan/atau penitipan Sertifikat bagi IDUKA yang tidak dapat menerbitkan.</li>
-        <li>Peserta didik meminta nilai kepada instruktur/pembimbing IDUKA yang ditulis pada halaman Nilai PKL dibuku jurnal.</li>
-        <li>Peserta didik harus menyerahkan nilai PKL yang diberikan oleh instruktur/pembimbing IDUKA pada aplikasi e-PKL.</li>
-        <li>Nilai yang diserahkan akan diperiksa oleh Guru pembimbing disekolah sampai dinyatakan valid.</li>
+        <li>Peserta didik berkewajiban menyerahkan nilai PKL yang diberikan oleh instruktur/pembimbing IDUKA melalui aplikasi e-PKL.</li>
+        <li>Nilai yang diserahkan akan diperiksa oleh Guru pembimbing sekolah sampai dinyatakan valid.</li>
       </ul>
     </div>
   </div>

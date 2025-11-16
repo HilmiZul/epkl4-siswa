@@ -8,7 +8,7 @@
     </div>
     <div class="card-body text-dark">
       <p class="text-muted small">
-        Diperbaharui pada 13 November 2025
+        Diperbaharui pada 16 November 2025
       </p>
       <p>
         Kebijakan Privasi ini bertujuan untuk membantu Anda memahami data yang kami kumpulkan. Dengan
@@ -28,7 +28,7 @@
       </p>
       <div class="fw-bold">Informasi Nilai</div>
       <p>
-        Kami juga mengumpulkan dan menyimpan nilai PKL yang dibuat/diajukan oleh peserta didik.
+        Kami juga mengumpulkan dan menyimpan nilai PKL dari IDUKA yang diserahkan oleh peserta didik.
       </p>
       <h5 class="fw-bold text-grey">Bagaimana Kami Menggunakan Informasi Anda</h5>
       <p>
