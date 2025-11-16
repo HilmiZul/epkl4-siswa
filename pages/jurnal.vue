@@ -31,10 +31,13 @@
                     {{ form.deskripsi.length }} <span v-if="form.deskripsi.length < 125" class="text-muted">/ 125 karakter</span>
                   </span>
                 </div>
-                <div class="mb-4">
+                <div class="mb-3">
                   <label for="foto" class="text-muted label-berkas p-2 hand-cursor"><i class="bi bi-camera-fill"></i> Ambil foto kegiatan</label>
                   <div v-if="form.foto" class="small fst-italic">Foto: {{ form.foto.name }}</div>
                   <input @change="compressFile" :disabled="form.elemen.length < 1 || form.deskripsi.length < 125" class="form-control-file" type="file" id="foto" accept="image/*" capture="user" required />
+                </div>
+                <div class="mb-4 smallest text-muted">
+                  Saya telah membaca dan setuju dengan <nuxt-link to="/privacy" target="_blank" class="link text-muted">kebijakan privasi & syarat penggunaan</nuxt-link>.
                 </div>
                 <button :disabled="isPosting || (form.foto && form.deskripsi.length < 125)" class="btn btn-info me-2 border border-2 border-dark" data-bs-dismiss="modal">
                   <span v-if="!isPosting"><i class="bi bi-send"></i> Kirim</span>
@@ -158,6 +161,7 @@ let isMovingPage = ref(false)
 let havePostJournalToday = ref(false)
 let today = useServerDay()
 let maxLenDesc = ref(50)
+let currStudent = ref('')
 
 async function isTodayPostJournal() {
   try {
@@ -189,8 +193,18 @@ function compressFile(e) {
   // anw, Xiexie Fengyuan :thumb:
   let file = e.target.files[0]
   if(!file) return;
+  let now = new Date()
+  let tanggal = new Intl.DateTimeFormat('id-ID', {dateStyle:'full'}).format(now)
   new Compressor(file, {
     quality: 0.6,
+    drew(context, canvas) {
+      context.fillStyle = 'rgba(255, 255, 255, .8',
+      context.font = '3rem serif',
+      context.textAlign = 'center'
+      context.fillText('PKL SMKN 4 Tasikmalaya', canvas.width/2, canvas.height/2),
+      context.fillText(currStudent.value, canvas.width/2, canvas.height/2+120)
+      context.fillText(tanggal, canvas.width/2, canvas.height/2+200)
+    },
     success(result) {
       form.value.foto = result
     },
@@ -293,6 +307,15 @@ async function getElemenCp() {
   }
 }
 
+async function getPesertaByIdUser() {
+  let res = await client.collection('student_users').getOne(user?.user.value.id, {
+    expand: `siswa`
+  })
+  if(res) {
+    currStudent.value = res.expand.siswa.nama
+  }
+}
+
 let removeSingleSpaceIfEmpty = computed(() => {
   if(form.value.deskripsi.length < 1 || form.value.deskripsi[0] == ' ') form.value.deskripsi = ''
 })
@@ -301,6 +324,7 @@ onMounted(() => {
   getElemenCp()
   getJournals()
   isTodayPostJournal()
+  getPesertaByIdUser()
   client.autoCancellation(false)
   client.collection('jurnal').subscribe('*', function(e) {
     if(e.action == 'create' || e.action == 'update' || e.action) {
