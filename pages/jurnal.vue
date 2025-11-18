@@ -17,10 +17,10 @@
             <div class="modal-body">
               <form @submit.prevent="buatJurnalBaru">
                 <div class="mb-4">
-                  <label for="elemen">Elemen</label>
+                  <label for="elemen">Tujuan Pembelajaran</label>
                   <select v-model="form.elemen" id="elemen" class="form form-control form-select" required>
-                    <option disabled value="" selected>&#8212; Pilih Elemen &#8212;</option>
-                    <option v-for="elemen in elements" :key="elemen.id" :value="elemen.id">{{ elemen.elemen }}</option>
+                    <option disabled value="" selected>&#8212; Pilih &#8212;</option>
+                    <option v-for="elemen in elements" :key="elemen.id" :value="elemen.id">{{ elemen.tujuan }}</option>
                   </select>
                 </div>
                 <div class="mb-4">
