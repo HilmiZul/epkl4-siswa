@@ -1,7 +1,13 @@
 <template>
   <div class="row">
-    <div class="col-12 text-center fst-italic lexend-mega">
-      <h1>Logging out...</h1>
+    <div class="col-lg-12 text-center lexend-mega text-muted">
+      <div class="card">
+        <div class="card-body">
+          <i class="bi bi-hourglass-split fs-1"></i>
+          <h1 class="my-5">Logging out</h1>
+          <h5 class="quicksand">tunggu bentar...</h5>
+        </div>
+      </div>
     </div>
   </div>
 </template>
