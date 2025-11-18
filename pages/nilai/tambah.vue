@@ -47,11 +47,11 @@
               </div>
               <div class="mb-4">
                 <label for="nomor_pegawai">Nomor Pegawai</label>
-                <input :disabled="form.nama_pj_penandatangan < 1" v-model="form.nomor_pegawai" type="text" id="nomor_pegawai" class="form form-control" placeholder="Kosongkan jika tidak ada">
+                <input v-model="form.nomor_pegawai" type="text" id="nomor_pegawai" class="form form-control" placeholder="Kosongkan jika tidak ada">
               </div>
               <div class="mb-4">
                 <label for="nomor_sertifikat">Nomor Sertifikat</label>
-                <input :disabled="form.nomor_pegawai < 1" v-model="form.nomor_sertifikat" type="text" id="nomor_sertifikat" class="form form-control" placeholder="Kosongkat jika tidak ada">
+                <input v-model="form.nomor_sertifikat" type="text" id="nomor_sertifikat" class="form form-control" placeholder="Kosongkat jika tidak ada">
               </div>
               <div class="mb-4">
                 <label for="logo_iduka">Logo IDUKA <span class="text-muted">(apabila punya)</span></label>
