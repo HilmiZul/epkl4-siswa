@@ -162,6 +162,7 @@ let havePostJournalToday = ref(false)
 let today = useServerDay()
 let maxLenDesc = ref(50)
 let currStudent = ref('')
+let currIduka = ref('')
 
 async function isTodayPostJournal() {
   try {
@@ -197,13 +198,15 @@ function compressFile(e) {
   let tanggal = new Intl.DateTimeFormat('id-ID', {dateStyle:'full'}).format(now)
   new Compressor(file, {
     quality: 0.6,
+    // drew: nempelin watermark ke foto agar tahu sumbernya dan sulit dipalsukan
     drew(context, canvas) {
       context.fillStyle = 'rgba(255, 255, 255, .8',
       context.font = '3rem serif',
       context.textAlign = 'center'
-      context.fillText('PKL SMKN 4 Tasikmalaya', canvas.width/2, canvas.height/2),
+      context.fillText('PKL SMKN 4 Tasikmalaya', canvas.width/2, canvas.height/2-120),
+      context.fillText(currIduka.value, canvas.width/2, canvas.height/2)
       context.fillText(currStudent.value, canvas.width/2, canvas.height/2+120)
-      context.fillText(tanggal, canvas.width/2, canvas.height/2+200)
+      context.fillText(tanggal, canvas.width/2, canvas.height/2+180)
     },
     success(result) {
       form.value.foto = result
@@ -297,6 +300,8 @@ async function getElemenCp() {
     if(res_pemetaan) {
       isLoading.value = false
       pemetaan.value = res_pemetaan
+      // currIduka: menyimpan nama IDUKA untuk ditempel kedalam watermark foto
+      currIduka.value = res_pemetaan[0].expand.iduka.nama
       if(res_pemetaan.length > 0) {
         form.value.iduka = res_pemetaan[0].iduka
         form.value.pembimbing = res_pemetaan[0].expand.iduka.pembimbing_sekolah
@@ -312,6 +317,7 @@ async function getPesertaByIdUser() {
     expand: `siswa`
   })
   if(res) {
+    // currStudent: menyimpan nama peserta untuk ditempel kedalam watermark foto
     currStudent.value = res.expand.siswa.nama
   }
 }
