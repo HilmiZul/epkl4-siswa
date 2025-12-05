@@ -201,7 +201,7 @@ function compressFile(e) {
     // drew: nempelin watermark ke foto agar tahu sumbernya dan sulit dipalsukan
     drew(context, canvas) {
       context.fillStyle = 'rgba(255, 255, 255, .8',
-      context.font = '3rem serif',
+      context.font = '4rem serif',
       context.textAlign = 'center'
       context.fillText('PKL SMKN 4 Tasikmalaya', canvas.width/2, canvas.height/2-120),
       context.fillText(currIduka.value, canvas.width/2, canvas.height/2)
