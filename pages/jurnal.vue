@@ -25,16 +25,16 @@
                 </div>
                 <div class="mb-4">
                   <label for="deskripsi">Uraian Kegiatan</label>
-                  <textarea v-model="form.deskripsi" :disabled="form.elemen.length < 1" @input="removeSingleSpaceIfEmpty" id="deskripsi" class="form form-control mb-2" placeholder="Uraikan kegiatan kamu disini minimal 125 karakter..." rows="5" required></textarea>
+                  <textarea v-model="form.deskripsi" :disabled="form.elemen.length < 1" @input="removeSingleSpaceIfEmpty" id="deskripsi" class="form form-control mb-2" placeholder="Minimal 125 karakter..." rows="5" required></textarea>
                   <span class="mb-3 fw-bold small">
                     <i v-if="form.deskripsi.length > 124" class="bi bi-check-circle-fill text-success"></i>
-                    {{ form.deskripsi.length }} <span v-if="form.deskripsi.length < 125" class="text-muted">/ 125 karakter</span>
+                    {{ form.deskripsi.length }} <span v-if="form.deskripsi.length < 125" class="text-muted"> (min. 125 karakter)</span>
                   </span>
                 </div>
-                <div class="mb-3">
-                  <label for="foto" class="text-muted label-berkas p-2 hand-cursor"><i class="bi bi-camera-fill"></i> Ambil foto kegiatan</label>
-                  <div v-if="form.foto" class="small fst-italic">Foto: {{ form.foto.name }}</div>
-                  <input @change="compressFile" :disabled="form.elemen.length < 1 || form.deskripsi.length < 125" class="form-control-file" type="file" id="foto" accept="image/*" capture="user" required />
+                <div v-if="form.elemen.length > 0 && form.deskripsi.length >= 125" class="mb-3">
+                  <label for="foto" class="text-muted label-berkas border-2 p-2"><i class="bi bi-camera-fill"></i> Ambil foto kegiatan</label>
+                  <div v-if="form.foto" class="small fst-italic">Foto: {{ form.foto?.name }}</div>
+                  <input @change="compressFile" :disabled="form.elemen.length < 1 && form.deskripsi.length < 125" class="form-control-file" type="file" id="foto" accept="image/*" capture="user" required />
                 </div>
                 <div class="mb-4 smallest text-muted">
                   Saya telah membaca dan setuju dengan <nuxt-link to="/privacy" target="_blank" class="link text-muted">kebijakan privasi & syarat penggunaan</nuxt-link>.
@@ -203,10 +203,10 @@ function compressFile(e) {
       context.fillStyle = 'rgba(255, 255, 255, .8',
       context.font = '4rem serif',
       context.textAlign = 'center'
-      context.fillText('PKL SMKN 4 Tasikmalaya', canvas.width/2, canvas.height/2-120),
+      context.fillText('PKL SMKN 4 Tasikmalaya', canvas.width/2, canvas.height/2-100),
       context.fillText(currIduka.value, canvas.width/2, canvas.height/2)
-      context.fillText(currStudent.value, canvas.width/2, canvas.height/2+120)
-      context.fillText(tanggal, canvas.width/2, canvas.height/2+180)
+      context.fillText(currStudent.value, canvas.width/2, canvas.height/2+100)
+      context.fillText(tanggal, canvas.width/2, canvas.height/2+190)
     },
     success(result) {
       form.value.foto = result
