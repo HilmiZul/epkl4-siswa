@@ -43,7 +43,7 @@
               </div>
               <div class="mb-4">
                 <label for="nama_pj_penandatangan">Nama Pejabat Penandatangan <span class="text-danger">*</span></label>
-                <input :disabled="form.pj_penandatangan < 1" v-model="form.nama_pj_penandatangan" type="text" id="nama_pj_penandatangan" class="form form-control" placeholder="Tulis mama lengkapnya..." required>
+                <input :disabled="form.pj_penandatangan < 1" v-model="form.nama_pj_penandatangan" type="text" id="nama_pj_penandatangan" class="form form-control" placeholder="Tulis nama lengkapnya..." required>
               </div>
               <div class="mb-4">
                 <label for="nomor_pegawai">Nomor Pegawai</label>
@@ -51,7 +51,7 @@
               </div>
               <div class="mb-4">
                 <label for="nomor_sertifikat">Nomor Sertifikat</label>
-                <input v-model="form.nomor_sertifikat" type="text" id="nomor_sertifikat" class="form form-control" placeholder="Kosongkat jika tidak ada">
+                <input v-model="form.nomor_sertifikat" type="text" id="nomor_sertifikat" class="form form-control" placeholder="Kosongkan jika tidak ada">
               </div>
               <div class="mb-4">
                 <label for="logo_iduka">Logo IDUKA <span class="text-muted">(apabila punya)</span></label>
