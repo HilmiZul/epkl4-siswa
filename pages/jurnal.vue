@@ -52,12 +52,15 @@
     <div class="card-body">
       <div class="row">
         <div class="col-md-12">
+          <div v-if="notValidCount > 0" class="alert alert-warning">
+            Ada <span class="fw-bold">{{ notValidCount }}</span> jurnal yang belum divalidasi
+          </div>
           <div class="row">
             <div class="col-md-12 p-0">
               <div v-if="!isLoadingJournals" class="mx-3 text-center text-muted smallest">
                 <!-- <span v-if="journals.totalItems" class="float-start">Halaman <span class="fw-bold">{{ journals.page }}</span> dari <span class="fw-bold">{{ journals.totalPages }}</span></span> -->
                 <!-- <span v-if="journals.totalItems">Menampilkan {{ journals.items.length }}  dari {{ journals.totalItems }} Jurnal</span> -->
-                <span v-if="journals.totalItems">{{ journals.totalItems }} Jurnal</span>
+                <span v-if="journals.totalItems" class="badge border border-dark text-dark">{{ journals.totalItems }} Jurnal</span>
               </div>
               <div v-if="!isLoadingJournals" class="text-center text-muted fw-bold fs-4">
                 <span v-if="journals.totalItems == 0">
@@ -163,6 +166,7 @@ let today = useServerDay()
 let maxLenDesc = ref(50)
 let currStudent = ref('')
 let currIduka = ref('')
+let notValidCount = ref(0)
 
 async function isTodayPostJournal() {
   try {
@@ -243,6 +247,7 @@ async function getJournals(loading=true) {
   if(res) {
     isLoadingJournals.value = false
     journals.value = res
+    notValidCount.value = 0
     // console.log(journals.value)
     // konversi waktu UTC dari server ke full date lokal indo
     for(let i=0; i<journals.value.items.length; i++) {
@@ -252,6 +257,8 @@ async function getJournals(loading=true) {
         timeStyle: "short"
       };
       journals.value.items[i].created = new Intl.DateTimeFormat('id-ID', options).format(date);
+
+      if(!journals.value.items[i].isValid) notValidCount.value++
     }
   }
 }
