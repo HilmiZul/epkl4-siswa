@@ -45,15 +45,15 @@
                 </div>
               </div>
             </div>
-            <div class="row small mb-3">
+            <div class="row mb-3">
               <div class="col-lg-12">
-                <div class="text-muted mb-1 fw-medium">Teman satu tim:</div>
+                <div class="text-muted mb-1">Temen satu tim:</div>
                 <table class="table table-striped border-0">
                   <tbody>
                     <tr v-if="pemetaan.length < 1">
                       <td class="text-muted fst-italic">Belum ada teman/pemetaan</td>
                     </tr>
-                    <tr v-for="(p,i) in pemetaan" :key="p.id">
+                    <tr v-for="(p) in pemetaan" :key="p.id">
                       <td>
                         <span class="fw-bold">{{ p.expand.siswa.nama }}</span> <br>
                         <span class="smallest text-muted">{{ p.expand.siswa.kelas }}</span>
