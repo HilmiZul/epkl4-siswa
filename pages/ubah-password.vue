@@ -6,20 +6,30 @@
     <div class="card-body">
       <div class="row">
         <div class="col-md-6">
+          <div class="alert alert-info small">
+            Kalo berhasil ubah password, sistem akan auto-logout dan kamu diminta login lagi.
+          </div>
+          <div class="text-muted hand-cursor mb-3" @click="showHidePassword">
+            <span v-if="isShowPassword"><i class="bi bi-eye-slash"></i> Sembunyiin password</span>
+            <span v-else><i class="bi bi-eye"></i> Tampilin password</span>
+          </div>
           <form @submit.prevent="ubahPassword">
             <div v-if="isError" class="alert alert-danger border border-2 border-dark">Konfirmasi Password tidak sama.</div>
-            <div v-if="isErrorOldPass" class="alert alert-danger border border-2 border-dark">Password lama salah.</div>
+            <div v-if="isErrorOldPass" class="alert alert-danger border border-2 border-dark">Password saat ini salah.</div>
             <div class="mb-4">
-              <label for="oldPassword">Password lama</label>
-              <input v-model="form.oldPassword" type="password" id="oldPassword" class="form form-control" placeholder="masukkan password lama (saat ini)" required>
+              <label for="oldPassword">Password saat ini</label>
+              <input v-if="isShowPassword" v-model="form.oldPassword" type="text" id="oldPassword" class="form form-control" placeholder="masukkan password saat ini" autocomplete="off" required>
+              <input v-else v-model="form.oldPassword" type="password" id="oldPassword" class="form form-control" placeholder="masukkan password saat ini" autocomplete="off" required>
             </div>
             <div class="mb-4">
               <label for="password">Password baru</label>
-              <input v-model="form.password" :disabled="form.oldPassword.length < 8" type="password" id="password" class="form form-control" placeholder="masukkan password baru" required>
+              <input v-if="isShowPassword" v-model="form.password" :disabled="form.oldPassword.length < 8" type="text" id="password" class="form form-control" placeholder="masukkan password baru" autocomplete="off" required>
+              <input v-else v-model="form.password" :disabled="form.oldPassword.length < 8" type="password" id="password" class="form form-control" placeholder="masukkan password baru" autocomplete="off" required>
             </div>
             <div class="my-4">
               <label for="passwordConfirm">Konfirmasi password baru</label>
-              <input v-model="form.passwordConfirm" :disabled="form.password.length < 8" type="password" id="newPassword" class="form form-control" placeholder="ketik ulang password baru" required>
+              <input v-if="isShowPassword" v-model="form.passwordConfirm" :disabled="form.password.length < 8" type="text" id="newPassword" class="form form-control" placeholder="ketik ulang password baru" autocomplete="off" required>
+              <input v-else v-model="form.passwordConfirm" :disabled="form.password.length < 8" type="password" id="newPassword" class="form form-control" placeholder="ketik ulang password baru" autocomplete="off" required>
             </div>
             <button :disabled="isSending || form.oldPassword.length < 8 || form.password.length < 8 || form.passwordConfirm.length < 8" class="btn btn-info me-2 border border-2 border-dark">
               <span v-if="!isSending">Simpan</span>
@@ -48,6 +58,7 @@ let form = ref({
   passwordConfirm: '',
   oldPassword: '',
 })
+let isShowPassword = ref(false)
 
 async function ubahPassword() {
   isSending.value = true
@@ -61,6 +72,9 @@ async function ubahPassword() {
         isSending.value = false
         isSaved.value = true
         isError.value = false
+        client.authStore.clear()
+        client.realtime.unsubscribe()
+        navigateTo('/login')
       }
     } catch {
       isSending.value = false
@@ -72,5 +86,10 @@ async function ubahPassword() {
     isSaved.value = false
     isError.value = true
   }
+}
+
+function showHidePassword() {
+  if(isShowPassword.value) isShowPassword.value = false
+  else isShowPassword.value = true
 }
 </script>
