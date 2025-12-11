@@ -2,7 +2,7 @@ e-PKL.peserta kembali. Mengubah fitur portofolio dan karya ilmiah sebelumnya men
 
 # Ingredients
 
-- [Node.js](https://nodejs.org) or [Bun](https://bun.dev)
+- [Node.js](https://nodejs.org) or [Bun](https://bun.dev) or [Deno](https://deno.com)
 - [Vue](https://vuejs.org)
 - [Nuxt](https://nuxt.com)
 
@@ -24,6 +24,10 @@ bun run dev
 or
 ```bash
 npm run dev
+```
+or
+```bash
+deno task dev
 ```
 
 # Production
