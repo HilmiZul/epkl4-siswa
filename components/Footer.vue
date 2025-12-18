@@ -4,7 +4,7 @@
       v{{ version }} <br>
       <nuxt-link class="hand-cursor link-footer" to="/privacy">Privacy</nuxt-link> |
       <nuxt-link class="hand-cursor link-footer" to="/terms">Terms</nuxt-link> <br>
-      &copy;2018 - {{ year }} <span class="fw-bold hand-cursor link-footer" data-bs-toggle="modal" data-bs-target="#cooked">e-PKL</span>. <br>
+      &copy;2018 - {{ year }} <nuxt-link class="hand-cursor link-footer" to="/cookedby">e-PKL</nuxt-link>.
     </footer>
     <!-- about e-PKL -->
     <div class="modal" id="cooked" tabindex="-1" aria-hidden="true">
