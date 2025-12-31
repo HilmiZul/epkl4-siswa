@@ -24,8 +24,8 @@
                   </select>
                 </div>
                 <div class="mb-4">
-                  <label for="deskripsi">Uraian Kegiatan</label>
-                  <textarea v-model="form.deskripsi" :disabled="form.elemen.length < 1" @input="removeSingleSpaceIfEmpty" id="deskripsi" class="form form-control mb-2" placeholder="Minimal 125 karakter..." rows="5" required></textarea>
+                  <label for="deskripsi">Ceritain Kegiatan Lo!</label>
+                  <textarea v-model="form.deskripsi" :disabled="form.elemen.length < 1" @input="removeSingleSpaceIfEmpty" id="deskripsi" class="form form-control mb-2" placeholder="Sesuein dgn tujuan yg lo pilih, boleh ditulis paragraf or daftar urutan. Asal jangan curhat..." rows="5" required></textarea>
                   <span class="mb-3 fw-bold small">
                     <i v-if="form.deskripsi.length > 124" class="bi bi-check-circle-fill text-success"></i>
                     {{ form.deskripsi.length }} <span v-if="form.deskripsi.length < 125" class="text-muted"> (min. 125 karakter)</span>
@@ -37,7 +37,7 @@
                   <input @change="compressFile" :disabled="form.elemen.length < 1 && form.deskripsi.length < 125" class="form-control-file" type="file" id="foto" accept="image/*" capture="user" required />
                 </div>
                 <div class="mb-4 smallest text-muted">
-                  Saya telah membaca dan setuju dengan <nuxt-link to="/privacy" target="_blank" class="link text-muted">kebijakan privasi & syarat penggunaan</nuxt-link>.
+                  Saya udah baca dan setuju dengan <nuxt-link to="/privacy" target="_blank" class="link text-muted">kebijakan privasi & syarat penggunaan</nuxt-link>.
                 </div>
                 <button :disabled="isPosting || (form.foto && form.deskripsi.length < 125)" class="btn btn-info me-2 border border-2 border-dark" data-bs-dismiss="modal">
                   <span v-if="!isPosting"><i class="bi bi-send"></i> Kirim</span>
