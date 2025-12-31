@@ -1,9 +1,11 @@
 <template>
-  <div class="card">
-    <div class="card-header h4 fw-bold"><i class="bi bi-buildings"></i>&nbsp;
+  <div class="">
+    <div class="h4 fw-bold text-center text-grey">
       <span v-if="meta_pemetaan">{{ form.nama }}</span>
       <span v-else>IDUKA</span>
     </div>
+  </div>
+  <div class="card">
     <div class="card-body">
       <loading v-if="isLoading" />
       <div v-else class="row">
