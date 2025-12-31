@@ -53,8 +53,8 @@
     <div class="card-body">
       <div class="row">
         <div class="col-md-12">
-          <div v-if="notValidCount > 0" class="alert alert-warning">
-            Ada <span class="fw-bold">{{ notValidCount }}</span> jurnal yang belum divalidasi
+          <div v-if="notValidCount > 0" class="alert alert-warning small text-center">
+            Ada <span class="fw-bold">{{ notValidCount }}</span> jurnal lo belum divalidasi
           </div>
           <div class="row">
             <div class="col-md-12 p-0">
@@ -88,7 +88,7 @@
                     <img :src="`${host}/api/files/${journal.collectionId}/${journal.id}/${journal.foto}`" :alt="journal.deskripsi" class="foto" />
                   </div>
                   <div v-if="journal.isValid" class="text-muted small">
-                    <span class="text-danger"><i class="bi bi-heart-fill"></i></span> Valid
+                    <span class="text-danger"><i class="bi bi-heart-fill"></i></span>
                   </div>
                   <div v-else class="text-muted small">
                     <span class="text-danger"><i class="bi bi-heart"></i></span> Belum di Validasi
