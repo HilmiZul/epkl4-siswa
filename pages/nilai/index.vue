@@ -16,8 +16,8 @@
         <div v-if="isCertificate" class="row">
           <div class="col-lg-12">
             <loading v-if="isLoading" />
-            <div v-else-if="!certificate.isValid" class="alert alert-warning">
-              <i class="bi bi-info-circle"></i> Nilai belum divalidasi Pembimbing
+            <div v-else-if="!certificate.isValid" class="alert alert-warning small text-center">
+              Tunggu aja, lagi divalidasi Pembimbing
             </div>
             <form @submit.prevent="updateNilai">
               <div class="row">
