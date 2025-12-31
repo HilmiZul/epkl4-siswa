@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <div class="card-header pb-3 ps-0 pe-0 text-center">
-      <span v-if="isLoading" class="fst-italic text-muted">loading</span>
+  <div class="bg-transparent">
+    <div class="pb-2 ps-0 pe-0 text-center">
+      <Loading v-if="isLoading" />
       <span v-else-if="!isLoading && peserta">
         <span @click="() => isOpenEmojis = !isOpenEmojis" class="mood-container hand-cursor">
           <span v-if="!currentMood" class="emoji">
@@ -11,18 +11,23 @@
             {{ currentMood }}
           </span>
           <div v-if="isOpenEmojis" class="mood-item shadow-lg">
-            <div class="smallest p-2">Apa mood lu saat ini?</div>
+            <div class="smallest p-2">Apa mood lu hari ini?</div>
             <ul v-for="(emoji, i) in emojis" :key="i">
               <li @click="handleMood(emoji)" class="hand-cursor">{{ emoji }}</li>
             </ul>
           </div>
         </span>
-        <div class="fw-bold text-muted small">
+        <div class="fw-bold text-grey">
           <!--{{ peserta.nama.charAt(0).toUpperCase()+peserta.nama.toLowerCase().slice(1) }}-->
           {{ peserta.nama }}
         </div>
       </span>
     </div>
+  </div>
+
+  <Loading v-if="isLoadingJournaToday" />
+  <div v-else class="mb-3">
+    <div v-if="!havePostJournalToday" class="p-2"><nuxt-link to="/jurnal" class="link"><i class="bi bi-pencil-square"></i> Lu belum nulis jurnal</nuxt-link> <sup>🔴</sup></div>
   </div>
 
   <div class="card">
@@ -35,7 +40,7 @@
               <div class="col-md-3">
                 <div class="mb-3">
                   <div class="text-muted">Kelas</div>
-                  <span v-if="peserta" class="fw-bold">{{ peserta.kelas }}</span>
+                  <span v-if="peserta" class="fw-bold text-grey">{{ peserta.kelas }}</span>
                   <span v-else>&#8212;</span>
                 </div>
               </div>
@@ -44,14 +49,14 @@
                   <nuxt-link to="/iduka" class="link">
                     <div class="text-muted">Tempat PKL <i v-if="iduka" class="bi bi-pencil-square"></i></div>
                   </nuxt-link>
-                  <span v-if="iduka" class="fw-bold">{{ iduka?.items[0].expand.iduka.nama }}</span>
+                  <span v-if="iduka" class="fw-bold text-grey">{{ iduka?.items[0].expand.iduka.nama }}</span>
                   <span v-else>Belum pemetaan</span>
                 </div>
               </div>
               <div class="col-md-3">
                 <div class="mb-3">
                   <div class="text-muted">Wilayah</div>
-                  <span v-if="iduka" class="fw-bold">{{ iduka?.items[0].expand.iduka.wilayah.charAt(0).toUpperCase() + iduka?.items[0].expand.iduka.wilayah.slice(1) }} kota</span>
+                  <span v-if="iduka" class="fw-bold text-grey">{{ iduka?.items[0].expand.iduka.wilayah.charAt(0).toUpperCase() + iduka?.items[0].expand.iduka.wilayah.slice(1) }} kota</span>
                   <span v-else>Belum pemetaan</span>
                 </div>
               </div>
@@ -59,36 +64,38 @@
                 <div class="mb-3">
                   <div class="text-muted">Guru Pembimbing</div>
                   <span v-if="emptyPemetaan">Belum pemetaan</span>
-                  <span v-if="iduka?.totalItems < 0" class="fw-bold">Belum pemetaan</span>
+                  <span v-if="iduka?.totalItems < 0" class="fw-bold text-grey">Belum pemetaan</span>
                   <span v-else>
                     <span v-if="iduka?.items[0].expand.iduka?.pembimbing_sekolah == '' || iduka?.items[0].expand.iduka?.pembimbing_sekolah == '-'">Belum pemetaan</span>
-                    <span v-else class="fw-bold">{{ iduka?.items[0].expand.iduka?.expand.pembimbing_sekolah.nama }}</span>
+                    <span v-else class="fw-bold text-grey">{{ iduka?.items[0].expand.iduka?.expand.pembimbing_sekolah.nama }}</span>
                   </span>
                 </div>
-              </div>
-            </div>
-
-            <div class="row mb-3">
-              <div class="col-lg-12">
-                <div class="text-muted mb-1">Temen satu tim:</div>
-                <table class="table table-striped border-0">
-                  <tbody>
-                    <tr v-if="pemetaan.length < 1">
-                      <td class="text-muted fst-italic">Belum ada teman/pemetaan</td>
-                    </tr>
-                    <tr v-for="(p) in pemetaan" :key="p.id">
-                      <td>
-                        <span class="fw-bold">{{ p.expand.siswa.currentMood }} {{ p.expand.siswa.nama }}</span> <br>
-                        <span class="smallest text-muted">{{ p.expand.siswa.kelas }}</span>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
               </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <div class="fw-bold text-grey fs-5 pb-1"><i class="bi bi-people"></i> Temen Satu Tim</div>
+    <Loading v-if="isLoading" />
+    <div v-else class="card">
+      <div class="card-body p-0">
+        <div v-if="pemetaan.length < 1" class="text-center text-muted small p-3">Belum ada temen / elu PKL sendirian</div>
+        <div v-for="p in pemetaan" :key="p.id" class="list-group list-group-flush">
+          <div class="list-group-item border-bottom border-1 border-dark">
+            <span class="small fw-bold text-grey pb-0 mb-0">{{ p.expand.siswa.currentMood }} {{ p.expand.siswa.nama }}</span> <br>
+            <span class="smallest text-muted">{{ p.expand.siswa.kelas }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <div class="">
       <div class="row">
         <div class="col-lg-3">
           <nuxt-link class="link" to="/jurnal">
@@ -113,6 +120,7 @@
           </nuxt-link>
         </div>
       </div>
+      
     </div>
   </div>
 </template>
@@ -124,6 +132,7 @@ let user = usePocketBaseUser()
 let client = usePocketBaseClient()
 let prokel = user.user.value.program_keahlian
 let isLoading = ref(true)
+let isLoadingJournaToday = ref(true)
 let countJournal = ref(0)
 let countJournalNotValid = ref(0)
 let pemetaan = ref([])
@@ -133,6 +142,8 @@ let emptyPemetaan = ref(false)
 let isOpenEmojis = ref(false)
 let emojis = ref(["😃", "😥", "😔", "🤯", "🔥"])
 let currentMood = ref('')
+let today = useServerDay()
+let havePostJournalToday = ref(false)
 
 async function getCountJournal(loading=true) {
   isLoading.value = loading
@@ -182,6 +193,27 @@ async function getInfo(loading=true) {
   }
 }
 
+async function isTodayPostJournal() {
+  try {
+    isLoadingJournaToday.value = true
+    let response = await client.collection('jurnal').getFirstListItem(`siswa="${user.user.value.id}"`, {
+      sort: "-created"
+    })
+    if(response) {
+      let res = response
+      const date = new Date(res.created)
+      const options = {
+        dateStyle: "long"
+      }
+      res.created = new Intl.DateTimeFormat('id-ID', options).format(date)
+      if(res.created == today) havePostJournalToday.value = true
+      isLoadingJournaToday.value = false
+    }
+  } catch(error) {
+    isLoadingJournaToday.value = false
+  }
+}
+
 async function handleMood(emoji) {
   currentMood.value = emoji
   isOpenEmojis.value ? false : true
@@ -201,13 +233,20 @@ onMounted(() => {
   getCountJournal()
   getInfo()
   getCurrentMood()
+  isTodayPostJournal()
   client.autoCancellation(false)
   client.collection('pemetaan').subscribe('*', function(e){
     if(e.action == 'create' || e.action == 'update') getInfo(false)
-  })
+  }, {})
   client.collection('jurnal').subscribe('*', function(e){
-    if(e.action == 'update') getCountJournal(false)
-  })
+    if(e.action == 'create' || e.action == 'update') {
+      getCountJournal()
+      isTodayPostJournal()
+    } 
+  }, {})
+  client.collection('siswa').subscribe('*', function(e) {
+    if(e.action == 'update') getCurrentMood()
+  }, {})
 })
 </script>
 
