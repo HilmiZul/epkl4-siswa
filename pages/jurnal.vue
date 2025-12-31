@@ -341,7 +341,7 @@ onMounted(() => {
   getPesertaByIdUser()
   client.autoCancellation(false)
   client.collection('jurnal').subscribe('*', function(e) {
-    if(e.action == 'create' || e.action == 'update' || e.action) {
+    if(e.action == 'create' || e.action == 'update') {
       getJournals(false)
       isTodayPostJournal()
     }
