@@ -29,7 +29,8 @@
   <Loading v-if="isLoadingJournaToday" />
   <div v-else class="mb-3">
     <nuxt-link to="/jurnal" class="link">
-      <div v-if="!havePostJournalToday" class="alert alert-warning text-center small p-2">Ayo buat Jurnal hari ini <i class="bi bi-arrow-right"></i>
+      <div v-if="!havePostJournalToday" class="alert alert-warning text-center small p-2">
+        <i class="bi bi-pencil-square"></i> Ayo buat Jurnal hari ini <i class="bi bi-arrow-right"></i>
       </div>
     </nuxt-link>
   </div>
