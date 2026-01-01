@@ -7,7 +7,7 @@
       <div class="row">
         <div class="col-md-6">
           <div class="alert alert-info small">
-            Kalo berhasil ubah password, sistem akan auto-logout dan kamu diminta login lagi.
+            Kalo berhasil ubah password, sistem akan auto-logout dan lo diminta login lagi.
           </div>
           <div class="text-muted hand-cursor mb-3" @click="showHidePassword">
             <span v-if="isShowPassword"><i class="bi bi-eye-slash"></i> Sembunyiin password</span>
