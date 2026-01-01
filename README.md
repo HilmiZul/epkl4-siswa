@@ -1,4 +1,4 @@
-e-PKL.peserta kembali. Mengubah fitur portofolio dan karya ilmiah sebelumnya menjadi jurnal harian.
+e-PKL Peserta kembali! App untuk Peserta ini ditulis ulang dan sengaja dibuat terpisah dengan app utama untuk Guru, dengan harapan untuk mempermudah pengembangannya (alias nambah-nambah kerjaan). Ada beberapa fitur utama lama yang dihilangkang: Portofolio dan Karya ilmiah. Saat ini tengah mengembangkan fitur Jurnal harian yang pernah dirancang pada versi terdahulu. Fitur akan terus berubah-ubah dan berkembang sejalan dengan Kurikulum (dan terutama kebutuhan sekolah kami).
 
 # Ingredients
 
