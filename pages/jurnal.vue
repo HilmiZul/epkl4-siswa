@@ -4,7 +4,9 @@
       <span class="h4 fw-bold"><i class="bi bi-journals"></i> Jurnal</span>
       <span v-if="$device.isMobile">
         <span v-if="pemetaan.length > 0 && !havePostJournalToday" class="float-end journal-button">
-          <button data-bs-toggle="modal" data-bs-target="#buat-jurnal-baru" class="btn btn-info btn-sm border border-2 border-dark"><i class="bi bi-pencil-square"></i> Buat baru</button>
+          <button data-bs-toggle="modal" data-bs-target="#buat-jurnal-baru"
+            class="btn btn-info btn-sm border border-2 border-dark"><i class="bi bi-pencil-square"></i> Buat
+            baru</button>
         </span>
       </span>
       <div v-if="$device.isMobile" class="modal" id="buat-jurnal-baru" tabindex="-1" aria-hidden="true">
@@ -24,22 +26,30 @@
                   </select>
                 </div>
                 <div class="mb-4">
-                  <label for="deskripsi">Ceritain Kegiatan Lo!</label>
-                  <textarea v-model="form.deskripsi" :disabled="form.elemen.length < 1" @input="removeSingleSpaceIfEmpty" id="deskripsi" class="form form-control mb-2" placeholder="Sesuein dgn tujuan yg lo pilih, boleh ditulis paragraf or daftar urutan. Asal jangan curhat..." rows="5" required></textarea>
+                  <label for="deskripsi">Ceritain Kegiatan Lu!</label>
+                  <textarea v-model="form.deskripsi" :disabled="form.elemen.length < 1"
+                    @input="removeSingleSpaceIfEmpty" id="deskripsi" class="form form-control mb-2"
+                    placeholder="Sesuein dengan tujuan yang lu pilih, boleh ditulis paragraf or daftar urutan. Asal jangan curhat..."
+                    rows="5" required></textarea>
                   <span class="mb-3 fw-bold small">
                     <i v-if="form.deskripsi.length > 124" class="bi bi-check-circle-fill text-success"></i>
-                    {{ form.deskripsi.length }} <span v-if="form.deskripsi.length < 125" class="text-muted"> (min. 125 karakter)</span>
+                    {{ form.deskripsi.length }} <span v-if="form.deskripsi.length < 125" class="text-muted"> (min. 125
+                      karakter)</span>
                   </span>
                 </div>
                 <div v-if="form.elemen.length > 0 && form.deskripsi.length >= 125" class="mb-3">
-                  <label for="foto" class="text-muted label-berkas border-2 p-2"><i class="bi bi-camera-fill"></i> Ambil foto kegiatan</label>
+                  <label for="foto" class="text-muted label-berkas border-2 p-2"><i class="bi bi-camera-fill"></i> Ambil
+                    foto kegiatan</label>
                   <div v-if="form.foto" class="small fst-italic">Foto: {{ form.foto?.name }}</div>
-                  <input @change="compressFile" :disabled="form.elemen.length < 1 && form.deskripsi.length < 125" class="form-control-file" type="file" id="foto" accept="image/*" capture="user" required />
+                  <input @change="compressFile" :disabled="form.elemen.length < 1 && form.deskripsi.length < 125"
+                    class="form-control-file" type="file" id="foto" accept="image/*" capture="user" required />
                 </div>
                 <div class="mb-4 smallest text-muted">
-                  Saya udah baca dan setuju dengan <nuxt-link to="/privacy" target="_blank" class="link text-muted">kebijakan privasi & syarat penggunaan</nuxt-link>.
+                  Saya udah baca dan setuju dengan <nuxt-link to="/privacy" target="_blank"
+                    class="link text-muted">kebijakan privasi & syarat penggunaan</nuxt-link>.
                 </div>
-                <button :disabled="isPosting || (form.foto && form.deskripsi.length < 125)" class="btn btn-info me-2 border border-2 border-dark" data-bs-dismiss="modal">
+                <button :disabled="isPosting || (form.foto && form.deskripsi.length < 125)"
+                  class="btn btn-info me-2 border border-2 border-dark" data-bs-dismiss="modal">
                   <span v-if="!isPosting"><i class="bi bi-send"></i> Kirim</span>
                   <span v-else>Sedang mengirim</span>
                 </button>
@@ -49,19 +59,20 @@
         </div>
       </div>
     </div>
-    
+
     <div class="card-body">
       <div class="row">
         <div class="col-md-12">
           <div v-if="notValidCount > 0" class="alert alert-warning small text-center">
-            Ada <span class="fw-bold">{{ notValidCount }}</span> jurnal lo belum divalidasi
+            Ada <span class="fw-bold">{{ notValidCount }}</span> jurnal lu yg belum divalidasi
           </div>
           <div class="row">
             <div class="col-md-12 p-0">
               <div v-if="!isLoadingJournals" class="mx-3 text-center text-muted smallest">
                 <!-- <span v-if="journals.totalItems" class="float-start">Halaman <span class="fw-bold">{{ journals.page }}</span> dari <span class="fw-bold">{{ journals.totalPages }}</span></span> -->
                 <!-- <span v-if="journals.totalItems">Menampilkan {{ journals.items.length }}  dari {{ journals.totalItems }} Jurnal</span> -->
-                <span v-if="journals.totalItems" class="badge border border-dark text-dark">{{ journals.totalItems }} Jurnal</span>
+                <span v-if="journals.totalItems" class="badge border border-dark text-dark">{{ journals.totalItems }}
+                  Jurnal</span>
               </div>
               <div v-if="!isLoadingJournals" class="text-center text-muted fw-bold fs-4">
                 <span v-if="journals.totalItems == 0">
@@ -70,22 +81,26 @@
                 </span>
               </div>
               <Loading class="py-3" v-if="isLoadingJournals" />
-              <div v-else v-for="journal in journals.items" :key="journal.id" class="card jurnal-hover jurnal-item no-shadow">
+              <div v-else v-for="journal in journals.items" :key="journal.id"
+                class="card jurnal-hover jurnal-item no-shadow">
                 <div class="card-body">
                   <!-- <div class="bookmark fs-2">
                     <div v-if="journal.expand.elemen.elemen == 'Lain-lain'" class="bookmark-icon text-danger"><i class="bi bi-bookmark-fill"></i></div>
                     <div v-else class="bookmark-icon text-info"><i class="bi bi-bookmark-fill"></i></div>
                   </div> -->
                   <div class="mb-1 smallest fw-bold text-muted">
-                    <span v-if="journal.expand.elemen.elemen == 'Lain-lain'"><i class="bi bi-bookmark-fill text-danger"></i> {{ journal.expand.elemen.elemen }}</span>
+                    <span v-if="journal.expand.elemen.elemen == 'Lain-lain'"><i
+                        class="bi bi-bookmark-fill text-danger"></i> {{ journal.expand.elemen.elemen }}</span>
                     <span v-else><i class="bi bi-bookmark-fill text-info"></i> {{ journal.expand.elemen.elemen }}</span>
                   </div>
                   <span class="text-muted smallest"><i class="bi bi-calendar2-date"></i> {{ journal.created }}</span>
                   <article class="my-3 pre-text">
                     {{ journal.deskripsi }}
                   </article>
-                  <div v-if="journal.foto" class="my-3 foto-container hand-cursor" data-bs-toggle="modal" :data-bs-target="`#foto-${journal.id}`">
-                    <img :src="`${host}/api/files/${journal.collectionId}/${journal.id}/${journal.foto}`" :alt="journal.deskripsi" class="foto" />
+                  <div v-if="journal.foto" class="my-3 foto-container hand-cursor" data-bs-toggle="modal"
+                    :data-bs-target="`#foto-${journal.id}`">
+                    <img :src="`${host}/api/files/${journal.collectionId}/${journal.id}/${journal.foto}`"
+                      :alt="journal.deskripsi" class="foto" />
                   </div>
                   <div v-if="journal.isValid" class="text-muted small">
                     <span class="text-danger"><i class="bi bi-heart-fill"></i></span>
@@ -103,7 +118,8 @@
                         <button class="btn-close" data-bs-dismiss="modal" label="Close"></button>
                       </div>
                       <div class="modal-body p-0">
-                        <img :src="`${host}/api/files/${journal.collectionId}/${journal.id}/${journal.foto}`" :alt="journal.deskripsi" class="foto-preview" />
+                        <img :src="`${host}/api/files/${journal.collectionId}/${journal.id}/${journal.foto}`"
+                          :alt="journal.deskripsi" class="foto-preview" />
                       </div>
                     </div>
                   </div>
@@ -119,10 +135,12 @@
                   <span v-if="journals.totalItems">Halaman {{ journals.page }} dari {{ journals.totalPages }}</span>
                 </div>
               </div>
-              <button v-if="journals.totalItems" :disabled="isMovingPage || journals.page < 2" @click="pagination(journals.page - 1, false)" class="btn btn-info me-2 border border-2 border-dark">
+              <button v-if="journals.totalItems" :disabled="isMovingPage || journals.page < 2"
+                @click="pagination(journals.page - 1, false)" class="btn btn-info me-2 border border-2 border-dark">
                 sebelumnya
               </button>
-              <button v-if="journals.totalItems" :disabled="isMovingPage || journals.page >= journals.totalPages" @click="pagination(journals.page + 1, false)" class="btn btn-info border border-2 border-dark">
+              <button v-if="journals.totalItems" :disabled="isMovingPage || journals.page >= journals.totalPages"
+                @click="pagination(journals.page + 1, false)" class="btn btn-info border border-2 border-dark">
                 lanjut
               </button>
             </div>
@@ -140,7 +158,7 @@ definePageMeta({ middleware: 'auth' })
 useHead({ title: "Jurnal — e-PKL / SMKN 4 Tasikmalaya." })
 let { isMobile } = useDevice()
 let config = useRuntimeConfig()
-let host = config.public.apiBaseUrl+":"+config.public.apiPort
+let host = config.public.apiBaseUrl + ":" + config.public.apiPort
 let user = usePocketBaseUser()
 let client = usePocketBaseClient()
 let prokel = user.user.value.program_keahlian
@@ -173,10 +191,10 @@ async function isTodayPostJournal() {
   try {
     client.autoCancellation(false)
     let response = await client.collection('jurnal')
-      .getFirstListItem("siswa='"+user.user.value.id+"'",{
+      .getFirstListItem("siswa='" + user.user.value.id + "'", {
         sort: "-created"
       })
-    if(response) {
+    if (response) {
       let res = response
       const date = new Date(res.created);
       const options = {
@@ -185,11 +203,11 @@ async function isTodayPostJournal() {
       res.created = new Intl.DateTimeFormat('id-ID', options).format(date)
       // memeriksa jurnal hari ini, jika belum mengirim maka tombol buat jurnal muncul
       // jika sudah maka tombol buat jurnal akan hilang :D
-      if(res.created == today) {
+      if (res.created == today) {
         havePostJournalToday.value = true
       }
     }
-  } catch(error) {
+  } catch (error) {
   }
 }
 
@@ -198,20 +216,20 @@ function compressFile(e) {
   // sedikit nguji mental hahaha
   // anw, Xiexie Fengyuan :thumb:
   let file = e.target.files[0]
-  if(!file) return;
+  if (!file) return;
   let now = new Date()
-  let tanggal = new Intl.DateTimeFormat('id-ID', {dateStyle:'full'}).format(now)
+  let tanggal = new Intl.DateTimeFormat('id-ID', { dateStyle: 'full' }).format(now)
   new Compressor(file, {
     quality: 0.6,
     // drew: nempelin watermark ke foto agar tahu sumbernya dan sulit dipalsukan
     drew(context, canvas) {
       context.fillStyle = 'rgba(255, 255, 255, .8',
-      context.font = '70px serif',
-      context.textAlign = 'center'
-      context.fillText('PKL SMKN 4 Tasikmalaya', canvas.width/2, canvas.height/2-100),
-      context.fillText(currIduka.value, canvas.width/2, canvas.height/2)
-      context.fillText(currStudent.value, canvas.width/2, canvas.height/2+100)
-      context.fillText(tanggal, canvas.width/2, canvas.height/2+190)
+        context.font = '70px serif',
+        context.textAlign = 'center'
+      context.fillText('PKL SMKN 4 Tasikmalaya', canvas.width / 2, canvas.height / 2 - 100),
+        context.fillText(currIduka.value, canvas.width / 2, canvas.height / 2)
+      context.fillText(currStudent.value, canvas.width / 2, canvas.height / 2 + 100)
+      context.fillText(tanggal, canvas.width / 2, canvas.height / 2 + 190)
     },
     success(result) {
       form.value.foto = result
@@ -228,7 +246,7 @@ async function buatJurnalBaru() {
   isSaved.value = false
   client.autoCancellation(false)
   let res = await client.collection('jurnal').create(form.value)
-  if(res) {
+  if (res) {
     isPosting.value = false
     isSaved.value = true
     form.value.elemen = ""
@@ -237,21 +255,21 @@ async function buatJurnalBaru() {
   }
 }
 
-async function getJournals(loading=true) {
+async function getJournals(loading = true) {
   isLoadingJournals.value = loading
   client.autoCancellation(false)
   let res = await client.collection('jurnal').getList(1, perPage, {
-    filter: "siswa='"+user.user.value.id+"'",
+    filter: "siswa='" + user.user.value.id + "'",
     expand: "iduka, pembimbing, siswa.siswa, elemen",
     sort: "isValid, -created"
   })
-  if(res) {
+  if (res) {
     isLoadingJournals.value = false
     journals.value = res
     notValidCount.value = 0
     // console.log(journals.value)
     // konversi waktu UTC dari server ke full date lokal indo
-    for(let i=0; i<journals.value.items.length; i++) {
+    for (let i = 0; i < journals.value.items.length; i++) {
       const date = new Date(journals.value.items[i].created);
       const options = {
         dateStyle: "full",
@@ -259,23 +277,23 @@ async function getJournals(loading=true) {
       };
       journals.value.items[i].created = new Intl.DateTimeFormat('id-ID', options).format(date);
 
-      if(!journals.value.items[i].isValid) notValidCount.value++
+      if (!journals.value.items[i].isValid) notValidCount.value++
     }
   }
 }
 
-async function pagination(page, loading=true) {
+async function pagination(page, loading = true) {
   isLoadingJournals.value = loading
   isMovingPage.value = true
   client.autoCancellation(false)
   let res = await client.collection('jurnal').getList(page, perPage, {
-    filter: "siswa='"+user.user.value.id+"'",
+    filter: "siswa='" + user.user.value.id + "'",
     expand: "iduka, pembimbing, siswa.siswa, elemen",
     sort: "isValid, -created"
   })
-  if(res) {
+  if (res) {
     journals.value = res
-    for(let i=0; i<journals.value.items.length; i++) {
+    for (let i = 0; i < journals.value.items.length; i++) {
       const date = new Date(journals.value.items[i].created);
       const options = {
         dateStyle: "full",
@@ -292,25 +310,25 @@ async function getElemenCp() {
   isLoading.value = true
   client.autoCancellation(false)
   let res_elemen = await client.collection('elemen_cp').getFullList({
-    filter: "program_keahlian='"+prokel+"'",
+    filter: "program_keahlian='" + prokel + "'",
     sort: 'created'
   })
   let res_user = await client.collection('student_users').getOne(user.user.value.id, {
     expand: "siswa"
   })
 
-  if(res_elemen && res_user) {
+  if (res_elemen && res_user) {
     elements.value = res_elemen
     let res_pemetaan = await client.collection('pemetaan').getFullList({
-      filter: "siswa='"+res_user.siswa+"'",
+      filter: "siswa='" + res_user.siswa + "'",
       expand: "iduka"
     })
-    if(res_pemetaan) {
+    if (res_pemetaan) {
       isLoading.value = false
       pemetaan.value = res_pemetaan
       // currIduka: menyimpan nama IDUKA untuk ditempel kedalam watermark foto
       currIduka.value = res_pemetaan[0].expand.iduka.nama
-      if(res_pemetaan.length > 0) {
+      if (res_pemetaan.length > 0) {
         form.value.iduka = res_pemetaan[0].iduka
         form.value.pembimbing = res_pemetaan[0].expand.iduka.pembimbing_sekolah
         // console.log(res_pemetaan[0].iduka)
@@ -324,14 +342,14 @@ async function getPesertaByIdUser() {
   let res = await client.collection('student_users').getOne(user?.user.value.id, {
     expand: `siswa`
   })
-  if(res) {
+  if (res) {
     // currStudent: menyimpan nama peserta untuk ditempel kedalam watermark foto
     currStudent.value = res.expand.siswa.nama
   }
 }
 
 let removeSingleSpaceIfEmpty = computed(() => {
-  if(form.value.deskripsi.length < 1 || form.value.deskripsi[0] == ' ') form.value.deskripsi = ''
+  if (form.value.deskripsi.length < 1 || form.value.deskripsi[0] == ' ') form.value.deskripsi = ''
 })
 
 onMounted(() => {
@@ -340,12 +358,12 @@ onMounted(() => {
   isTodayPostJournal()
   getPesertaByIdUser()
   client.autoCancellation(false)
-  client.collection('jurnal').subscribe('*', function(e) {
-    if(e.action == 'create' || e.action == 'update') {
+  client.collection('jurnal').subscribe('*', function (e) {
+    if (e.action == 'create' || e.action == 'update') {
       getJournals(false)
       isTodayPostJournal()
     }
-  },{})
+  }, {})
 })
 </script>
 
@@ -353,31 +371,38 @@ onMounted(() => {
 .form-control-file {
   display: none;
 }
+
 .foto-container {
   width: 100%;
   height: 200px;
 }
+
 .foto {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
 }
+
 .foto-preview {
   width: 100%;
   height: 100%;
 }
+
 .jurnal-hover:hover {
   background-color: #f9f9f9;
 }
+
 .bg-danger {
   background-color: rgb(255, 99, 132) !important;
 }
+
 @media screen and (max-width: 992px) {
   .journal-form {
     display: none;
   }
 }
+
 /*@media screen and (min-width: 992px) {
   .journal-button {
     display: none;
@@ -386,18 +411,22 @@ onMounted(() => {
 .pre-text {
   white-space: pre-wrap;
 }
+
 .bookmark {
   position: relative;
 }
+
 .bookmark .bookmark-icon {
   position: absolute;
   top: -20px;
   right: -5px;
 }
+
 .jurnal-item {
   border: none !important;
   border-bottom: 1px solid #000 !important
 }
+
 .no-shadow {
   box-shadow: none !important;
 }
