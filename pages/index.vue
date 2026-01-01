@@ -8,12 +8,13 @@
             <i class="bi bi-emoji-smile"></i><sup class="text-muted fw-normal"><i class="bi bi-plus"></i></sup>
           </span>
           <span v-else class="emoji">
-            {{ currentMood }}
+            <div class="mood-bubble">I feel {{ currentMood.name }}!</div>
+            {{ currentMood.emoji }}
           </span>
           <div v-if="isOpenEmojis" class="mood-item shadow-lg">
             <div class="smallest p-2">Apa mood lu hari ini?</div>
             <ul v-for="(emoji, i) in emojis" :key="i">
-              <li @click="handleMood(emoji)" class="hand-cursor">{{ emoji }}</li>
+              <li @click="handleMood(emoji)" class="hand-cursor">{{ emoji.emoji }}</li>
             </ul>
           </div>
         </span>
@@ -27,7 +28,10 @@
 
   <Loading v-if="isLoadingJournaToday" />
   <div v-else class="mb-3">
-    <div v-if="!havePostJournalToday" class="p-2"><nuxt-link to="/jurnal" class="link"><i class="bi bi-pencil-square"></i> Lu belum nulis jurnal</nuxt-link> <sup>🔴</sup></div>
+    <nuxt-link to="/jurnal" class="link">
+      <div v-if="!havePostJournalToday" class="alert alert-warning text-center small p-2">Ayo buat Jurnal hari ini <i class="bi bi-arrow-right"></i>
+      </div>
+    </nuxt-link>
   </div>
 
   <div class="card">
@@ -86,7 +90,8 @@
         <div v-if="pemetaan.length < 1" class="text-center text-muted small p-3">Belum ada temen / elu PKL sendirian</div>
         <div v-for="p in pemetaan" :key="p.id" class="list-group list-group-flush">
           <div class="list-group-item border-bottom border-1 border-dark">
-            <span class="small fw-bold text-grey pb-0 mb-0">{{ p.expand.siswa.currentMood }} {{ p.expand.siswa.nama }}</span> <br>
+            <div class="float-start fs-4 me-2">{{ p.expand.siswa.currentMood?.emoji }}</div>
+            <span class="small fw-bold text-grey pb-0 mb-0">{{ p.expand.siswa.nama }}</span> <br>
             <span class="smallest text-muted">{{ p.expand.siswa.kelas }}</span>
           </div>
         </div>
@@ -140,7 +145,28 @@ let iduka = ref()
 let peserta = ref()
 let emptyPemetaan = ref(false)
 let isOpenEmojis = ref(false)
-let emojis = ref(["😃", "😥", "😔", "🤯", "🔥"])
+let emojis = ref([
+  {
+    "name": "good", 
+    "emoji": "😊"
+  },
+  {
+    "name": "happy",
+    "emoji": "😃"
+  },
+  {
+    "name": "tired",
+    "emoji": "😔"
+  },
+  {
+    "name": "headache",
+    "emoji": "🤯" 
+  },
+  {
+    "name": "fire",
+    "emoji": "🔥"
+  }
+])
 let currentMood = ref('')
 let today = useServerDay()
 let havePostJournalToday = ref(false)
@@ -280,6 +306,16 @@ ul li {
   bottom: -90px;
   background-color: #fff;
   border: 2px solid #000;
+}
+.mood-bubble {
+  position: absolute;
+  left: 53%;
+  top: 0%;
+  background-color: #000;
+  border-radius: 10px;
+  color: #fff;
+  padding: 7px;
+  font-size: .8rem 
 }
 .emoji {
   font-size: 3rem
