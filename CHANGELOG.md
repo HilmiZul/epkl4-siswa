@@ -1,5 +1,18 @@
 # Changelog
 
+### 2.5.0-rc3 (1 Januari 2026)
+- Create bubble Mood, and show the emoji's name
+- Show Mood emoji to friends
+- Revamp a lil bit UI alert
+
+### 2.5.0-rc2 (31 Desember 2025)
+- Revamp a lil bit UI
+- Ganti ke bahasa slank
+
+### 2.5.0-rc1 (31 Desember 2025)
+- Minor update, release candidate
+- Create Mood User's feature
+
 ### 2.4.6 (20 Desember 2025)
 - Improvement: Change unit size on watermark #731720c
 
