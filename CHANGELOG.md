@@ -4,6 +4,7 @@
 - Create bubble Mood, and show the emoji's name
 - Show Mood emoji to friends
 - Revamp a lil bit UI alert
+- Improve: UX Writing
 
 ### 2.5.0-rc2 (31 Desember 2025)
 - Revamp a lil bit UI
