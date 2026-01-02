@@ -1,5 +1,9 @@
 # Changelog
 
+### 2.5.0-rc4 (2 Januari 2026)
+- Create mood's page to see other moods update
+- Create link to page "kepoin mood orang laen"
+
 ### 2.5.0-rc3 (1 Januari 2026)
 - Create bubble Mood, and show the emoji's name
 - Show Mood emoji to friends
