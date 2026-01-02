@@ -98,6 +98,9 @@
         </div>
       </div>
     </div>
+    <div class="mt-3 small">
+      <nuxt-link to="/mood" class="link">Kepoin mood orang laen <i class="bi bi-arrow-right"></i></nuxt-link>
+    </div>
   </div>
 
   <div class="mt-4">
