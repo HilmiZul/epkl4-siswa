@@ -8,7 +8,7 @@
     </div>
     <div class="card-body text-dark">
       <p class="text-muted small">
-        Diperbaharui pada 16 November 2025
+        Diperbaharui pada 2 Januari 2026
       </p>
       <h5 class="fw-bold text-grey">Akun Anggota e-PKL</h5>
       <ul>
@@ -62,6 +62,13 @@
         <li>Nilai akan digunakan untuk Rapor PKL dan/atau penitipan Sertifikat bagi IDUKA yang tidak dapat menerbitkan.</li>
         <li>Peserta didik berkewajiban menyerahkan nilai PKL yang diberikan oleh instruktur/pembimbing IDUKA melalui aplikasi e-PKL.</li>
         <li>Nilai yang diserahkan akan diperiksa oleh Guru pembimbing sekolah sampai dinyatakan valid.</li>
+      </ul>
+      <h5 class="fw-bold text-grey">Terkait Mood</h5>
+      <ul>
+        <li>Peserta dapat menggunakan fitur Mood untuk meluapkan perasaan saat/setelah bekerja (PKL).</li>
+        <li>Peserta bebas melakukan update Mood kapan saja selama masa PKL dan masih aktif sebagai peserta didik.</li>
+        <li>Peserta dapat melihat Mood teman satu tim dan luar tim.</li>
+        <li>Guru Pembimbing dapat melihat Mood peserta pada halaman validasi Jurnal, hanya peserta yang dibimbingnya.</li>
       </ul>
     </div>
   </div>
