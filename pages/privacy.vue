@@ -8,7 +8,7 @@
     </div>
     <div class="card-body text-dark">
       <p class="text-muted small">
-        Diperbaharui pada 16 November 2025
+        Diperbaharui pada 2 Januari 2026
       </p>
       <p>
         Kebijakan Privasi ini bertujuan untuk membantu Anda memahami data yang kami kumpulkan. Dengan
@@ -17,8 +17,8 @@
       <h5 class="fw-bold text-grey">Informasi yang Kami Simpan</h5>
       <div class="fw-bold">Informasi Personal</div>
       <p>
-        Kami menyimpan informasi personal Anda diantaranya Nama, Email, Grup Program Keahlian
-        dan Password sesuai dengan Program Keahlian.
+        Kami menyimpan informasi personal Anda diantaranya Nama, Email, Grup Program Keahlian,
+        Password dan Mood (suasana hati) dalam bentuk emoji.
       </p>
       <div class="fw-bold">Informasi Jurnal</div>
       <p>
@@ -28,7 +28,11 @@
       </p>
       <div class="fw-bold">Informasi Nilai</div>
       <p>
-        Kami juga mengumpulkan dan menyimpan nilai PKL dari IDUKA yang diserahkan oleh peserta didik.
+        Kami mengumpulkan dan menyimpan nilai PKL dari IDUKA yang diserahkan oleh peserta didik.
+      </p>
+      <div class="fw-bold">Informasi Mood</div>
+      <p>
+        Kami juga mengumpulkan pembaharuan Mood yang dilakukan oleh Peserta.
       </p>
       <h5 class="fw-bold text-grey">Bagaimana Kami Menggunakan Informasi Anda</h5>
       <p>
@@ -40,7 +44,11 @@
         Elemen Mapel PKL serta digunakan untuk analitik data.
       </p>
       <p>
-        Kami juga menggunakan nilai peserta didik untuk Rapor PKL dan/atau pencetakan Sertifikat.
+        Kami menggunakan nilai peserta didik untuk Rapor PKL dan/atau pencetakan Sertifikat.
+      </p>
+      <p>
+        Kami juga menggunakan informasi Mood peserta untuk dibagikan pada halaman Kepoin Mood setiap peserta melakukan update. 
+        Dan Mood peserta dapat dilihat oleh peserta lain pada halaman Kepoin Mood.
       </p>
       <h5 class="fw-bold text-grey">Bagaimana Kami Menjaga Keamanan Informasi Anda</h5>
       <p>
