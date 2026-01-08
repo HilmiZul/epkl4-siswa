@@ -9,6 +9,7 @@
             baru</button>
         </span>
       </span>
+
       <div v-if="$device.isMobile" class="modal" id="buat-jurnal-baru" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content rounded-0 border border-2 border-dark shadow-lg">
@@ -17,7 +18,7 @@
               <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <form @submit.prevent="buatJurnalBaru">
+              <!--<form @submit.prevent="buatJurnalBaru">-->
                 <div class="mb-4">
                   <label for="elemen">Tujuan Pembelajaran</label>
                   <select v-model="form.elemen" id="elemen" class="form form-control form-select" required>
@@ -48,18 +49,75 @@
                   Saya udah baca dan setuju dengan <nuxt-link to="/privacy" target="_blank"
                     class="link text-muted">kebijakan privasi & syarat penggunaan</nuxt-link>.
                 </div>
-                <button :disabled="isPosting || (form.foto && form.deskripsi.length < 125)"
+                <button @click="buatJurnalBaru(false)" :disabled="isPosting || (form.foto && form.deskripsi.length < 125)"
                   class="btn btn-info me-2 border border-2 border-dark" data-bs-dismiss="modal">
                   <span v-if="!isPosting"><i class="bi bi-send"></i> Kirim</span>
                   <span v-else>Sedang mengirim</span>
                 </button>
-              </form>
+                <div @click="buatJurnalBaru(true)" data-bs-dismiss="modal" class="float-end pt-2 smallest"><i class="bi bi-save"></i> Simpan draft</div>
+              <!--</form>-->
             </div>
           </div>
         </div>
       </div>
     </div>
+    <!-- ./card-heder -->
 
+    <!-- TODO: create single modal Edit Jurnal 
+        save draft and kirim button call diff function and querying must be UPDATE not CREATE -->
+      <div v-if="$device.isMobile" class="modal" id="edit-jurnal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content rounded-0 border border-2 border-dark shadow-lg">
+            <div class="modal-header fw-bold bg-warning rounded-0 border-0 border-bottom border-2 border-dark">
+              <i class="bi bi-pencil-square me-2"></i> Edit Jurnal
+              <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-4">
+                  <label for="elemen">Tujuan Pembelajaran</label>
+                  <select v-model="formEdit.elemen" id="elemen" class="form form-control form-select" required>
+                    <option disabled value="" selected>&#8212; Pilih &#8212;</option>
+                    <option v-for="elemen in elements" :key="elemen.id" :value="elemen.id">{{ elemen.tujuan }}</option>
+                  </select>
+                </div>
+                <div class="mb-4">
+                  <label for="deskripsi">Ceritain Kegiatan Lu!</label>
+                  <textarea v-model="formEdit.deskripsi" :disabled="formEdit.elemen.length < 1"
+                    @input="removeSingleSpaceIfEmpty" id="deskripsi" class="form form-control mb-2"
+                    placeholder="Sesuein dengan tujuan yang lu pilih, boleh ditulis paragraf or daftar urutan. Asal jangan curhat..."
+                    rows="5" required></textarea>
+                  <span class="mb-3 fw-bold small">
+                    <i v-if="formEdit.deskripsi.length > 124" class="bi bi-check-circle-fill text-success"></i>
+                    {{ formEdit.deskripsi.length }} <span v-if="formEdit.deskripsi.length < 125" class="text-muted"> (min. 125
+                      karakter)</span>
+                  </span>
+                </div>
+                <div v-if="formEdit.elemen.length > 0 && formEdit.deskripsi.length >= 125" class="mb-3">
+                  <label for="foto" class="text-muted label-berkas border-2 p-2"><i class="bi bi-camera-fill"></i> Ambil
+                    foto kegiatan</label>
+                  <div v-if="formEdit.foto" class="small fst-italic">
+                    <span v-if="formEdit.foto?.name">Foto baru: {{ formEdit.foto?.name }}</span>
+                    <img v-else :src="`${host}/api/files/${formEdit.collectionId}/${formEdit.id}/${formEdit.foto}`" :alt="formEdit.id" width="65px" />
+                  </div>
+                  <input @change="compressFile" :disabled="formEdit.elemen.length < 1 && formEdit.deskripsi.length < 125"
+                    class="form-control-file" type="file" id="foto" accept="image/*" capture="user" required />
+                </div>
+                <div class="mb-4 smallest text-muted">
+                  Saya udah baca dan setuju dengan <nuxt-link to="/privacy" target="_blank"
+                    class="link text-muted">kebijakan privasi & syarat penggunaan</nuxt-link>.
+                </div>
+                <button @click="buatJurnalBaru(false, true)" :disabled="isPosting || (formEdit.foto && formEdit.deskripsi.length < 125)"
+                  class="btn btn-info me-2 border border-2 border-dark" data-bs-dismiss="modal">
+                  <span v-if="!isPosting"><i class="bi bi-send"></i> Kirim</span>
+                  <span v-else>Sedang mengirim</span>
+                </button>
+                <div @click="buatJurnalBaru(true, true)" data-bs-dismiss="modal" class="float-end pt-2 smallest"><i class="bi bi-save"></i> Simpan draft</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <!-- card-body -->
     <div class="card-body">
       <div class="row">
         <div class="col-md-12">
@@ -71,8 +129,7 @@
               <div v-if="!isLoadingJournals" class="mx-3 text-center text-muted smallest">
                 <!-- <span v-if="journals.totalItems" class="float-start">Halaman <span class="fw-bold">{{ journals.page }}</span> dari <span class="fw-bold">{{ journals.totalPages }}</span></span> -->
                 <!-- <span v-if="journals.totalItems">Menampilkan {{ journals.items.length }}  dari {{ journals.totalItems }} Jurnal</span> -->
-                <span v-if="journals.totalItems" class="badge border border-dark text-dark">{{ journals.totalItems }}
-                  Jurnal</span>
+                <span v-if="journals.totalItems" class="badge border border-dark text-dark">{{ journals.totalItems }} Jurnal</span>
               </div>
               <div v-if="!isLoadingJournals" class="text-center text-muted fw-bold fs-4">
                 <span v-if="journals.totalItems == 0">
@@ -84,6 +141,11 @@
               <div v-else v-for="journal in journals.items" :key="journal.id"
                 class="card jurnal-hover jurnal-item no-shadow">
                 <div class="card-body">
+                  <div v-if="$device.isMobile" class="text-end">
+                    <div v-if="journal.isDraft" data-bs-toggle="modal" data-bs-target="#edit-jurnal" @click="setModalEditJurnal(journal)" class="badge border border-1 border-danger text-danger mb-1">
+                      <i class="bi bi-pencil-square"></i> Edit Draft
+                    </div>
+                  </div>
                   <!-- <div class="bookmark fs-2">
                     <div v-if="journal.expand.elemen.elemen == 'Lain-lain'" class="bookmark-icon text-danger"><i class="bi bi-bookmark-fill"></i></div>
                     <div v-else class="bookmark-icon text-info"><i class="bi bi-bookmark-fill"></i></div>
@@ -109,6 +171,7 @@
                     <span class="text-danger"><i class="bi bi-heart"></i></span> Belum di Validasi
                   </div>
                 </div>
+
                 <!-- MODAL FOTO PREVIEW -->
                 <div v-if="journal.foto" class="modal" :id="`foto-${journal.id}`" aria-hidden="true" tabindex="-1">
                   <div class="modal-dialog modal-dialog-centered modal-xl">
@@ -124,6 +187,7 @@
                     </div>
                   </div>
                 </div>
+
               </div>
             </div>
           </div>
@@ -177,7 +241,17 @@ let form = ref({
   "pembimbing": "",
   "iduka": "",
   "program_keahlian": prokel,
-  "foto": ""
+  "foto": "",
+  "isDraft": false
+})
+let formEdit = ref({
+  "deskripsi": "",
+  "elemen": "",
+  "siswa": user.user.value.id,
+  "pembimbing": "",
+  "iduka": "",
+  "program_keahlian": prokel,
+  "foto": "",
 })
 let isMovingPage = ref(false)
 let havePostJournalToday = ref(false)
@@ -232,7 +306,11 @@ function compressFile(e) {
       context.fillText(tanggal, canvas.width / 2, canvas.height / 2 + 190)
     },
     success(result) {
+      // jika nilai isUpdate, maka file berasa dari Edit Jurnal / Draft
+      //if(formEdit.value.isUpdate) formEdit.value.foto = result
+      //else form.value.foto = result
       form.value.foto = result
+      formEdit.value.foto = result
     },
     error(err) {
       console.error(err.message)
@@ -240,13 +318,25 @@ function compressFile(e) {
   })
 }
 
-async function buatJurnalBaru() {
+
+// fungsi ini nerima 2 params
+// isDraft untuk menyimpan draft dengan type bool
+// isUpdate untuk membedakan antara Buat Baru atau Update yang berasal dari Edit Jurnal
+// secara default isUpdate bernilai False, ini disesuein sama nama func-nya.
+async function buatJurnalBaru(isDraft, isUpdate=false) {
   // console.log(form.value)
   isPosting.value = true
   isSaved.value = false
   client.autoCancellation(false)
-  let res = await client.collection('jurnal').create(form.value)
-  if (res) {
+  let response;
+  if(isUpdate) {
+    formEdit.value.isDraft = isDraft
+    response = await client.collection('jurnal').update(formEdit.value.id, formEdit.value)
+  } else {
+    form.value.isDraft = isDraft
+    response = await client.collection('jurnal').create(form.value)
+  }
+  if (response) {
     isPosting.value = false
     isSaved.value = true
     form.value.elemen = ""
@@ -261,7 +351,7 @@ async function getJournals(loading = true) {
   let res = await client.collection('jurnal').getList(1, perPage, {
     filter: "siswa='" + user.user.value.id + "'",
     expand: "iduka, pembimbing, siswa.siswa, elemen",
-    sort: "isValid, -created"
+    sort: "-isDraft, isValid, -created"
   })
   if (res) {
     isLoadingJournals.value = false
@@ -351,6 +441,12 @@ async function getPesertaByIdUser() {
 let removeSingleSpaceIfEmpty = computed(() => {
   if (form.value.deskripsi.length < 1 || form.value.deskripsi[0] == ' ') form.value.deskripsi = ''
 })
+
+// copy data dari form ke formEdit agar tidak mengubah data sementara
+// yang ditampilkan pada list
+function setModalEditJurnal(jurnal) {
+  formEdit.value = jurnal
+}
 
 onMounted(() => {
   getElemenCp()
