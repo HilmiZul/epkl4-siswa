@@ -1,5 +1,8 @@
 # Changelog
 
+### 2.5 (8 Januari 2026)
+- Let's save your life with `save as draft` Journal
+
 ### 2.5.0-rc4 (2 Januari 2026)
 - Create mood's page to see other moods update
 - Create link to page "kepoin mood orang laen"
