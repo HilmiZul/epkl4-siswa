@@ -28,6 +28,11 @@
 
   <Loading v-if="isLoadingJournaToday" />
   <div v-else class="mb-3">
+    <nuxt-link v-if="countDraftJournal > 0" to="/jurnal" class="link">
+      <div class="alert alert-danger text-center small p-2">
+        Lu punya <span class="fw-bold">{{ countDraftJournal }}</span> draft jurnal. Segera kirim! <i class="bi bi-arrow-right"></i>
+      </div>
+    </nuxt-link>
     <nuxt-link to="/jurnal" class="link">
       <div v-if="!havePostJournalToday" class="alert alert-warning text-center small p-2">
         <i class="bi bi-pencil-square"></i> Ayo buat Jurnal hari ini <i class="bi bi-arrow-right"></i>
@@ -174,6 +179,7 @@ let emojis = ref([
 let currentMood = ref('')
 let today = useServerDay()
 let havePostJournalToday = ref(false)
+let countDraftJournal = ref(0)
 
 async function getCountJournal(loading=true) {
   isLoading.value = loading
@@ -183,8 +189,8 @@ async function getCountJournal(loading=true) {
     fields: "id",
   })
   let res_journal2 = await client.collection('jurnal').getFullList({
-    filter: "siswa='"+user.user.value.id+"' && isValid=false",
-    fields: "id"
+    filter: `siswa="${user.user.value.id}" && isValid=false`,
+    fields: `id`
   })
   if(res_journal && res_journal2) {
     isLoading.value = false
@@ -259,11 +265,21 @@ async function getCurrentMood() {
   }
 }
 
+async function getCountDraftJournal() {
+  let res = await client.collection('jurnal').getFullList({
+    filter: `siswa="${user.user.value.id}" && isDraft=true`
+  })
+  if(res) {
+    countDraftJournal.value = res.length
+  }
+}
+
 onMounted(() => {
   getCountJournal()
   getInfo()
   getCurrentMood()
   isTodayPostJournal()
+  getCountDraftJournal()
   client.autoCancellation(false)
   client.collection('pemetaan').subscribe('*', function(e){
     if(e.action == 'create' || e.action == 'update') getInfo(false)
@@ -272,6 +288,7 @@ onMounted(() => {
     if(e.action == 'create' || e.action == 'update') {
       getCountJournal()
       isTodayPostJournal()
+      getCountDraftJournal()
     } 
   }, {})
   client.collection('siswa').subscribe('*', function(e) {
