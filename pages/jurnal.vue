@@ -54,7 +54,7 @@
                   <span v-if="!isPosting"><i class="bi bi-send"></i> Kirim</span>
                   <span v-else>Sedang mengirim</span>
                 </button>
-                <div @click="buatJurnalBaru(true)" data-bs-dismiss="modal" class="float-end pt-2 smallest"><i class="bi bi-save"></i> Simpan draft</div>
+                <div @click="buatJurnalBaru(true)" v-if="form.elemen && form.deskripsi" data-bs-dismiss="modal" class="float-end pt-2 smallest"><i class="bi bi-save"></i> Simpan draft</div>
               <!--</form>-->
             </div>
           </div>
@@ -93,8 +93,8 @@
                   </span>
                 </div>
                 <div v-if="formEdit.elemen.length > 0 && formEdit.deskripsi.length >= 125" class="mb-3">
-                  <label for="foto" class="text-muted label-berkas border-2 p-2"><i class="bi bi-camera-fill"></i> Ambil
-                    foto kegiatan</label>
+                  <label for="foto" class="text-muted label-berkas border-2 p-2"><i class="bi bi-camera-fill"></i> Ganti 
+                    foto kegiatan?</label>
                   <div v-if="formEdit.foto" class="small fst-italic">
                     <span v-if="formEdit.foto?.name">Foto baru: {{ formEdit.foto?.name }}</span>
                     <img v-else :src="`${host}/api/files/${formEdit.collectionId}/${formEdit.id}/${formEdit.foto}`" :alt="formEdit.id" width="65px" />
@@ -111,7 +111,7 @@
                   <span v-if="!isPosting"><i class="bi bi-send"></i> Kirim</span>
                   <span v-else>Sedang mengirim</span>
                 </button>
-                <div @click="buatJurnalBaru(true, true)" data-bs-dismiss="modal" class="float-end pt-2 smallest"><i class="bi bi-save"></i> Simpan draft</div>
+                <div @click="buatJurnalBaru(true, true)" v-if="formEdit.elemen && formEdit.deskripsi" data-bs-dismiss="modal" class="float-end pt-2 smallest"><i class="bi bi-save"></i> Simpan draft</div>
             </div>
           </div>
         </div>
@@ -121,8 +121,13 @@
     <div class="card-body">
       <div class="row">
         <div class="col-md-12">
-          <div v-if="notValidCount > 0" class="alert alert-warning small text-center">
-            Ada <span class="fw-bold">{{ notValidCount }}</span> jurnal lu yg belum divalidasi
+          <div v-if="countDraftJournal > 0 || notValidCount > 0" class="alert alert-warning small">
+            <div v-if="countDraftJournal > 0">
+              <span class="fw-bold">{{ countDraftJournal }}</span> Draft
+            </div>
+            <div v-if="notValidCount > 0">
+              <span class="fw-bold">{{ notValidCount }}</span> Jurnal belum divalidasi 
+            </div>
           </div>
           <div class="row">
             <div class="col-md-12 p-0">
@@ -260,6 +265,7 @@ let maxLenDesc = ref(50)
 let currStudent = ref('')
 let currIduka = ref('')
 let notValidCount = ref(0)
+let countDraftJournal = ref(0)
 
 async function isTodayPostJournal() {
   try {
@@ -440,6 +446,7 @@ async function getPesertaByIdUser() {
 
 let removeSingleSpaceIfEmpty = computed(() => {
   if (form.value.deskripsi.length < 1 || form.value.deskripsi[0] == ' ') form.value.deskripsi = ''
+  if (formEdit.value.deskripsi.length < 1 || formEdit.value.deskripsi[0] == ' ') formEdit.value.deskripsi = ''
 })
 
 // copy data dari form ke formEdit agar tidak mengubah data sementara
@@ -448,16 +455,27 @@ function setModalEditJurnal(jurnal) {
   formEdit.value = jurnal
 }
 
+async function getCountDraftJournal() {
+  let res = await client.collection('jurnal').getFullList({
+    filter: `siswa="${user.user.value.id}" && isDraft=true`
+  })
+  if(res) {
+    countDraftJournal.value = res.length
+  }
+}
+
 onMounted(() => {
   getElemenCp()
   getJournals()
   isTodayPostJournal()
   getPesertaByIdUser()
+  getCountDraftJournal()
   client.autoCancellation(false)
   client.collection('jurnal').subscribe('*', function (e) {
     if (e.action == 'create' || e.action == 'update') {
       getJournals(false)
       isTodayPostJournal()
+      getCountDraftJournal()
     }
   }, {})
 })
