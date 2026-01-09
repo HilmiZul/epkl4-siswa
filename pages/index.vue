@@ -30,7 +30,7 @@
   <div v-else class="mb-3">
     <nuxt-link v-if="countDraftJournal > 0" to="/jurnal" class="link">
       <div class="alert alert-danger text-center small p-2">
-        Lu punya <span class="fw-bold">{{ countDraftJournal }}</span> draft jurnal. Segera kirim! <i class="bi bi-arrow-right"></i>
+        Ada <span class="fw-bold">{{ countDraftJournal }}</span> draft jurnal. Segera kirim! <i class="bi bi-arrow-right"></i>
       </div>
     </nuxt-link>
     <nuxt-link to="/jurnal" class="link">
@@ -124,7 +124,7 @@
         </div>
         <div v-if="countJournalNotValid > 0" class="col-lg-3">
           <nuxt-link class="link" to="/jurnal">
-            <div class="card bg-danger mb-3">
+            <div class="card bg-warning mb-3">
               <div class="card-body">
                 <strong class="fs-4">{{ countJournalNotValid }}</strong>
                 <div class="small">Jurnal belum di validasi</div>
