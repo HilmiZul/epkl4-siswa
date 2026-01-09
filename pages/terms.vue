@@ -8,7 +8,7 @@
     </div>
     <div class="card-body text-dark">
       <p class="text-muted small">
-        Diperbaharui pada 2 Januari 2026
+        Diperbaharui pada 9 Januari 2026
       </p>
       <h5 class="fw-bold text-grey">Akun Anggota e-PKL</h5>
       <ul>
@@ -35,6 +35,7 @@
           dengan <em>jobdesc</em>.</li>
         <li>Peserta didik wajib menyematkan swafoto (<em>selfie</em>) menggunakan HP kedalam jurnal harian sesuai
           aktivitasnya.</li>
+        <li>Peserta dapat menyimpan Jurnal sebagai draft apabila belum yakin dikirim dan dapat diubah/dikirim kemudian.</li>
         <li>Guru Pembimbing hanya akan memvalidasi Jurnal apabila:
           <table class="table text-muted small mt-3">
             <tbody>
