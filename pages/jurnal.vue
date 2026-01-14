@@ -30,7 +30,7 @@
                   <label for="deskripsi">Ceritain Kegiatan Lu!</label>
                   <textarea v-model="form.deskripsi" :disabled="form.elemen.length < 1"
                     @input="removeSingleSpaceIfEmpty" id="deskripsi" class="form form-control mb-2"
-                    placeholder="Sesuein dengan tujuan yang lu pilih, boleh ditulis paragraf or daftar urutan. Asal jangan curhat..."
+                    placeholder="Gunakan bahasa indonesia baik dan benar. Sesuaikan dengan tujuan yang dipilih, boleh ditulis paragraf atau daftar urutan. Asal jangan curhat..."
                     rows="5" required></textarea>
                   <span class="mb-3 fw-bold small">
                     <i v-if="form.deskripsi.length > 124" class="bi bi-check-circle-fill text-success"></i>
@@ -54,7 +54,8 @@
                   <span v-if="!isPosting"><i class="bi bi-send"></i> Kirim</span>
                   <span v-else>Sedang mengirim</span>
                 </button>
-                <div @click="buatJurnalBaru(true)" v-if="form.elemen && form.deskripsi" data-bs-dismiss="modal" class="float-end pt-2 smallest"><i class="bi bi-save"></i> Simpan draft</div>
+                <span class="link small fw-bold text-muted" data-bs-dismiss="modal">Tutup</span>
+                <div @click="buatJurnalBaru(true)" v-if="form.elemen && form.deskripsi" data-bs-dismiss="modal" class="float-end pt-2 smallest fw-bold"><i class="bi bi-save"></i> Simpan draft</div>
               <!--</form>-->
             </div>
           </div>
@@ -84,7 +85,7 @@
                   <label for="deskripsi">Ceritain Kegiatan Lu!</label>
                   <textarea v-model="formEdit.deskripsi" :disabled="formEdit.elemen.length < 1"
                     @input="removeSingleSpaceIfEmpty" id="deskripsi" class="form form-control mb-2"
-                    placeholder="Sesuein dengan tujuan yang lu pilih, boleh ditulis paragraf or daftar urutan. Asal jangan curhat..."
+                    placeholder="Gunakan bahasa indonesia baik dan benar. Sesuaikan dengan tujuan yang dipilih, boleh ditulis paragraf atau daftar urutan. Asal jangan curhat..."
                     rows="5" required></textarea>
                   <span class="mb-3 fw-bold small">
                     <i v-if="formEdit.deskripsi.length > 124" class="bi bi-check-circle-fill text-success"></i>
@@ -111,7 +112,8 @@
                   <span v-if="!isPosting"><i class="bi bi-send"></i> Kirim</span>
                   <span v-else>Sedang mengirim</span>
                 </button>
-                <div @click="buatJurnalBaru(true, true)" v-if="formEdit.elemen && formEdit.deskripsi" data-bs-dismiss="modal" class="float-end pt-2 smallest"><i class="bi bi-save"></i> Simpan draft</div>
+                <span class="link small fw-bold text-muted" data-bs-dismiss="modal">Tutup</span>
+                <div @click="buatJurnalBaru(true, true)" v-if="formEdit.elemen && formEdit.deskripsi" data-bs-dismiss="modal" class="float-end pt-2 smallest fw-bold"><i class="bi bi-save"></i> Simpan draft</div>
             </div>
           </div>
         </div>
