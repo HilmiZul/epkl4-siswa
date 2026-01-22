@@ -34,8 +34,13 @@
       </div>
     </nuxt-link>
     <nuxt-link to="/jurnal" class="link">
-      <div v-if="!havePostJournalToday" class="alert alert-warning text-center small p-2">
+      <div v-if="!havePostJournalToday" class="alert alert-info text-center small p-2">
         <i class="bi bi-pencil-square"></i> Ayo buat Jurnal hari ini <i class="bi bi-arrow-right"></i>
+      </div>
+    </nuxt-link>
+    <nuxt-link v-if="countUnreadJournalComment > 0" to="/jurnal" class="link">
+      <div v-if="!havePostJournalToday" class="alert alert-dark text-center small p-2">
+        <i class="bi bi-bell"></i> Kamu punya {{ countUnreadJournalComment }} komentar jurnal <i class="bi bi-arrow-right"></i> 
       </div>
     </nuxt-link>
   </div>
@@ -180,6 +185,8 @@ let currentMood = ref('')
 let today = useServerDay()
 let havePostJournalToday = ref(false)
 let countDraftJournal = ref(0)
+let countUnreadJournalComment = ref(0)
+
 
 async function getCountJournal(loading=true) {
   isLoading.value = loading
@@ -274,12 +281,22 @@ async function getCountDraftJournal() {
   }
 }
 
+async function getCountUnreadJournalComment() {
+  let res = await client.collection('jurnal_komentar').getList(1,1, {
+    filter: `idJurnal.siswa.id="${user.user.value.id}" && isOpen=false`
+  })
+  if(res) {
+    countUnreadJournalComment.value = res.totalItems
+  }
+}
+
 onMounted(() => {
   getCountJournal()
   getInfo()
   getCurrentMood()
   isTodayPostJournal()
   getCountDraftJournal()
+  getCountUnreadJournalComment()
   client.autoCancellation(false)
   client.collection('pemetaan').subscribe('*', function(e){
     if(e.action == 'create' || e.action == 'update') getInfo(false)
@@ -294,6 +311,9 @@ onMounted(() => {
   client.collection('siswa').subscribe('*', function(e) {
     if(e.action == 'update') getCurrentMood()
   }, {})
+  client.collection('jurnal_komentar').subscribe('*', function(e){
+    if(e.action == 'create' || e.action == 'update') getCountUnreadJournalComment()
+  },{})
 })
 </script>
 
