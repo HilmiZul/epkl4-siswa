@@ -19,16 +19,23 @@
             </div>
             <div class="modal-body">
               <!--<form @submit.prevent="buatJurnalBaru">-->
+                <div class="mb-3">
+                  <label for="foto" class="text-muted label-berkas border-2 p-2"><i class="bi bi-camera-fill"></i> Ambil
+                    foto kegiatan</label>
+                  <div v-if="form.foto" class="small fst-italic">Foto: {{ form.foto?.name }}</div>
+                  <input @change="compressFile"
+                    class="form-control-file" type="file" id="foto" accept="image/*" capture="user" required />
+                </div>
                 <div class="mb-4">
                   <label for="elemen">Tujuan Pembelajaran</label>
-                  <select v-model="form.elemen" id="elemen" class="form form-control form-select" required>
+                  <select v-model="form.elemen" :disabled="!form.foto" id="elemen" class="form form-control form-select" required>
                     <option disabled value="" selected>&#8212; Pilih &#8212;</option>
                     <option v-for="elemen in elements" :key="elemen.id" :value="elemen.id">{{ elemen.tujuan }}</option>
                   </select>
                 </div>
                 <div class="mb-4">
                   <label for="deskripsi">Ceritakan Kegiatanmu!</label>
-                  <textarea v-model="form.deskripsi" :disabled="form.elemen.length < 1"
+                  <textarea v-model="form.deskripsi" :disabled="form.foto && form.elemen.length < 1"
                     @input="removeSingleSpaceIfEmpty" id="deskripsi" class="form form-control mb-2"
                     placeholder="Gunakan bahasa indonesia baik dan benar. Sesuaikan dengan tujuan yang dipilih, boleh ditulis paragraf atau daftar urutan. Asal jangan curhat..."
                     rows="5" required></textarea>
@@ -37,13 +44,6 @@
                     {{ form.deskripsi.length }} <span v-if="form.deskripsi.length < 125" class="text-muted"> (min. 125
                       karakter)</span>
                   </span>
-                </div>
-                <div v-if="form.elemen.length > 0 && form.deskripsi.length >= 125" class="mb-3">
-                  <label for="foto" class="text-muted label-berkas border-2 p-2"><i class="bi bi-camera-fill"></i> Ambil
-                    foto kegiatan</label>
-                  <div v-if="form.foto" class="small fst-italic">Foto: {{ form.foto?.name }}</div>
-                  <input @change="compressFile" :disabled="form.elemen.length < 1 && form.deskripsi.length < 125"
-                    class="form-control-file" type="file" id="foto" accept="image/*" capture="user" required />
                 </div>
                 <div class="mb-4 smallest text-muted">
                   Saya udah baca dan setuju dengan <nuxt-link to="/privacy" target="_blank"
@@ -55,7 +55,7 @@
                   <span v-else>Sedang mengirim</span>
                 </button>
                 <span class="link small fw-bold text-muted" data-bs-dismiss="modal">Tutup</span>
-                <div @click="buatJurnalBaru(true)" v-if="form.elemen && form.deskripsi" data-bs-dismiss="modal" class="float-end pt-2 smallest fw-bold"><i class="bi bi-save"></i> Simpan draft</div>
+                <div @click="buatJurnalBaru(true)" v-if="form.foto && form.elemen" data-bs-dismiss="modal" class="float-end pt-2 smallest fw-bold"><i class="bi bi-save"></i> Simpan draft</div>
               <!--</form>-->
             </div>
           </div>
@@ -74,16 +74,26 @@
               <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                <div class="mb-3">
+                  <label for="foto" class="text-muted label-berkas border-2 p-2"><i class="bi bi-camera-fill"></i> Ganti 
+                    foto kegiatan?</label>
+                  <div v-if="formEdit.foto" class="small fst-italic">
+                    <span v-if="formEdit.foto?.name">Foto baru: {{ formEdit.foto?.name }}</span>
+                    <img v-else :src="`${host}/api/files/${formEdit.collectionId}/${formEdit.id}/${formEdit.foto}`" :alt="formEdit.id" width="65px" />
+                  </div>
+                  <input @change="compressFile"
+                    class="form-control-file" type="file" id="foto" accept="image/*" capture="user" required />
+                </div>
                 <div class="mb-4">
                   <label for="elemen">Tujuan Pembelajaran</label>
-                  <select v-model="formEdit.elemen" id="elemen" class="form form-control form-select" required>
+                  <select v-model="formEdit.elemen" :disabled="!formEdit.foto" id="elemen" class="form form-control form-select" required>
                     <option disabled value="" selected>&#8212; Pilih &#8212;</option>
                     <option v-for="elemen in elements" :key="elemen.id" :value="elemen.id">{{ elemen.tujuan }}</option>
                   </select>
                 </div>
                 <div class="mb-4">
                   <label for="deskripsi">Ceritain Kegiatan Lu!</label>
-                  <textarea v-model="formEdit.deskripsi" :disabled="formEdit.elemen.length < 1"
+                  <textarea v-model="formEdit.deskripsi" :disabled="formEdit.foto && formEdit.elemen.length < 1"
                     @input="removeSingleSpaceIfEmpty" id="deskripsi" class="form form-control mb-2"
                     placeholder="Gunakan bahasa indonesia baik dan benar. Sesuaikan dengan tujuan yang dipilih, boleh ditulis paragraf atau daftar urutan. Asal jangan curhat..."
                     rows="5" required></textarea>
@@ -92,16 +102,6 @@
                     {{ formEdit.deskripsi.length }} <span v-if="formEdit.deskripsi.length < 125" class="text-muted"> (min. 125
                       karakter)</span>
                   </span>
-                </div>
-                <div v-if="formEdit.elemen.length > 0 && formEdit.deskripsi.length >= 125" class="mb-3">
-                  <label for="foto" class="text-muted label-berkas border-2 p-2"><i class="bi bi-camera-fill"></i> Ganti 
-                    foto kegiatan?</label>
-                  <div v-if="formEdit.foto" class="small fst-italic">
-                    <span v-if="formEdit.foto?.name">Foto baru: {{ formEdit.foto?.name }}</span>
-                    <img v-else :src="`${host}/api/files/${formEdit.collectionId}/${formEdit.id}/${formEdit.foto}`" :alt="formEdit.id" width="65px" />
-                  </div>
-                  <input @change="compressFile" :disabled="formEdit.elemen.length < 1 && formEdit.deskripsi.length < 125"
-                    class="form-control-file" type="file" id="foto" accept="image/*" capture="user" required />
                 </div>
                 <div class="mb-4 smallest text-muted">
                   Saya udah baca dan setuju dengan <nuxt-link to="/privacy" target="_blank"
@@ -113,7 +113,7 @@
                   <span v-else>Sedang mengirim</span>
                 </button>
                 <span class="link small fw-bold text-muted" data-bs-dismiss="modal">Tutup</span>
-                <div @click="buatJurnalBaru(true, true)" v-if="formEdit.elemen && formEdit.deskripsi" data-bs-dismiss="modal" class="float-end pt-2 smallest fw-bold"><i class="bi bi-save"></i> Simpan draft</div>
+                <div @click="buatJurnalBaru(true, true)" v-if="formEdit.foto && formEdit.elemen" data-bs-dismiss="modal" class="float-end pt-2 smallest fw-bold"><i class="bi bi-save"></i> Simpan draft</div>
             </div>
           </div>
         </div>
