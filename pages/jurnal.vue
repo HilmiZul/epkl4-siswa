@@ -27,7 +27,7 @@
                   </select>
                 </div>
                 <div class="mb-4">
-                  <label for="deskripsi">Ceritain Kegiatan Lu!</label>
+                  <label for="deskripsi">Ceritakan Kegiatanmu!</label>
                   <textarea v-model="form.deskripsi" :disabled="form.elemen.length < 1"
                     @input="removeSingleSpaceIfEmpty" id="deskripsi" class="form form-control mb-2"
                     placeholder="Gunakan bahasa indonesia baik dan benar. Sesuaikan dengan tujuan yang dipilih, boleh ditulis paragraf atau daftar urutan. Asal jangan curhat..."
@@ -166,17 +166,23 @@
                   <article class="my-3 pre-text">
                     {{ journal.deskripsi }}
                   </article>
+
                   <div v-if="journal.foto" class="my-3 foto-container hand-cursor" data-bs-toggle="modal"
                     :data-bs-target="`#foto-${journal.id}`">
                     <img :src="`${host}/api/files/${journal.collectionId}/${journal.id}/${journal.foto}`"
                       :alt="journal.deskripsi" class="foto" />
                   </div>
-                  <div v-if="journal.isValid" class="text-muted small">
+                  <div v-if="journal.isValid" class="text-muted small float-start">
                     <span class="text-danger"><i class="bi bi-heart-fill"></i></span>
                   </div>
-                  <div v-else class="text-muted small">
+                  <div v-else class="text-muted small float-start">
                     <span class="text-danger"><i class="bi bi-heart"></i></span> Belum di Validasi
                   </div>
+
+                  <div v-if="journal.isComment" @click="getKomentarByIdJurnal(journal)" class="float-end text-muted small hand-cursor" data-bs-toggle="modal" data-bs-target="#modal-lihat-komentar">
+                    <i class="bi bi-chat-left-fill"></i> Lihat komentar
+                  </div>
+
                 </div>
 
                 <!-- MODAL FOTO PREVIEW -->
@@ -190,6 +196,24 @@
                       <div class="modal-body p-0">
                         <img :src="`${host}/api/files/${journal.collectionId}/${journal.id}/${journal.foto}`"
                           :alt="journal.deskripsi" class="foto-preview" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- single modal: lihat komentar -->
+                <div class="modal" id="modal-lihat-komentar">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content rounded-0 border border-3 border-dark shadow-lg">
+                      <div class="modal-body">
+                        <loading-placeholder v-if="isLoadingKomentar" row="1" col="12" /> 
+                        <div v-else>
+                          <div v-if="pratinjauKomentar" class="text-muted small">{{ pratinjauKomentar.created }}</div>
+                          <div v-if="pratinjauKomentar" class="my-2">
+                            {{ pratinjauKomentar.komentar }}
+                          </div>
+                        </div>
+                        <div class="text-end text-muted fw-bold mt-3 hand-cursor" data-bs-dismiss="modal">Tutup</div>
                       </div>
                     </div>
                   </div>
@@ -268,6 +292,8 @@ let currStudent = ref('')
 let currIduka = ref('')
 let notValidCount = ref(0)
 let countDraftJournal = ref(0)
+let isLoadingKomentar = ref(true)
+let pratinjauKomentar = ref()
 
 async function isTodayPostJournal() {
   try {
@@ -463,6 +489,24 @@ async function getCountDraftJournal() {
   })
   if(res) {
     countDraftJournal.value = res.length
+  }
+}
+
+async function getKomentarByIdJurnal(journal) {
+  isLoadingKomentar.value = true
+  let res = await client.collection('jurnal_komentar').getList(1,1, {
+    filter: `idJurnal="${journal.id}"`
+  })
+  if(res) {
+    pratinjauKomentar.value = res.items[0]
+    await client.collection('jurnal_komentar').update(pratinjauKomentar.value.id, { isOpen: true })
+    isLoadingKomentar.value = false
+    const date = new Date(pratinjauKomentar.value.created);
+    const options = {
+      dateStyle: "full",
+      timeStyle: "short"
+    }
+    pratinjauKomentar.value.created = new Intl.DateTimeFormat('id-ID', options).format(date);
   }
 }
 
