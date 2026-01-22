@@ -200,26 +200,26 @@
                     </div>
                   </div>
                 </div>
+              </div>
 
-                <!-- single modal: lihat komentar -->
-                <div class="modal" id="modal-lihat-komentar">
-                  <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content rounded-0 border border-3 border-dark shadow-lg">
-                      <div class="modal-body">
-                        <loading-placeholder v-if="isLoadingKomentar" row="1" col="12" /> 
-                        <div v-else>
-                          <div v-if="pratinjauKomentar" class="text-muted small">{{ pratinjauKomentar.created }}</div>
-                          <div v-if="pratinjauKomentar" class="my-2">
-                            {{ pratinjauKomentar.komentar }}
-                          </div>
+              <!-- single modal: lihat komentar -->
+              <div class="modal" id="modal-lihat-komentar">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content rounded-0 border border-3 border-dark shadow-lg">
+                    <div class="modal-body">
+                      <loading-placeholder v-if="isLoadingKomentar" row="1" col="12" /> 
+                      <div v-else>
+                        <div v-if="pratinjauKomentar" class="text-muted small">{{ pratinjauKomentar.created }}</div>
+                        <div v-if="pratinjauKomentar" class="my-2">
+                          {{ pratinjauKomentar.komentar }}
                         </div>
-                        <div class="text-end text-muted fw-bold mt-3 hand-cursor" data-bs-dismiss="modal">Tutup</div>
                       </div>
+                      <div class="text-end text-muted fw-bold mt-3 hand-cursor" data-bs-dismiss="modal">Tutup</div>
                     </div>
                   </div>
                 </div>
-
               </div>
+
             </div>
           </div>
           <div class="row my-3 mb-2">
