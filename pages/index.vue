@@ -39,7 +39,7 @@
       </div>
     </nuxt-link>
     <nuxt-link v-if="countUnreadJournalComment > 0" to="/jurnal" class="link">
-      <div v-if="!havePostJournalToday" class="alert alert-dark text-center small p-2">
+      <div class="alert alert-dark text-center small p-2">
         <i class="bi bi-bell"></i> Kamu punya {{ countUnreadJournalComment }} komentar jurnal <i class="bi bi-arrow-right"></i> 
       </div>
     </nuxt-link>
