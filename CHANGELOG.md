@@ -1,5 +1,9 @@
 # Changelog
 
+### 2.6 (22 Januari 2026)
+- Teacher can write comment to student's Journal
+- Showing indicator notification on bottom nav: comment and draft journal
+
 ### 2.5 (8 Januari 2026)
 - Let's save your life with `save as draft` Journal
 
