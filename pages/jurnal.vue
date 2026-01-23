@@ -224,8 +224,8 @@
           </div>
           <div class="row my-3 mb-2">
             <div v-if="!isLoadingJournals" class="col-md-12">
-              <div v-if="isMovingPage" class="text-muted smallest mb-2 fst-italic">sedang berpindah halaman</div>
-              <div v-else>
+              <div v-if="isMovingPage" class="text-muted smallest mb-2 fst-italic">sedang memuat</div>
+              <!--<div v-else>
                 <div v-if="journals || isMovingPage" class="text-muted smallest mb-2">
                   <span v-if="journals.totalItems">Halaman {{ journals.page }} dari {{ journals.totalPages }}</span>
                 </div>
@@ -233,11 +233,12 @@
               <button v-if="journals.totalItems" :disabled="isMovingPage || journals.page < 2"
                 @click="pagination(journals.page - 1, false)" class="btn btn-info me-2 border border-2 border-dark">
                 sebelumnya
-              </button>
-              <button v-if="journals.totalItems" :disabled="isMovingPage || journals.page >= journals.totalPages"
-                @click="pagination(journals.page + 1, false)" class="btn btn-info border border-2 border-dark">
-                lanjut
-              </button>
+              </button>-->
+              <div class="text-center">
+                <button v-if="journals.totalItems" :disabled="isMovingPage || journals.page >= journals.totalPages" @click="pagination(journals.page + 1, false)" class="btn btn-info border border-2 border-dark">
+                  muat lagi <i class="bi bi-arrow-down"></i>
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -264,7 +265,7 @@ let isSaved = ref(false)
 let elements = ref([])
 let journals = ref([])
 let pemetaan = ref([])
-let perPage = 5
+let perPage = 30 
 let form = ref({
   "deskripsi": "",
   "elemen": "",
@@ -416,15 +417,20 @@ async function pagination(page, loading = true) {
     sort: "isValid, -created"
   })
   if (res) {
-    journals.value = res
-    for (let i = 0; i < journals.value.items.length; i++) {
-      const date = new Date(journals.value.items[i].created);
+    for(let i=0; i<res.items.length; i++) {
+      const date = new Date(res.items[i].created);
       const options = {
         dateStyle: "full",
         timeStyle: "short"
       };
-      journals.value.items[i].created = new Intl.DateTimeFormat('id-ID', options).format(date);
+      res.items[i].created = new Intl.DateTimeFormat('id-ID', options).format(date);
     }
+    
+    journals.value.page = res.page
+    journals.value.perPage = res.perPage
+    journals.value.totalItems = res.totalItems
+    journals.value.totalPages = res.totalPages
+    journals.value.items = journals.value.items.concat(res.items)
     isLoadingJournals.value = false
     isMovingPage.value = false
   }
