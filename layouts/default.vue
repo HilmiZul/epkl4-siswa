@@ -7,7 +7,7 @@
         <slot />
       </div>
       <NavFixedBottom v-if="isMobile" />
-      <!-- <Footer class="footer-mobile-view" /> -->
+      <Footer class="footer-mobile-view" />
     </div>
   </div>
 </template>
