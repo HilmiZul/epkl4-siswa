@@ -1,5 +1,9 @@
 # Changelog
 
+### 2.6.1 (24 Januari 2026)
+- Chagne pagination method with loadmore
+- Limit record 30 per page
+
 ### 2.6 (22 Januari 2026)
 - Teacher can write comment to student's Journal
 - Showing indicator notification on bottom nav: comment and draft journal
