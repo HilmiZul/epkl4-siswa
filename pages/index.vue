@@ -12,7 +12,7 @@
             {{ currentMood.emoji }}
           </span>
           <div v-if="isOpenEmojis" class="mood-item shadow-lg">
-            <div class="smallest p-2">Apa mood lu hari ini?</div>
+            <div class="smallest p-2">Apa mood-mu hari ini?</div>
             <ul v-for="(emoji, i) in emojis" :key="i">
               <li @click="handleMood(emoji)" class="hand-cursor">{{ emoji.emoji }}</li>
             </ul>
