@@ -224,7 +224,7 @@
           </div>
           <div class="row my-3 mb-2">
             <div v-if="!isLoadingJournals" class="col-md-12">
-              <div v-if="isMovingPage" class="text-muted smallest mb-2 fst-italic">sedang memuat</div>
+              <loading v-if="isMovingPage" /> 
               <!--<div v-else>
                 <div v-if="journals || isMovingPage" class="text-muted smallest mb-2">
                   <span v-if="journals.totalItems">Halaman {{ journals.page }} dari {{ journals.totalPages }}</span>
