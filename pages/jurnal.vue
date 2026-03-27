@@ -329,6 +329,8 @@ function compressFile(e) {
   let now = new Date()
   let tanggal = new Intl.DateTimeFormat('id-ID', { dateStyle: 'full' }).format(now)
   new Compressor(file, {
+    convertTypes: ["image/webp"],
+    mimeType: 'image/webp',
     quality: 0.6,
     // drew: nempelin watermark ke foto agar tahu sumbernya dan sulit dipalsukan
     drew(context, canvas) {
