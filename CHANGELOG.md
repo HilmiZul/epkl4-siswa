@@ -1,5 +1,8 @@
 # Changelog
 
+### 2.7 (27 Maret 2026)
+- New Journal image will convert to .webp
+
 ### 2.6.1 (24 Januari 2026)
 - Chagne pagination method with loadmore
 - Limit record 30 per page
