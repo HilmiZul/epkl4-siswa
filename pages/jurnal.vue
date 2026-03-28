@@ -144,6 +144,17 @@
                   Belum ada jurnal
                 </span>
               </div>
+
+              <!-- Filter by elemen / tujuan pembelajaran -->
+              <div class="mx-3 mt-2 sticky">
+                <select @change="getJournals" v-model="opsiFilterElemen" name="elemen" class="form form-select form-sm">
+                  <option value="" disabled>Filter Jurnal</option>
+                  <option value="Semua">Semua</option>
+                  <option value="sesuai">Sesuai Elemen</option>
+                  <option value="Lain-lain">Tidak Sesuai Elemen</option>
+                </select> 
+              </div>
+
               <Loading class="py-3" v-if="isLoadingJournals" />
               <div v-else v-for="journal in journals.items" :key="journal.id"
                 class="card jurnal-hover jurnal-item no-shadow">
@@ -295,6 +306,7 @@ let notValidCount = ref(0)
 let countDraftJournal = ref(0)
 let isLoadingKomentar = ref(true)
 let pratinjauKomentar = ref()
+let opsiFilterElemen = ref('')
 
 async function isTodayPostJournal() {
   try {
@@ -329,9 +341,9 @@ function compressFile(e) {
   let now = new Date()
   let tanggal = new Intl.DateTimeFormat('id-ID', { dateStyle: 'full' }).format(now)
   new Compressor(file, {
-    convertTypes: ["image/webp"],
-    mimeType: 'image/webp',
-    quality: 0.6,
+    convertTypes: ['image/webp'],
+    mimeType: 'auto',
+    quality: 0.4,
     // drew: nempelin watermark ke foto agar tahu sumbernya dan sulit dipalsukan
     drew(context, canvas) {
       context.fillStyle = 'rgba(255, 255, 255, .8',
@@ -385,8 +397,17 @@ async function buatJurnalBaru(isDraft, isUpdate=false) {
 async function getJournals(loading = true) {
   isLoadingJournals.value = loading
   client.autoCancellation(false)
+
+  let filter = `siswa="${user.user.value.id}"`
+  if(opsiFilterElemen.value == 'Lain-lain') {
+    filter = `siswa="${user.user.value.id}" && elemen.elemen="Lain-lain"`
+  }
+  else if(opsiFilterElemen.value == 'sesuai') {
+    filter = `siswa="${user.user.value.id}" && elemen.elemen!="Lain-lain"`
+  }
+
   let res = await client.collection('jurnal').getList(1, perPage, {
-    filter: "siswa='" + user.user.value.id + "'",
+    filter: filter,
     expand: "iduka, pembimbing, siswa.siswa, elemen",
     sort: "-isDraft, isValid, -created"
   })
@@ -597,5 +618,12 @@ onMounted(() => {
 
 .no-shadow {
   box-shadow: none !important;
+}
+
+.sticky {
+  position: sticky !important;
+  top: 1rem;
+  left: 0;
+  z-index: 1;
 }
 </style>
