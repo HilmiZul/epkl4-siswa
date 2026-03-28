@@ -1,7 +1,10 @@
 # Changelog
 
 ### 2.7 (27 Maret 2026)
-- New Journal image will convert to .webp
+- New Journal image will convert to auto (.jpg/.png/.webp)
+- Increase compression ratio (maybe medium quality)
+- Filter journal by Elemen
+- Display percentage based on journal activity
 
 ### 2.6.1 (24 Januari 2026)
 - Chagne pagination method with loadmore
