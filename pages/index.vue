@@ -127,6 +127,7 @@
             </div>
           </nuxt-link>
         </div>
+
         <div v-if="countJournalNotValid > 0" class="col-lg-3">
           <nuxt-link class="link" to="/jurnal">
             <div class="card bg-warning mb-3">
@@ -138,9 +139,23 @@
             </div>
           </nuxt-link>
         </div>
+
+        <div class="col-lg-3">
+          <div class="card mb-3">
+            <div class="card-body">
+              <strong class="fs-4">
+                <span v-if="prosentaseAktivitasJurnal > 89">😃</span>
+                <span v-else-if="prosentaseAktivitasJurnal > 79">😔</span>
+                <span v-else>😭</span>
+                {{ prosentaseAktivitasJurnal }}%
+              </strong>
+              <div class="small">{{ descAktivitasJurnal }}</div>
+            </div>
+          </div>
+        </div>
       </div>
-      
     </div>
+
   </div>
 </template>
 
@@ -154,6 +169,10 @@ let isLoading = ref(true)
 let isLoadingJournaToday = ref(true)
 let countJournal = ref(0)
 let countJournalNotValid = ref(0)
+let countJournalSesuaiElemen = ref(0)
+let countJournalTidakSesuaiElemen = ref(0)
+let prosentaseAktivitasJurnal = ref(0)
+let descAktivitasJurnal = ref('')
 let pemetaan = ref([])
 let iduka = ref()
 let peserta = ref()
@@ -186,7 +205,7 @@ let today = useServerDay()
 let havePostJournalToday = ref(false)
 let countDraftJournal = ref(0)
 let countUnreadJournalComment = ref(0)
-
+let isLoadingJournalSesuaiTidakSesuai = ref(true)
 
 async function getCountJournal(loading=true) {
   isLoading.value = loading
@@ -203,6 +222,31 @@ async function getCountJournal(loading=true) {
     isLoading.value = false
     countJournal.value = res_journal.length
     countJournalNotValid.value = res_journal2.length
+  }
+}
+
+async function getCountJournalSesuaiTidakSesuai(loading=true) {
+  isLoadingJournalSesuaiTidakSesuai.value = loading
+  let res_sesuai = await client.collection('jurnal').getList(1,1, {
+    filter: `siswa="${user.user.value.id}" && elemen.elemen!="Lain-lain"`
+  })
+  let res_tidak_sesuai = await client.collection('jurnal').getList(1,1, {
+    filter: `siswa="${user.user.value.id}" && elemen.elemen="Lain-lain"`
+  })
+  let res_jurnal = await client.collection('jurnal').getList(1,1, {
+    filter: `siswa="${user.user.value.id}"`
+  })
+
+  if(res_sesuai && res_tidak_sesuai && res_jurnal) {
+    isLoadingJournalSesuaiTidakSesuai.value = false
+    countJournalSesuaiElemen.value = res_sesuai.totalItems
+    countJournalTidakSesuaiElemen.value = res_tidak_sesuai.totalItems
+    
+    prosentaseAktivitasJurnal.value = Math.floor((res_sesuai.totalItems / res_jurnal.totalItems) * 100, 2)
+
+    if(prosentaseAktivitasJurnal.value > 89) descAktivitasJurnal.value = "Aktivitasmu sesuai"
+    else if(prosentaseAktivitasJurnal.value > 79) descAktivitasJurnal.value = "Aktivitasmu cukup sesuai"
+    else descAktivitasJurnal.value = "Aktivitasmu kurang sesuai"
   }
 }
 
@@ -297,6 +341,7 @@ onMounted(() => {
   isTodayPostJournal()
   getCountDraftJournal()
   getCountUnreadJournalComment()
+  getCountJournalSesuaiTidakSesuai()
   client.autoCancellation(false)
   client.collection('pemetaan').subscribe('*', function(e){
     if(e.action == 'create' || e.action == 'update') getInfo(false)
