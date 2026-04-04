@@ -228,10 +228,10 @@ async function getCountJournal(loading=true) {
 async function getCountJournalSesuaiTidakSesuai(loading=true) {
   isLoadingJournalSesuaiTidakSesuai.value = loading
   let res_sesuai = await client.collection('jurnal').getList(1,1, {
-    filter: `siswa="${user.user.value.id}" && elemen.elemen!="Lain-lain"`
+    filter: `siswa="${user.user.value.id}" && elemen.elemen!="Lain-lain" && isValid=true`
   })
   let res_tidak_sesuai = await client.collection('jurnal').getList(1,1, {
-    filter: `siswa="${user.user.value.id}" && elemen.elemen="Lain-lain"`
+    filter: `siswa="${user.user.value.id}" && elemen.elemen="Lain-lain" && isValid=true`
   })
   let res_jurnal = await client.collection('jurnal').getList(1,1, {
     filter: `siswa="${user.user.value.id}"`
@@ -351,6 +351,7 @@ onMounted(() => {
       getCountJournal()
       isTodayPostJournal()
       getCountDraftJournal()
+      getCountJournalSesuaiTidakSesuai(false)
     } 
   }, {})
   client.collection('siswa').subscribe('*', function(e) {
