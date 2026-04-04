@@ -144,7 +144,7 @@
           <div class="card mb-3">
             <div class="card-body">
               <strong class="fs-4">
-                <span v-if="prosentaseAktivitasJurnal > 89">😃</span>
+                <span v-if="prosentaseAktivitasJurnal > 89">👑</span>
                 <span v-else-if="prosentaseAktivitasJurnal > 79">😔</span>
                 <span v-else>😭</span>
                 {{ prosentaseAktivitasJurnal }}%
