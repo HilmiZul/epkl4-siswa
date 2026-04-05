@@ -20,7 +20,7 @@
       <h5 class="fw-bold text-grey">Terkait Elemen</h5>
       <ul>
         <li>
-          Berdasarkan keputusan <nuxt-link to="https://kurikulum.kemdikbud.go.id/file/1687442514_manage_file.pdf" target="_blank">Kepala Badan Standar, Kurikulum, dan Asesmen Pendidikan (BSKAP)</nuxt-link>
+          Berdasarkan keputusan <nuxt-link to="https://kurikulum.kemendikdasmen.go.id/file/1687442514_manage_file.pdf" target="_blank">Kepala Badan Standar, Kurikulum, dan Asesmen Pendidikan (BSKAP)</nuxt-link>
           Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi yang mengatur elemen Capaian Pembelajaran untuk mata pelajaran
           PKK dan PKL dalam kurikulum merdeka.
         </li>
