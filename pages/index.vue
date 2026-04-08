@@ -98,7 +98,7 @@
     <Loading v-if="isLoading" />
     <div v-else class="card">
       <div class="card-body p-0">
-        <div v-if="pemetaan.length < 1" class="text-center text-muted small p-3">Belum ada temen / elu PKL sendirian</div>
+        <div v-if="pemetaan.length < 1" class="text-center text-muted small p-3">Belum ada temen / kamu PKL sendirian</div>
         <div v-for="p in pemetaan" :key="p.id" class="list-group list-group-flush">
           <div class="list-group-item border-bottom border-1 border-dark">
             <div class="float-start fs-4 me-2">{{ p.expand.siswa.currentMood?.emoji }}</div>
