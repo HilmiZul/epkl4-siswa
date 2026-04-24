@@ -2,65 +2,63 @@
   <div class="card">
     <div class="card-header">
       <span class="h4 fw-bold"><i class="bi bi-journals"></i> Jurnal</span>
-      <span v-if="$device.isMobile">
-        <span v-if="pemetaan.length > 0 && !havePostJournalToday" class="float-end journal-button">
-          <button data-bs-toggle="modal" data-bs-target="#buat-jurnal-baru"
-            class="btn btn-info btn-sm border border-2 border-dark"><i class="bi bi-pencil-square"></i> Buat
-            baru</button>
-        </span>
-      </span>
-
-      <div v-if="$device.isMobile" class="modal" id="buat-jurnal-baru" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content rounded-0 border border-2 border-dark shadow-lg">
-            <div class="modal-header fw-bold bg-info rounded-0 border-0 border-bottom border-2 border-dark">
-              <i class="bi bi-pencil-square me-2"></i> Buat Jurnal
-              <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <!--<form @submit.prevent="buatJurnalBaru">-->
-                <div class="mb-3">
-                  <label for="foto" class="text-muted label-berkas border-2 p-2"><i class="bi bi-camera-fill"></i> Ambil
-                    foto kegiatan</label>
-                  <div v-if="form.foto" class="small fst-italic">Foto: {{ form.foto?.name }}</div>
-                  <input @change="compressFile"
-                    class="form-control-file" type="file" id="foto" accept="image/*" capture="user" required />
-                </div>
-                <div class="mb-4">
-                  <label for="elemen">Tujuan Pembelajaran</label>
-                  <select v-model="form.elemen" :disabled="!form.foto" id="elemen" class="form form-control form-select" required>
-                    <option disabled value="" selected>&#8212; Pilih &#8212;</option>
-                    <option v-for="elemen in elements" :key="elemen.id" :value="elemen.id">{{ elemen.tujuan }}</option>
-                  </select>
-                </div>
-                <div class="mb-4">
-                  <label for="deskripsi">Ceritakan Kegiatanmu!</label>
-                  <textarea v-model="form.deskripsi" :disabled="form.foto && form.elemen.length < 1"
-                    @input="removeSingleSpaceIfEmpty" id="deskripsi" class="form form-control mb-2"
-                    placeholder="Gunakan bahasa indonesia baik dan benar. Sesuaikan dengan tujuan yang dipilih, boleh ditulis paragraf atau daftar urutan. Asal jangan curhat..."
-                    rows="5" required></textarea>
-                  <span class="mb-3 fw-bold small">
-                    <i v-if="form.deskripsi.length > 124" class="bi bi-check-circle-fill text-success"></i>
-                    {{ form.deskripsi.length }} <span v-if="form.deskripsi.length < 125" class="text-muted"> (min. 125
-                      karakter)</span>
-                  </span>
-                </div>
-                <div class="mb-4 smallest text-muted">
-                  Saya udah baca dan setuju dengan <nuxt-link to="/privacy" target="_blank"
-                    class="link text-muted">kebijakan privasi & syarat penggunaan</nuxt-link>.
-                </div>
-                <button @click="buatJurnalBaru(false)" :disabled="isPosting || (form.foto && form.deskripsi.length < 125)"
-                  class="btn btn-info me-2 border border-2 border-dark" data-bs-dismiss="modal">
-                  <span v-if="!isPosting"><i class="bi bi-send"></i> Kirim</span>
-                  <span v-else>Sedang mengirim</span>
-                </button>
-                <span class="link small fw-bold text-muted" data-bs-dismiss="modal">Tutup</span>
-                <div @click="buatJurnalBaru(true)" v-if="form.foto && form.elemen" data-bs-dismiss="modal" class="float-end pt-2 smallest fw-bold"><i class="bi bi-save"></i> Simpan draft</div>
-              <!--</form>-->
-            </div>
-          </div>
-        </div>
-      </div>
+      <!-- <span v-if="$device.isMobile"> -->
+      <!--   <span v-if="pemetaan.length > 0 && !havePostJournalToday" class="float-end journal-button"> -->
+      <!--     <button data-bs-toggle="modal" data-bs-target="#buat-jurnal-baru" -->
+      <!--       class="btn btn-info btn-sm border border-2 border-dark"><i class="bi bi-pencil-square"></i> Buat -->
+      <!--       baru</button> -->
+      <!--   </span> -->
+      <!-- </span> -->
+      <!---->
+      <!-- <div v-if="$device.isMobile" class="modal" id="buat-jurnal-baru" tabindex="-1" aria-hidden="true"> -->
+      <!--   <div class="modal-dialog modal-dialog-centered"> -->
+      <!--     <div class="modal-content rounded-0 border border-2 border-dark shadow-lg"> -->
+      <!--       <div class="modal-header fw-bold bg-info rounded-0 border-0 border-bottom border-2 border-dark"> -->
+      <!--         <i class="bi bi-pencil-square me-2"></i> Buat Jurnal -->
+      <!--         <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button> -->
+      <!--       </div> -->
+      <!--       <div class="modal-body"> -->
+      <!--         <div class="mb-3"> -->
+      <!--           <label for="foto" class="text-muted label-berkas border-2 p-2"><i class="bi bi-camera-fill"></i> Ambil -->
+      <!--             foto kegiatan</label> -->
+      <!--           <div v-if="form.foto" class="small fst-italic">Foto: {{ form.foto?.name }}</div> -->
+      <!--           <input @change="compressFile" -->
+      <!--             class="form-control-file" type="file" id="foto" accept="image/*" capture="user" required /> -->
+      <!--         </div> -->
+      <!--         <div class="mb-4"> -->
+      <!--           <label for="elemen">Tujuan Pembelajaran</label> -->
+      <!--           <select v-model="form.elemen" :disabled="!form.foto" id="elemen" class="form form-control form-select" required> -->
+      <!--             <option disabled value="" selected>&#8212; Pilih &#8212;</option> -->
+      <!--             <option v-for="elemen in elements" :key="elemen.id" :value="elemen.id">{{ elemen.tujuan }}</option> -->
+      <!--           </select> -->
+      <!--         </div> -->
+      <!--         <div class="mb-4"> -->
+      <!--           <label for="deskripsi">Ceritakan Kegiatanmu!</label> -->
+      <!--           <textarea v-model="form.deskripsi" :disabled="form.foto && form.elemen.length < 1" -->
+      <!--             @input="removeSingleSpaceIfEmpty" id="deskripsi" class="form form-control mb-2" -->
+      <!--             placeholder="Gunakan bahasa indonesia baik dan benar. Sesuaikan dengan tujuan yang dipilih, boleh ditulis paragraf atau daftar urutan. Asal jangan curhat..." -->
+      <!--             rows="5" required></textarea> -->
+      <!--           <span class="mb-3 fw-bold small"> -->
+      <!--             <i v-if="form.deskripsi.length > 124" class="bi bi-check-circle-fill text-success"></i> -->
+      <!--             {{ form.deskripsi.length }} <span v-if="form.deskripsi.length < 125" class="text-muted"> (min. 125 -->
+      <!--               karakter)</span> -->
+      <!--           </span> -->
+      <!--         </div> -->
+      <!--         <div class="mb-4 smallest text-muted"> -->
+      <!--           Saya udah baca dan setuju dengan <nuxt-link to="/privacy" target="_blank" -->
+      <!--             class="link text-muted">kebijakan privasi & syarat penggunaan</nuxt-link>. -->
+      <!--         </div> -->
+      <!--         <button @click="buatJurnalBaru(false)" :disabled="isPosting || (form.foto && form.deskripsi.length < 125)" -->
+      <!--           class="btn btn-info me-2 border border-2 border-dark" data-bs-dismiss="modal"> -->
+      <!--           <span v-if="!isPosting"><i class="bi bi-send"></i> Kirim</span> -->
+      <!--           <span v-else>Sedang mengirim</span> -->
+      <!--         </button> -->
+      <!--         <span class="link small fw-bold text-muted" data-bs-dismiss="modal">Tutup</span> -->
+      <!--         <div @click="buatJurnalBaru(true)" v-if="form.foto && form.elemen" data-bs-dismiss="modal" class="float-end pt-2 smallest fw-bold"><i class="bi bi-save"></i> Simpan draft</div> -->
+      <!--       </div> -->
+      <!--     </div> -->
+      <!--   </div> -->
+      <!-- </div> -->
     </div>
     <!-- ./card-heder -->
 

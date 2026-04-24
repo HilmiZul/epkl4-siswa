@@ -26,25 +26,25 @@
     </div>
   </div>
 
-  <Loading v-if="isLoadingJournaToday" />
-  <div v-else class="mb-3">
-    <nuxt-link v-if="countDraftJournal > 0" to="/jurnal" class="link">
-      <div class="alert alert-danger text-center small p-2">
-        Ada <span class="fw-bold">{{ countDraftJournal }}</span> draft jurnal. Segera kirim! <i class="bi bi-arrow-right"></i>
-      </div>
-    </nuxt-link>
-    <nuxt-link to="/jurnal" class="link">
-      <div v-if="!havePostJournalToday" class="alert alert-info text-center small p-2">
-        <i class="bi bi-pencil-square"></i> Ayo buat Jurnal hari ini <i class="bi bi-arrow-right"></i>
-      </div>
-    </nuxt-link>
-    <nuxt-link v-if="countUnreadJournalComment > 0" to="/jurnal" class="link">
-      <div class="alert alert-dark text-center small p-2">
-        <i class="bi bi-bell"></i> Kamu punya {{ countUnreadJournalComment }} komentar jurnal <i class="bi bi-arrow-right"></i> 
-      </div>
-    </nuxt-link>
-  </div>
-
+  <!-- <Loading v-if="isLoadingJournaToday" /> -->
+  <!-- <div v-else class="mb-3"> -->
+  <!--   <nuxt-link v-if="countDraftJournal > 0" to="/jurnal" class="link"> -->
+  <!--     <div class="alert alert-danger text-center small p-2"> -->
+  <!--       Ada <span class="fw-bold">{{ countDraftJournal }}</span> draft jurnal. Segera kirim! <i class="bi bi-arrow-right"></i> -->
+  <!--     </div> -->
+  <!--   </nuxt-link> -->
+  <!--   <nuxt-link to="/jurnal" class="link"> -->
+  <!--     <div v-if="!havePostJournalToday" class="alert alert-info text-center small p-2"> -->
+  <!--       <i class="bi bi-pencil-square"></i> Ayo buat Jurnal hari ini <i class="bi bi-arrow-right"></i> -->
+  <!--     </div> -->
+  <!--   </nuxt-link> -->
+  <!--   <nuxt-link v-if="countUnreadJournalComment > 0" to="/jurnal" class="link"> -->
+  <!--     <div class="alert alert-dark text-center small p-2"> -->
+  <!--       <i class="bi bi-bell"></i> Kamu punya {{ countUnreadJournalComment }} komentar jurnal <i class="bi bi-arrow-right"></i>  -->
+  <!--     </div> -->
+  <!--   </nuxt-link> -->
+  <!-- </div> -->
+  <!---->
   <div class="card">
     <div class="card-body">
       <div class="row">
