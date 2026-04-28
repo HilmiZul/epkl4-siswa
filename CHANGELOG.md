@@ -1,5 +1,10 @@
 # Changelog
 
+### 2.8 (28 Maret 2026)
+- Craete new feature: Self Project
+- Move Elemen Nav to NavTop
+- Add Project Nav to NavBottom
+
 ### 2.7 (27 Maret 2026)
 - New Journal image will convert to auto (.jpg/.png/.webp)
 - Increase compression ratio (maybe medium quality)
