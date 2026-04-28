@@ -33,9 +33,9 @@
           </nuxt-link>
         </li>
         <li class="nav-item">
-          <nuxt-link class="nav-link  text-dark" to="/elemen" :activeClass="activeClass">
-            <i class="bi bi-journal-bookmark-fill fs-5"></i> <br>
-            <span class="smallest">Elemen</span>
+          <nuxt-link class="nav-link  text-dark" to="/proyek" :activeClass="activeClass">
+            <i class="bi bi-easel fs-5"></i> <br>
+            <span class="smallest">Proyek</span>
           </nuxt-link>
         </li>
         <!-- <li class="nav-item">

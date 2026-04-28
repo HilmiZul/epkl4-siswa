@@ -14,7 +14,7 @@
           <li v-if="!$device.isMobile" class="nav-item">
             <nuxt-link  class="nav-link" to="/iduka"><i class="bi bi-buildings"></i> IDUKA</nuxt-link>
           </li>
-          <li v-if="!$device.isMobile" class="nav-item">
+          <li class="nav-item">
             <nuxt-link  class="nav-link" to="/elemen"><i class="bi bi-journal-bookmark-fill"></i> Elemen</nuxt-link>
           </li>
           <li v-if="!$device.isMobile" class="nav-item">
