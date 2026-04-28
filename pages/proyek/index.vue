@@ -5,6 +5,12 @@
     </div>
 
     <div v-if="isProjectCreated" class="card-body">
+      <div class="alert alert-info">
+        <div class="fw-bold">Catatan Guru:</div>
+        <div v-if="form.catatan_guru">{{ form.catatan_guru }}</div>
+        <div v-else class="text-muted fst-italic">(belum ada)</div>
+      </div>
+
       <div class="row">
         <div class="col-md-6 small">
 
@@ -61,7 +67,8 @@ let isError = ref(false)
 let form = ref({
   judul: '',
   deskripsi: '',
-  url: ''
+  url: '',
+  catatan_guru: ''
 })
 let isProjectCreated = ref(false)
 let id_project = ref()
