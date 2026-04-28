@@ -24,7 +24,10 @@
               <input v-model="form.url" class="form form-control" type="url" placeholder="https://..." required />
             </div>
 
-            <button class="btn btn-info border border-2 border-dark">Serahkan</button>
+            <button :disabled="isLoading && isSending" class="btn btn-info border border-2 border-dark">
+              <span v-if="isSending">Sedang menyimpan</span>
+              <span v-else>Serahkan</span>
+            </button>
           </form>
         </div>
       </div>
