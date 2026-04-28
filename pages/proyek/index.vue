@@ -9,7 +9,7 @@
         <div class="col-md-6 small">
 
           <div v-if="isSaved" class="alert alert-success">
-            Proyek berhasil disimpan!
+            Proyek berhasil diperbaharui
           </div>
 
           <form @submit.prevent="updateProject">
@@ -22,13 +22,13 @@
               <textarea :disabled="isSending" v-model="form.deskripsi" class="form form-control" name="deskripsi" id="deskripsi" rows="4" placeholder="Deskripsikan proyeknya..." required></textarea>
             </div>
             <div class="mb-4">
-              <label for="url">URL <span class="text-muted">(http://)</span></label>
-              <input :disabled="isSending" v-model="form.url" class="form form-control" type="url" placeholder="(Web/Drive/Github/Figma/Canva)" required />
+              <label for="url">URL <span class="text-danger">*</span> <span class="text-muted">(Web/Github/Drive/Youtube)</span></label>
+              <input v-model="form.url" class="form form-control" type="url" placeholder="https://..." required />
             </div>
 
-            <button :disabled="isLoading && isSending" class="btn btn-info border border-2 border-dark">
+            <button :disabled="isLoading && isSending" class="btn btn-success border border-2 border-dark">
               <span v-if="isSending">Sedang menyimpan</span>
-              <span v-else>Simpan</span>
+              <span v-else>Update</span>
             </button>
           </form>
         </div>
@@ -40,7 +40,7 @@
         <i class="bi bi-database fs-1"></i> <br>
         Belum ada proyek
         <div class="mt-3">
-          <nuxt-link to="/proyek/tambah" class="btn btn-info border border-2 border-dark"><i class="bi bi-send"></i> Buat proyek</nuxt-link>
+          <nuxt-link to="/proyek/tambah" class="btn btn-info border border-2 border-dark"><i class="bi bi-send"></i> Serahkan proyek</nuxt-link>
         </div>
       </div>
     </div>

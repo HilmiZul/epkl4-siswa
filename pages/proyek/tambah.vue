@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <div class="card-header h4 fw-bold">
-      <i class="bi bi-easel"></i> Proyek 
+      <i class="bi bi-easel"></i> Serahkan Proyek 
       <span class="float-end">
         <nuxt-link to="/proyek" class="btn btn-light btn-sm border border-2 border-dark">Kembali</nuxt-link>
       </span>
@@ -12,19 +12,19 @@
         <div class="col-md-6 small">
           <form @submit.prevent="createProject">
             <div class="mb-4">
-              <label for="judul">Judul Proyek <span class="text-danger">*</span></label>
-              <input v-model="form.judul" class="form form-control" type="text" placeholder="Tulis judulnya..." required />
+              <label for="judul">Judul <span class="text-danger">*</span></label>
+              <input v-model="form.judul" class="form form-control" type="text" placeholder="Tulis proyek..." required />
             </div>
             <div class="mb-4">
-              <label for="deskripsi">Deskripsi <span class="text-muted">(opsional)</span></label>
-              <textarea v-model="form.deskripsi" class="form form-control" name="deskripsi" id="deskripsi" rows="4" placeholder="Deskripsikan proyeknya..." required></textarea>
+              <label for="deskripsi">Deskripsi <span class="text-danger">*</span></label>
+              <textarea v-model="form.deskripsi" class="form form-control" name="deskripsi" id="deskripsi" rows="4" placeholder="Deskripsikan proyekmu..." required></textarea>
             </div>
             <div class="mb-4">
-              <label for="url">URL <span class="text-muted">(http://)</span></label>
-              <input v-model="form.url" class="form form-control" type="url" placeholder="(Web/Drive/Github/Figma/Canva)" required />
+              <label for="url">URL <span class="text-danger">*</span> <span class="text-muted">(Web/Github/Drive/Youtube)</span></label>
+              <input v-model="form.url" class="form form-control" type="url" placeholder="https://..." required />
             </div>
 
-            <button class="btn btn-info border border-2 border-dark">Kirim</button>
+            <button class="btn btn-info border border-2 border-dark">Serahkan</button>
           </form>
         </div>
       </div>
@@ -48,7 +48,8 @@ let form = ref({
   deskripsi: '',
   url: '',
   program_keahlian: user?.user.value.program_keahlian,
-  siswa: user?.user.value.siswa
+  siswa: user?.user.value.siswa,
+  iduka: '',
 })
 let isProjectCreated = ref(false)
 
@@ -60,13 +61,20 @@ async function createProject() {
   isSaved.value = false
 
   try {
-    let response = await client.collection('proyek').create(form.value)
-    if(response) {
-      isLoading.value = false
-      isSending.value = false
-      isError.value = false
-      isSaved.value = true
-      navigateTo("/proyek")
+    let res_iduka = await client.collection('pemetaan').getFirstListItem(`siswa="${siswa_id}"`, {})
+
+    if(res_iduka) {
+      form.value.iduka = res_iduka.iduka
+
+      let response = await client.collection('proyek').create(form.value)
+
+      if(response) {
+        isLoading.value = false
+        isSending.value = false
+        isError.value = false
+        isSaved.value = true
+        navigateTo("/proyek")
+      }
     }
   } catch (err) {
     isError.value = true
@@ -84,6 +92,7 @@ async function getProject() {
     let res = await client.collection('proyek').getFirstListItem(`siswa='${siswa_id}'`, {
       expand: `program_keahlian, siswa`
     })
+
 
     if(res) {
       navigateTo('/proyek')
