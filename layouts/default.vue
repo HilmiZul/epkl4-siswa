@@ -311,4 +311,8 @@ input[type="checkbox"]:not(:checked) {
   margin-bottom: 5.5em;
   ;
 }
+
+.pre-text {
+  white-space: pre-wrap;
+}
 </style>

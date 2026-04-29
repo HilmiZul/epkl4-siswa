@@ -13,7 +13,7 @@
       <div v-if="isProjectCreated" class="card-body">
         <div class="alert alert-info">
           <div class="fw-bold">Catatan Guru:</div>
-          <div v-if="catatan_guru">{{ catatan_guru }}</div>
+          <div v-if="catatan_guru" class="pre-text">{{ catatan_guru }}</div>
           <div v-else class="text-muted fst-italic">(belum ada)</div>
         </div>
 
