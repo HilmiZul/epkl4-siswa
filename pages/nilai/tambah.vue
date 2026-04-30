@@ -34,19 +34,19 @@
             <hr>
             <div class="mb-4 form-check form-switch">
               <input v-model="form.isEntrust" class="form-check-input" type="checkbox" id="entrust" switch>
-              <label for="entrust">Buatkan Sertifikat di Sekolah?</label>
+              <label for="entrust">Sertifikat (opsional)</label>
             </div>
             <div v-if="form.isEntrust">
               <div class="mb-4">
-                <label for="pj_penandatangan">Pejabat Penandatangan <span class="text-danger">*</span></label>
+                <label for="pj_penandatangan">Jabatan Penandatangan <span class="text-danger">*</span></label>
                 <input :disabled="form.nilai_elemen4 < 1" v-model="form.pj_penandatangan" type="text" id="pj_penandatangan" class="form form-control" placeholder="Contoh: CEO, Direktur, Kepala Dinas..." required>
               </div>
               <div class="mb-4">
                 <label for="nama_pj_penandatangan">Nama Pejabat Penandatangan <span class="text-danger">*</span></label>
-                <input :disabled="form.pj_penandatangan < 1" v-model="form.nama_pj_penandatangan" type="text" id="nama_pj_penandatangan" class="form form-control" placeholder="Tulis nama lengkapnya..." required>
+                <input :disabled="form.pj_penandatangan < 1" v-model="form.nama_pj_penandatangan" type="text" id="nama_pj_penandatangan" class="form form-control" placeholder="Tulis nama lengkap pejabat..." required>
               </div>
               <div class="mb-4">
-                <label for="nomor_pegawai">Nomor Pegawai</label>
+                <label for="nomor_pegawai">Nomor Induk</label>
                 <input v-model="form.nomor_pegawai" type="text" id="nomor_pegawai" class="form form-control" placeholder="Kosongkan jika tidak ada">
               </div>
               <div class="mb-4">

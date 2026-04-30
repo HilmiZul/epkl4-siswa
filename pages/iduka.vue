@@ -20,7 +20,7 @@
             <div class="mb-4">
               <label for="pimpinan">Pimpinan <span class="text-danger">*</span></label>
               <input v-model="form.pimpinan" :disabled="isLoading || isSaving" type="text" id="pimpinan"
-                class="form form-control" placeholder="nama pimpinan/direktur" required>
+                class="form form-control" placeholder="nama pimpinan" required>
             </div>
             <div class="mb-4">
               <label for="kontak">Kontak <span class="text-danger">*</span></label>
@@ -33,9 +33,9 @@
                 class="form form-control" placeholder="email kantor kalo ada">
             </div>
             <div class="mb-4">
-              <label for="instruktur">Instruktur/Pembimbing <span class="text-danger">*</span></label>
+              <label for="instruktur">Instruktur <span class="text-danger">*</span></label>
               <input v-model="form.pembimbing_iduka" :disabled="isLoading || isSaving" type="text" id="instruktur"
-                class="form form-control" placeholder="nama pembimbing dikantor" required>
+                class="form form-control" placeholder="nama pembimbing di tempat PKL" required>
             </div>
             <button :disabled="isSaving" class="btn btn-info border border-2 border-dark">
               <span v-if="isSaving">Sedang menyimpan</span>
