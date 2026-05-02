@@ -295,7 +295,7 @@ let formEdit = ref({
   "foto": "",
 })
 let isMovingPage = ref(false)
-let havePostJournalToday = ref(false)
+// let havePostJournalToday = ref(false)
 let today = useServerDay()
 let maxLenDesc = ref(50)
 let currStudent = ref('')
@@ -306,29 +306,29 @@ let isLoadingKomentar = ref(true)
 let pratinjauKomentar = ref()
 let opsiFilterElemen = ref('')
 
-async function isTodayPostJournal() {
-  try {
-    client.autoCancellation(false)
-    let response = await client.collection('jurnal')
-      .getFirstListItem("siswa='" + user.user.value.id + "'", {
-        sort: "-created"
-      })
-    if (response) {
-      let res = response
-      const date = new Date(res.created);
-      const options = {
-        dateStyle: "long",
-      }
-      res.created = new Intl.DateTimeFormat('id-ID', options).format(date)
-      // memeriksa jurnal hari ini, jika belum mengirim maka tombol buat jurnal muncul
-      // jika sudah maka tombol buat jurnal akan hilang :D
-      if (res.created == today) {
-        havePostJournalToday.value = true
-      }
-    }
-  } catch (error) {
-  }
-}
+// async function isTodayPostJournal() {
+//   try {
+//     client.autoCancellation(false)
+//     let response = await client.collection('jurnal')
+//       .getFirstListItem("siswa='" + user.user.value.id + "'", {
+//         sort: "-created"
+//       })
+//     if (response) {
+//       let res = response
+//       const date = new Date(res.created);
+//       const options = {
+//         dateStyle: "long",
+//       }
+//       res.created = new Intl.DateTimeFormat('id-ID', options).format(date)
+//       // memeriksa jurnal hari ini, jika belum mengirim maka tombol buat jurnal muncul
+//       // jika sudah maka tombol buat jurnal akan hilang :D
+//       if (res.created == today) {
+//         havePostJournalToday.value = true
+//       }
+//     }
+//   } catch (error) {
+//   }
+// }
 
 function compressFile(e) {
   // kecilin ukuran file sebelum di unggah!
@@ -540,7 +540,7 @@ async function getKomentarByIdJurnal(journal) {
 onMounted(() => {
   getElemenCp()
   getJournals()
-  isTodayPostJournal()
+  // isTodayPostJournal()
   getPesertaByIdUser()
   getCountDraftJournal()
   client.autoCancellation(false)
