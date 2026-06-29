@@ -17,7 +17,7 @@
           <div class="col-lg-12">
             <loading v-if="isLoading" />
             <div v-else-if="!certificate.isValid" class="alert alert-warning small text-center">
-              Tunggu aja, lagi divalidasi Pembimbing
+              Nilai sedang proses validasi
             </div>
             <form @submit.prevent="updateNilai">
               <div class="row">
@@ -53,7 +53,9 @@
                     <input @change="compressFile" class="form form-control" type="file" id="fotonilai" accept="image/*" capture="environment" />
                     <div v-if="isErrorCompressOrExt" class="my-2 fst-italic text-muted text-danger small">Silahkan periksa kembali file-nya (jpg/png).</div>
                   </div>
+
                   <hr v-if="!certificate.isValid || certificate.isEntrust">
+
                   <div v-if="!certificate.isValid" class="mb-4 form-check form-switch">
                     <input v-model="form.isEntrust" :checked="form.isEntrust" class="form-check-input" type="checkbox" id="entrust" switch>
                     <label for="entrust">Sertifikat (opsional)</label>
@@ -67,13 +69,13 @@
                     </div>
                     <div class="mb-4">
                       <div v-if="certificate.isValid" class="text-muted fw-bold">Nama Pejabat Penandatangan</div>
-                      <label v-else for="nama_pj_penandatangan">Nama Pejabat Penandatangan <span class="text-danger">*</span></label>
+                      <label for="nama_pj_penandatangan">Nama Lengkap Pejabat <span class="text-danger">*</span></label>
                       <span v-if="certificate.isValid" class="fw-bold">{{ certificate.nama_pj_penandatangan }}</span>
                       <input v-else :disabled="form.pj_penandatangan < 1" v-model="form.nama_pj_penandatangan" type="text" id="nama_pj_penandatangan" class="form form-control" placeholder="Tulis nama lengkap pejabat..." required>
                     </div>
                     <div class="mb-4">
                       <div v-if="certificate.isValid" class="text-muted fw-bold">Nomor Pegawai</div>
-                      <label v-else for="nomor_pegawai">Nomor Induk</label>
+                      <label v-else for="nomor_pegawai">NIP <span class="text-muted">(opsional)</span></label>
                       <span v-if="certificate.isValid" class="fw-bold">
                         <span v-if="certificate.nomor_pegawai">{{ certificate.nomor_pegawai }}</span>
                         <span v-else>&#8212;</span>
@@ -82,7 +84,7 @@
                     </div>
                     <div class="mb-4">
                       <div v-if="certificate.isValid" class="text-muted fw-bold">Nomor Sertifikat</div>
-                      <label v-else for="nomor_sertifikat">Nomor Sertifikat</label>
+                      <label v-else for="nomor_sertifikat">Nomor Sertifikat <span class="text-muted">(opsional)</span></label>
                       <span v-if="certificate.isValid" class="fw-bold">
                         <span v-if="certificate.nomor_sertifikat">{{ certificate.nomor_sertifikat }}</span>
                         <span v-else>&#8212;</span>

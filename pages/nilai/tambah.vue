@@ -31,7 +31,9 @@
               <label for="el_wirausaha">Nilai Elemen 4 <span class="text-danger">*</span></label>
               <input :disabled="form.nilai_elemen2 < 1" v-model="form.nilai_elemen4" type="number" min="0" max="100" id="el_wirausaha" class="form form-control" required>
             </div>
+
             <hr>
+
             <div class="mb-4 form-check form-switch">
               <input v-model="form.isEntrust" class="form-check-input" type="checkbox" id="entrust" switch>
               <label for="entrust">Sertifikat (opsional)</label>
@@ -39,18 +41,18 @@
             <div v-if="form.isEntrust">
               <div class="mb-4">
                 <label for="pj_penandatangan">Jabatan Penandatangan <span class="text-danger">*</span></label>
-                <input :disabled="form.nilai_elemen4 < 1" v-model="form.pj_penandatangan" type="text" id="pj_penandatangan" class="form form-control" placeholder="Contoh: CEO, Direktur, Kepala Dinas..." required>
+                <input :disabled="form.nilai_elemen4 < 1" v-model="form.pj_penandatangan" type="text" id="pj_penandatangan" class="form form-control" placeholder="CEO/Direktur/Kepala Bengkel..." required>
               </div>
               <div class="mb-4">
-                <label for="nama_pj_penandatangan">Nama Pejabat Penandatangan <span class="text-danger">*</span></label>
+                <label for="nama_pj_penandatangan">Nama Lengkap Pejabat Penandatangan <span class="text-danger">*</span></label>
                 <input :disabled="form.pj_penandatangan < 1" v-model="form.nama_pj_penandatangan" type="text" id="nama_pj_penandatangan" class="form form-control" placeholder="Tulis nama lengkap pejabat..." required>
               </div>
               <div class="mb-4">
-                <label for="nomor_pegawai">Nomor Induk</label>
+                <label for="nomor_pegawai">NIP <span class="text-muted">(opsional)</span></label>
                 <input v-model="form.nomor_pegawai" type="text" id="nomor_pegawai" class="form form-control" placeholder="Kosongkan jika tidak ada">
               </div>
               <div class="mb-4">
-                <label for="nomor_sertifikat">Nomor Sertifikat</label>
+                <label for="nomor_sertifikat">Nomor Sertifikat <span class="text-muted">(opsional)</span></label>
                 <input v-model="form.nomor_sertifikat" type="text" id="nomor_sertifikat" class="form form-control" placeholder="Kosongkan jika tidak ada">
               </div>
               <div class="mb-4">
