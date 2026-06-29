@@ -8,7 +8,7 @@
     </div>
     <div class="card-body text-dark">
       <p class="text-muted small">
-        Diperbaharui pada 9 Januari 2026
+        Diperbaharui pada 29 Juni 2026
       </p>
       <h5 class="fw-bold text-grey">Akun Anggota e-PKL</h5>
       <ul>
@@ -20,9 +20,9 @@
       <h5 class="fw-bold text-grey">Terkait Elemen</h5>
       <ul>
         <li>
-          Berdasarkan keputusan <nuxt-link to="https://kurikulum.kemendikdasmen.go.id/file/1687442514_manage_file.pdf" target="_blank">Kepala Badan Standar, Kurikulum, dan Asesmen Pendidikan (BSKAP)</nuxt-link>
-          Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi yang mengatur elemen Capaian Pembelajaran untuk mata pelajaran
-          PKK dan PKL dalam kurikulum merdeka.
+          Berdasarkan <nuxt-link to="https://uploads.belajar.id/document/files/Panduan_Praktik_Kerja_Lapangan_Sebagai_Mata_Pelajaran_Dalam_Implementasi_Kurikulum_Merdeka_01j7gc39ne8pwwze47qwf12a5s.pdf" target="_blank">Panduan Direktorat SMK</nuxt-link>
+          (edisi revisi tahun 2024) Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi terkait elemen Capaian Pembelajaran (CP)
+          PKL sebagai Mata Pelajaran dalam implementasi kurikulum merdeka.
         </li>
         <li>Elemen berisi CP dan tujuan Mapel PKL.</li>
         <li>Elemen ini akan digunakan oleh peserta didik untuk mengisi Jurnal Harian.</li>
