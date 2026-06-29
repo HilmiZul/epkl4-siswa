@@ -1,7 +1,8 @@
 # Changelog
 
 ### 2.8.1 (29 Juni 2026)
-- Update UX writing
+- Add new page: create journal
+- Improvement UI/UX
 
 ### 2.8 (28 Maret 2026)
 - Craete new feature: Self Project
