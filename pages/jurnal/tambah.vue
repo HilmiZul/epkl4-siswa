@@ -133,10 +133,10 @@ function compressFile(e) {
     // drew: nempelin watermark ke foto agar tahu sumbernya dan sulit dipalsukan
     drew(context, canvas) {
       context.fillStyle = 'rgba(255, 255, 255, .8',
-        context.font = '70px serif',
-        context.textAlign = 'center'
+      context.font = '70px serif',
+      context.textAlign = 'center'
       context.fillText('PKL SMKN 4 Tasikmalaya', canvas.width / 2, canvas.height / 2 - 100),
-        context.fillText(currIduka.value, canvas.width / 2, canvas.height / 2)
+      context.fillText(currIduka.value, canvas.width / 2, canvas.height / 2)
       context.fillText(currStudent.value, canvas.width / 2, canvas.height / 2 + 100)
       context.fillText(tanggal, canvas.width / 2, canvas.height / 2 + 190)
     },
