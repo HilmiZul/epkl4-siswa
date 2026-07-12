@@ -144,7 +144,8 @@
           <div class="card mb-3">
             <div class="card-body">
               <strong class="fs-4">
-                <span v-if="prosentaseAktivitasJurnal > 89">👑</span>
+                <span v-if="prosentaseAktivitasJurnal >= 95">👑</span>
+                <span v-else-if="prosentaseAktivitasJurnal > 89">😃</span>
                 <span v-else-if="prosentaseAktivitasJurnal > 79">😔</span>
                 <span v-else>😭</span>
                 {{ prosentaseAktivitasJurnal }}%
@@ -228,13 +229,13 @@ async function getCountJournal(loading=true) {
 async function getCountJournalSesuaiTidakSesuai(loading=true) {
   isLoadingJournalSesuaiTidakSesuai.value = loading
   let res_sesuai = await client.collection('jurnal').getList(1,1, {
-    filter: `siswa="${user.user.value.id}" && elemen.elemen!="Lain-lain" && isValid=true`
+    filter: `siswa="${user.user.value.id}" && elemen.elemen!="Lain-lain" && isValid=true && isDraft=false`
   })
   let res_tidak_sesuai = await client.collection('jurnal').getList(1,1, {
-    filter: `siswa="${user.user.value.id}" && elemen.elemen="Lain-lain" && isValid=true`
+    filter: `siswa="${user.user.value.id}" && elemen.elemen="Lain-lain" && isValid=true && isDraft=false`
   })
   let res_jurnal = await client.collection('jurnal').getList(1,1, {
-    filter: `siswa="${user.user.value.id}"`
+    filter: `siswa="${user.user.value.id}" && isValid=true && isDraft=false`
   })
 
   if(res_sesuai && res_tidak_sesuai && res_jurnal) {
@@ -242,11 +243,12 @@ async function getCountJournalSesuaiTidakSesuai(loading=true) {
     countJournalSesuaiElemen.value = res_sesuai.totalItems
     countJournalTidakSesuaiElemen.value = res_tidak_sesuai.totalItems
     
-    prosentaseAktivitasJurnal.value = Math.floor((res_sesuai.totalItems / res_jurnal.totalItems) * 100, 2)
+    prosentaseAktivitasJurnal.value = Math.round((res_sesuai.totalItems / res_jurnal.totalItems) * 100 || 0)
 
-    if(prosentaseAktivitasJurnal.value > 89) descAktivitasJurnal.value = "Aktivitasmu sesuai"
-    else if(prosentaseAktivitasJurnal.value > 79) descAktivitasJurnal.value = "Aktivitasmu cukup sesuai"
-    else descAktivitasJurnal.value = "Aktivitasmu kurang sesuai"
+    if(prosentaseAktivitasJurnal.value >= 95) descAktivitasJurnal.value = "Aktivitasmu Sangat Sesuai"
+    else if(prosentaseAktivitasJurnal.value > 89) descAktivitasJurnal.value = "Aktivitasmu Sesuai"
+    else if(prosentaseAktivitasJurnal.value > 79) descAktivitasJurnal.value = "Aktivitasmu Cukup Sesuai"
+    else descAktivitasJurnal.value = "Aktivitasmu Kurang Sesuai"
   }
 }
 
