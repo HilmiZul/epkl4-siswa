@@ -1,5 +1,8 @@
 # Changelog
 
+### 2.9 (12 Juli 2026)
+- Change activity formula (prosentase kesesuaian)
+
 ### 2.8.1 (29 Juni 2026)
 - Add new page: create journal
 - Improvement UI/UX
