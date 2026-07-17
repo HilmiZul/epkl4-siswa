@@ -128,7 +128,7 @@
                   </div>
                   <div v-else class="text-muted small float-start">
                     <span class="text-danger me-2"><i class="bi bi-heart"></i></span>
-                    <span v-if="$device.isMobile && journal.isDraft" data-bs-toggle="modal" data-bs-target="#edit-jurnal" @click="setModalEditJurnal(journal)" class="badge border border-1 border-danger text-danger smallest">
+                    <span v-if="$device.isMobile && journal.isDraft" data-bs-toggle="modal" data-bs-target="#edit-jurnal" @click="setModalEditJurnal(journal)" class="badge border border-1 border-danger text-danger smallest hand-cursor">
                       <i class="bi bi-pencil-square"></i> Edit Draft
                     </span>
                   </div>
