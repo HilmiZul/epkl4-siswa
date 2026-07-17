@@ -1,5 +1,8 @@
 # Changelog
 
+### 2.9.1 (17 Juli 2026)
+- Change cursor when hint an Edit Draft button
+
 ### 2.9 (12 Juli 2026)
 - Change activity formula (prosentase kesesuaian)
 
