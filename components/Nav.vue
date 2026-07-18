@@ -5,7 +5,7 @@
       <div class="card-body p-0">
         <!-- <div v-if="user" class="lexend-mega text-center py-2 border-2 border-bottom border-dark">Halo, <span class="border-2 border-bottom border-dark">{{ username.toUpperCase() }}</span>! 😆</div> -->
         <nav>
-          <ol class="list-group list-group-flush quicksand fw-bold">
+          <ol class="list-group list-group-flush quicksand fw-bold py-3">
             <nuxt-link to="/">
               <li class="list-group-item"><i class="bi bi-house-door"></i> Home</li>
             </nuxt-link>
@@ -56,10 +56,21 @@ a:hover > li {
 .list-group-item {
   font-size: 1.2em;
   border: none !important;
-  border-bottom: 2px solid #000 !important;
+  /* border-bottom: 2px solid #212529 !important; */
+  background-color: transparent;
 }
-.list-group-item:hover {
-  background-color: #fafa96;
+.list-group-item:hover,
+a.list-group-item-active > li {
+  /* background-color: #b5d2ad !important; */
+  background-color: #fafa96 !important;
+  color: #000;
+}
+
+.list-group-item:hover .badge,
+.list-group-item-active .badge {
+  border: #fff;
+  color: #fff;
+  background-color: #fff;
 }
 @media screen and (max-width: 992px) {
   .side-nav {
