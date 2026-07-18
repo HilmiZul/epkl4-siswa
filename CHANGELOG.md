@@ -1,5 +1,8 @@
 # Changelog
 
+### 2.9.2 (18 Juli 2026)
+- Revamp UI corner into squircle and dark button for primary.
+
 ### 2.9.1 (17 Juli 2026)
 - Change cursor when hint an Edit Draft button
 
