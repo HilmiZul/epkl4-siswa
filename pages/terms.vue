@@ -1,9 +1,9 @@
 <template>
   <nuxt-link to="/" class="btn btn-light btn-sm border border-2 border-dark"><i class="bi bi-arrow-left"></i>
     Kembali</nuxt-link>
-  <nuxt-link to="/privacy" class="btn btn-info btn-sm border border-2 border-dark ms-2">Kebijakan Privasi</nuxt-link>
+  <nuxt-link to="/privacy" class="btn btn-dark btn-sm border border-2 border-dark ms-2">Kebijakan Privasi</nuxt-link>
   <div class="card mt-3">
-    <div class="card-header bg-warning fw-bold fs-5">
+    <div class="card-header fw-bold fs-5">
       Aturan dan Syarat Penggunaan
     </div>
     <div class="card-body text-dark">

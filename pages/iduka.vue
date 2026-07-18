@@ -37,7 +37,7 @@
               <input v-model="form.pembimbing_iduka" :disabled="isLoading || isSaving" type="text" id="instruktur"
                 class="form form-control" placeholder="nama pembimbing di tempat PKL" required>
             </div>
-            <button :disabled="isSaving" class="btn btn-info border border-2 border-dark">
+            <button :disabled="isSaving" class="btn btn-dark border border-2 border-dark">
               <span v-if="isSaving">Sedang menyimpan</span>
               <span v-else>Simpan</span>
             </button>

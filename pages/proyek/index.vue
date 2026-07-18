@@ -11,7 +11,7 @@
 
     <div v-else>
       <div v-if="isProjectCreated" class="card-body">
-        <div class="alert alert-info">
+        <div class="alert alert-secondary">
           <div class="fw-bold">Catatan Guru:</div>
           <div v-if="catatan_guru" class="pre-text">{{ catatan_guru }}</div>
           <div v-else class="text-muted fst-italic">(belum ada)</div>
@@ -38,7 +38,7 @@
                 <input v-model="form.url" class="form form-control" type="url" placeholder="https://..." required />
               </div>
 
-              <button :disabled="isLoading && isSending" class="btn btn-success border border-2 border-dark">
+              <button :disabled="isLoading && isSending" class="btn btn-dark border border-2 border-dark">
                 <span v-if="isSending">Sedang menyimpan</span>
                 <span v-else>Update</span>
               </button>
@@ -52,7 +52,7 @@
           <i class="bi bi-database fs-1"></i> <br>
           Belum ada proyek
           <div class="mt-3">
-            <nuxt-link to="/proyek/tambah" class="btn btn-info border border-2 border-dark"><i class="bi bi-send"></i> Serahkan proyek</nuxt-link>
+            <nuxt-link to="/proyek/tambah" class="btn btn-dark border border-2 border-dark"><i class="bi bi-send"></i> Serahkan proyek</nuxt-link>
           </div>
         </div>
       </div>

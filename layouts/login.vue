@@ -9,7 +9,7 @@
   </div>
 </template>
 
-<style >
+<style>
 @import url('https://fonts.googleapis.com/css2?family=Lexend+Mega:wght@700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
 
@@ -48,7 +48,8 @@ html, body {
   box-shadow: 0.5rem 0.5rem 0 #000000 !important;
 }
 .card {
-  border-radius: 0 !important;
+  border-radius: 32px !important;
+  corner-shape: squircle;
   border: 2.5px solid #000000 !important;
   box-shadow: 0.5rem 0.5rem 0 #000000 !important;
 }
@@ -56,7 +57,8 @@ html, body {
   font-weight: 600;
   transition: all 0.1s ease-in-out;
   /*border: 1.9px solid #000000;*/
-  border-radius: 0 !important;
+  border-radius: 32px !important;
+  corner-shape: squircle;
   box-shadow: 0.2rem 0.2rem 0 #000000 !important;
 }
 .btn:hover {
@@ -72,7 +74,8 @@ html, body {
 .form {
   font-weight: 550;
   border: 2px solid #000000;
-  border-radius: 0 !important;
+  border-radius: 32px !important;
+  corner-shape: squircle;
   box-shadow: 0.2rem 0.2rem 0 #000000 !important;
 }
 .form:focus {
@@ -153,4 +156,15 @@ table th {
   background-color: #000 !important;
   color: #fff;
 }
+
+.alert {
+  border-radius: 32px !important;
+  corner-shape: squircle;
+}
+
+button {
+  border-radius: 32px !important;
+  corner-shape: squircle;
+}
+
 </style>

@@ -60,7 +60,7 @@
                 <input @change="compressFileLogo" class="form form-control" type="file" id="logo_iduka" accept="image/*" />
               </div>
             </div>
-            <button :disabled="isSending || form.nilai_elemen1 < 1 || form.nilai_elemen2 < 1 || form.nilai_elemen3 < 1 || form.nilai_elemen4 < 1" class="btn btn-info me-2 border border-2 border-dark">
+            <button :disabled="isSending || form.nilai_elemen1 < 1 || form.nilai_elemen2 < 1 || form.nilai_elemen3 < 1 || form.nilai_elemen4 < 1" class="btn btn-dark me-2 border border-2 border-dark">
               <span v-if="isSending">Sedang mengirim</span>
               <span v-else>Serahkan</span>
             </button>

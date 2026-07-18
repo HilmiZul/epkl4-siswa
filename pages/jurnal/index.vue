@@ -4,7 +4,7 @@
       <span class="h5 fw-bold"><i class="bi bi-journals"></i> Jurnal</span>
       <span v-if="$device.isMobile">
         <span v-if="pemetaan.length > 0 && !havePostJournalToday" class="float-end journal-button">
-          <NuxtLink to="/jurnal/tambah" class="btn btn-info btn-sm border border-2 border-dark"><i class="bi bi-pencil-square"></i> Buat</NuxtLink>
+          <NuxtLink to="/jurnal/tambah" class="btn btn-dark btn-sm border border-2 border-dark"><i class="bi bi-pencil-square"></i> Buat</NuxtLink>
         </span>
       </span>
     </div>
@@ -53,7 +53,7 @@
                     class="link text-muted">kebijakan privasi & syarat penggunaan</nuxt-link>.
                 </div>
                 <button @click="buatJurnalBaru(false, true)" :disabled="isPosting || (formEdit.foto && formEdit.deskripsi.length < 125)"
-                  class="btn btn-info me-2 border border-2 border-dark" data-bs-dismiss="modal">
+                  class="btn btn-dark me-2 border border-2 border-dark" data-bs-dismiss="modal">
                   <span v-if="!isPosting"><i class="bi bi-send"></i> Kirim</span>
                   <span v-else>Sedang mengirim</span>
                 </button>
@@ -189,7 +189,7 @@
                 sebelumnya
               </button>-->
               <div class="text-center">
-                <button v-if="journals.totalItems" :disabled="isMovingPage || journals.page >= journals.totalPages" @click="pagination(journals.page + 1, false)" class="btn btn-info border border-2 border-dark">
+                <button v-if="journals.totalItems" :disabled="isMovingPage || journals.page >= journals.totalPages" @click="pagination(journals.page + 1, false)" class="btn btn-dark border border-2 border-dark">
                   muat lagi <i class="bi bi-arrow-down"></i>
                 </button>
               </div>
@@ -219,7 +219,7 @@ let isSaved = ref(false)
 let elements = ref([])
 let journals = ref([])
 let pemetaan = ref([])
-let perPage = 30 
+let perPage = 30
 let form = ref({
   "deskripsi": "",
   "elemen": "",
@@ -556,7 +556,8 @@ onMounted(() => {
 
 .jurnal-item {
   border: none !important;
-  border-bottom: 1px solid #000 !important
+  border-bottom: 1px solid #bababa !important;
+  border-radius: 0 !important;
 }
 
 .no-shadow {

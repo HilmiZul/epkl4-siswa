@@ -30,7 +30,8 @@ html, body {
   font-style: normal;
 }
 .card {
-  border-radius: 0 !important;
+  border-radius: 32px !important;
+  corner-shape: squircle;
   border: 2.5px solid #000000 !important;
   box-shadow: 0.4rem 0.4rem 0 #000000 !important;
 }
@@ -69,7 +70,8 @@ a.link {
   font-weight: 600;
   transition: all 0.1s ease-in-out;
   /*border: 1.9px solid #000000;*/
-  border-radius: 0 !important;
+  border-radius: 32px !important;
+  corner-shape: squircle;
   box-shadow: 0.2rem 0.2rem 0 #000000 !important;
 }
 .btn:hover {

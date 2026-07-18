@@ -26,24 +26,25 @@
     </div>
   </div>
 
-  <!-- <Loading v-if="isLoadingJournaToday" /> -->
-  <!-- <div v-else class="mb-3"> -->
-  <!--   <nuxt-link v-if="countDraftJournal > 0" to="/jurnal" class="link"> -->
-  <!--     <div class="alert alert-danger text-center small p-2"> -->
-  <!--       Ada <span class="fw-bold">{{ countDraftJournal }}</span> draft jurnal. Segera kirim! <i class="bi bi-arrow-right"></i> -->
-  <!--     </div> -->
-  <!--   </nuxt-link> -->
-  <!--   <nuxt-link to="/jurnal" class="link"> -->
-  <!--     <div v-if="!havePostJournalToday" class="alert alert-info text-center small p-2"> -->
-  <!--       <i class="bi bi-pencil-square"></i> Ayo buat Jurnal hari ini <i class="bi bi-arrow-right"></i> -->
-  <!--     </div> -->
-  <!--   </nuxt-link> -->
-  <!--   <nuxt-link v-if="countUnreadJournalComment > 0" to="/jurnal" class="link"> -->
-  <!--     <div class="alert alert-dark text-center small p-2"> -->
-  <!--       <i class="bi bi-bell"></i> Kamu punya {{ countUnreadJournalComment }} komentar jurnal <i class="bi bi-arrow-right"></i>  -->
-  <!--     </div> -->
-  <!--   </nuxt-link> -->
-  <!-- </div> -->
+  <Loading v-if="isLoadingJournaToday" />
+  <div v-else class="mb-3">
+    <nuxt-link v-if="countDraftJournal > 0" to="/jurnal" class="link">
+      <div class="alert alert-danger text-center small p-2">
+        Ada <span class="fw-bold">{{ countDraftJournal }}</span> draft jurnal. Segera kirim! <i class="bi bi-arrow-right"></i>
+      </div>
+    </nuxt-link>
+    <nuxt-link to="/jurnal/tambah" class="link">
+      <div v-if="!havePostJournalToday" class="alert alert-dark text-center small p-2">
+        <i class="bi bi-pencil-square"></i> Ayo buat Jurnal hari ini <i class="bi bi-arrow-right"></i>
+      </div>
+    </nuxt-link>
+    <nuxt-link v-if="countUnreadJournalComment > 0" to="/jurnal" class="link">
+      <div class="text-center small p-2">
+        <i class="bi bi-bell"></i> Kamu punya {{ countUnreadJournalComment }} komentar jurnal <i class="bi bi-arrow-right"></i> 
+      </div>
+    </nuxt-link>
+  </div>
+
   <!---->
   <div class="card">
     <div class="card-body">
@@ -100,7 +101,7 @@
       <div class="card-body p-0">
         <div v-if="pemetaan.length < 1" class="text-center text-muted small p-3">Belum ada temen / kamu PKL sendirian</div>
         <div v-for="p in pemetaan" :key="p.id" class="list-group list-group-flush">
-          <div class="list-group-item border-bottom border-1 border-dark">
+          <div class="list-group-item">
             <div class="float-start fs-4 me-2">{{ p.expand.siswa.currentMood?.emoji }}</div>
             <span class="small fw-bold text-grey pb-0 mb-0">{{ p.expand.siswa.nama }}</span> <br>
             <span class="smallest text-muted">{{ p.expand.siswa.kelas }}</span>
@@ -118,7 +119,7 @@
       <div class="row">
         <div class="col-lg-3">
           <nuxt-link class="link" to="/jurnal">
-            <div class="card bg-info mb-3">
+            <div class="card mb-3">
               <div class="card-body">
                 <strong class="fs-4">{{ countJournal }}</strong>
                 <div class="small">Jurnal Harian</div>

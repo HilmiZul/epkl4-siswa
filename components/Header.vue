@@ -7,13 +7,11 @@
   </div>
 </template>
 
-<script setup>
-let user = usePocketBaseUser()
-</script>
-
 <style scoped>
 .card {
   background-color: transparent;
+  border-radius: 32px !important;
+  corner-shape: squircle;
 }
 .text-shadow {
   text-shadow: 3px -2px #fff;

@@ -36,7 +36,7 @@
           class="link text-muted">kebijakan privasi & syarat penggunaan</nuxt-link>.
       </div>
       <button @click="buatJurnalBaru(false)" :disabled="isPosting || (form.foto && form.deskripsi.length < 125)"
-        class="btn btn-info btn-sm me-2 border border-2 border-dark">
+        class="btn btn-dark btn-sm me-2 border border-2 border-dark">
         <span v-if="!isPosting"><i class="bi bi-send"></i> Kirim</span>
         <span v-else>Sedang mengirim</span>
       </button>

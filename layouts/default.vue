@@ -72,18 +72,19 @@ body {
 }
 
 .card {
-  border-radius: 0 !important;
+  border-radius: 32px !important;
+  corner-shape: squircle;
   border: 2.5px solid #000000 !important;
   box-shadow: 0.4rem 0.4rem 0 #000000 !important;
 }
 
 .card .card-header {
   border-bottom: 2.5px solid #000 !important;
-  border-radius: 0 !important;
 }
 
 .alert {
-  border-radius: 0 !important;
+  border-radius: 32px !important;
+  corner-shape: squircle;
   border-width: 2px;
   border: 2px solid #000 !important;
 }
@@ -92,7 +93,8 @@ body {
   font-weight: 600;
   transition: all 0.1s ease-in-out;
   /*border: 1.9px solid #000000;*/
-  border-radius: 0 !important;
+  border-radius: 32px !important;
+  corner-shape: squircle;
   box-shadow: 0.2rem 0.2rem 0 #000000 !important;
 }
 
@@ -112,7 +114,8 @@ body {
 .form {
   font-weight: 550;
   border: 2px solid #000000;
-  border-radius: 0 !important;
+  border-radius: 32px !important;
+  corner-shape: squircle;
   box-shadow: 0.2rem 0.2rem 0 #000000 !important;
 }
 
@@ -314,5 +317,9 @@ input[type="checkbox"]:not(:checked) {
 
 .pre-text {
   white-space: pre-wrap;
+}
+
+.list-group-item {
+  background-color: transparent;
 }
 </style>

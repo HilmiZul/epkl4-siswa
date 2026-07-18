@@ -97,7 +97,7 @@
                       <input v-if="!certificate.isValid" @change="compressFileLogo" class="form form-control" type="file" id="logo_iduka" accept="image/*" />
                     </div>
                   </div>
-                  <button v-if="!certificate.isValid" :disabled="isSending" class="btn btn-info me-2 mb-2 border border-2 border-dark">
+                  <button v-if="!certificate.isValid" :disabled="isSending" class="btn btn-dark me-2 mb-2 border border-2 border-dark">
                     <span v-if="isSending">Sedang menyimpan</span>
                     <span v-else>Simpan</span>
                   </button>
@@ -156,7 +156,7 @@
               <i class="bi bi-database fs-1"></i> <br>
               Belum ada nilai
               <div v-if="meta_pemetaan" class="mt-3">
-                <nuxt-link to="/nilai/tambah" class="btn btn-info border border-2 border-dark"><i class="bi bi-send"></i> Serahkan nilai</nuxt-link>
+                <nuxt-link to="/nilai/tambah" class="btn btn-dark border border-2 border-dark"><i class="bi bi-send"></i> Serahkan nilai</nuxt-link>
               </div>
             </div>
           </div>
