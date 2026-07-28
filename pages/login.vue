@@ -15,7 +15,7 @@
           <input v-model="password" :disabled="username.length < 3" type="password" class="form form-control form-control-lg" name="password" id="password" placeholder="jangan lupa password-nya" autocomplete="off" required>
         </div>
         <div class="d-grid gap-2 mt-5">
-          <button :disabled="sending || username.length < 3 || password.length < 8" class="btn btn-dark btn-lg border border-3 border-dark">
+          <button :disabled="sending || username.length < 3 || password.length < 8" class="btn btn-light btn-lg border border-3 border-dark">
             <span v-if="!sending"><i class="bi bi-send"></i> Masuk</span>
             <span v-else>tunggu bentar...</span>
           </button>
@@ -34,17 +34,10 @@ definePageMeta({
 useHead({ title: "Login — e-PKL / SMKN 4 Tasikmalaya." })
 
 let client = usePocketBaseClient()
-let user = usePocketBaseUser()
-// console.log(user.value)
-// if(user.value) navigateTo('/')
 let username = ref('')
 let password = ref('')
 let isError = ref(false)
 let sending = ref(false)
-let isLoading = ref(false)
-let perPage = ref(10)
-let students = ref([])
-let keyword = ref('')
 
 async function handleLogin() {
   isError.value = false
@@ -63,38 +56,6 @@ async function handleLogin() {
     isError.value = true
     sending.value = false
     password.value = ''
-  }
-}
-
-async function cariPesertaByNama() {
-  isLoading.vaue = true
-  let queryFilter = ""
-  if(keyword.value.length > 0) {
-    queryFilter = "nama~'"+keyword.value+"'"
-    client.autoCancellation(false)
-    let res = await client.collection('siswa').getList(1, perPage.value, {
-      filter: queryFilter,
-      sort: "kelas, nama"
-    })
-    if(res) {
-      isLoading.value = false
-      students.value = res
-    }
-  } else {
-    students.value = []
-  }
-}
-
-async function pagination(page) {
-  isLoading.value = true
-  client.autoCancellation(false)
-  let res = await client.collection('siswa').getList(page, perPage.value, {
-    expand: "program_keahlian",
-    sort: "program_keahlian, kelas, nama"
-  })
-  if(res) {
-    isLoading.value = false
-    students.value = res
   }
 }
 </script>
