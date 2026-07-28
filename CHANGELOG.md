@@ -1,5 +1,8 @@
 # Changelog
 
+### 2.9.3 (28 Juli 2026)
+- Light login button
+
 ### 2.9.2 (18 Juli 2026)
 - Revamp UI corner into squircle and dark button for primary.
 
