@@ -1,5 +1,10 @@
 # Changelog
 
+### 2.10-rc (14 Agustus 2026)
+- Memisahkan Guru Pembimbing dengan guru yang menjadi PIC Sekolah ke IDUKA
+- Pembuatan Jurnal harus sudah terpetakan baik PKL dan Guru Pembimbing
+- Penyerahan Proyek harus sudah terpetakan baik PKL dan Guru Pembimbing
+
 ### 2.9.3 (28 Juli 2026)
 - Light login button
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="fw-bold text-grey text-center mb-3">Kepoin Mood Orang laen 👀</div>
+  <div class="fw-bold text-grey text-center mb-3">Mood Orang Lain</div>
   <div class="card">
     <div class="card-body pt-0 pb-3 ps-2 pe-2">
       <div class="list-group list-group-flush">
@@ -8,10 +8,12 @@
           <h1>🧐</h1>
           Yaah belom pada ngupdate~
         </div>
+
         <div v-else v-for="m in moods" :key="m.id" class="list-group-item ps-0 pe-0 mt-2">
           <div class="smallest text-muted">{{ m.updated }}</div>
           <div class="small text-muted fw-bold">
-            {{ m.nama.charAt(0).toUpperCase() + m.nama.slice(1).toLowerCase() }} <span class="fw-normal">feels {{ m.currentMood?.name }} &#8212;</span> {{ m.currentMood?.emoji }}
+            {{ m.nama.charAt(0).toUpperCase() + m.nama.slice(1).toLowerCase() }} 
+            <span class="fw-normal">feels {{ m.currentMood?.name }} &#8212;</span> {{ m.currentMood?.emoji }}
           </div>
           <!--<div data-bs-toggle="modal" data-bs-target="#openModalEmoji" @click="setModalEmoji(m)" class="hand-cursor smallest text-muted mt-2">
             <i class="bi bi-emoji-smile"></i><sup><i class="bi bi-plus"></i></sup>
@@ -73,7 +75,7 @@ function formatTanggal(date) {
 async function getAllMood(loading=true) {
   isLoading.value = loading 
   let response = await client.collection("siswa").getFullList({
-    filter: `currentMood != null`,
+    filter: `currentMood != null && currentMood != ""`,
     sort: `-updated`
   })
   if(response) {
@@ -87,10 +89,6 @@ async function getAllMood(loading=true) {
 
 onMounted(() => {
   getAllMood()
-  client.autoCancellation(false)
-  client.collection("siswa").subscribe("*", function(e) {
-    if(e.action == "update") getAllMood(false)
-  },{})
 })
 </script>
 

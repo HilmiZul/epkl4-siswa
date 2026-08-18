@@ -93,6 +93,10 @@ let isLoadingMetaPemetaan = ref(true)
 let prokel = user.user.value.program_keahlian
 let siswa_id = user.user.value.siswa
 let meta_pemetaan = ref()
+
+// pembimbing_id akan nyimpen nilai id pembimbing dari collection `siswa`
+let pembimbing_id = ref()
+
 let form = ref({
   "nilai_elemen1": 0,
   "nilai_elemen2": 0,
@@ -108,12 +112,15 @@ let form = ref({
   "isValid": false,
   "nama_pj_penandatangan": "",
   "nomor_sertifikat": "",
-  "nomor_pegawai": ""
+  "nomor_pegawai": "",
+  "pembimbing": ""
 })
 
 async function buatBaru() {
   form.value.iduka = meta_pemetaan.value.iduka
   form.value.siswa = siswa_id
+  form.value.pembimbing = pembimbing_id.value
+
   isSending.value = true
   isSaved.value = false
   try {
@@ -193,7 +200,16 @@ async function getNilai() {
   }
 }
 
+async function getSiswa() {
+  let res_siswa = await client.collection('siswa').getOne(user.user.value.siswa)
+
+  if(res_siswa) {
+    pembimbing_id.value = res_siswa.guru_pembimbing
+  }
+}
+
 onMounted(() => {
+  getSiswa()
   getNilai()
   getIdukaByPeserta()
 })

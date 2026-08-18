@@ -32,7 +32,8 @@ const { isMobile } = useDevice()
 
 html,
 body {
-  background: #fff url('~/assets/img/bg.webp') no-repeat center bottom fixed;
+  /* background: #fff url('~/assets/img/bg.webp') no-repeat center bottom fixed; */
+  background-color: #fff;
   background-size: cover;
   /*background-color: #a0a0a0;*/
   font-family: "Quicksand", sans-serif;
@@ -321,5 +322,20 @@ input[type="checkbox"]:not(:checked) {
 
 .list-group-item {
   background-color: transparent;
+}
+
+.accordion, .accordion .accordion-flush {
+  box-shadow: none;
+  border-radius: 32px !important;
+  corner-shape: squircle;
+}
+
+.border-grey {
+  border-color: #afafaf !important;
+}
+
+.modal-content {
+  border-radius: 32px !important;
+  corner-shape: squircle;
 }
 </style>

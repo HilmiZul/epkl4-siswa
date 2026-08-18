@@ -48,6 +48,7 @@
 
 <script setup>
 import Compressor from 'compressorjs'
+import { navigateTo } from 'nuxt/app'
 
 definePageMeta({ middleware: 'auth' })
 useHead({ title: "Jurnal — e-PKL / SMKN 4 Tasikmalaya." })
@@ -168,18 +169,34 @@ async function getElemenCp() {
     elements.value = res_elemen
     let res_pemetaan = await client.collection('pemetaan').getFullList({
       filter: "siswa='" + res_user.siswa + "'",
-      expand: "iduka"
+      expand: "iduka, siswa"
     })
-    if (res_pemetaan) {
+
+    let res_pemetaan_pembimbing = await client.collection('pemetaan_pembimbing').getFullList({
+      filter: `pembimbing="${res_user?.expand?.siswa?.guru_pembimbing}"`
+    })
+
+    if (res_pemetaan && res_pemetaan_pembimbing) {
       isLoading.value = false
       pemetaan.value = res_pemetaan
       // currIduka: menyimpan nama IDUKA untuk ditempel kedalam watermark foto
-      currIduka.value = res_pemetaan[0].expand.iduka.nama
-      if (res_pemetaan.length > 0) {
+      currIduka.value = res_pemetaan[0]?.expand.iduka.nama
+
+      // apabila sudah pemeetaan PKL ke IDUKA dan pemetaan pembimbing sekolah
+      // maka pembuatan jurnal bisa dilakukan
+      if (res_pemetaan.length > 0 && res_pemetaan_pembimbing.length > 0) {
         form.value.iduka = res_pemetaan[0].iduka
-        form.value.pembimbing = res_pemetaan[0].expand.iduka.pembimbing_sekolah
+        form.value.pembimbing = res_user.expand.siswa.guru_pembimbing
+        // form.value.pembimbing = res_pemetaan[0].expand.iduka.pembimbing_sekolah
+
         // console.log(res_pemetaan[0].iduka)
         // console.log(res_pemetaan[0].expand.iduka.pembimbing_sekolah)
+      }
+
+      // kalau belum pemetaan PKL dan pembimbing sekolah, 
+      // maka redir ke halaman jurnal
+      else {
+        navigateTo('/jurnal')
       }
     }
   }

@@ -34,7 +34,7 @@
       </div>
     </nuxt-link>
     <nuxt-link to="/jurnal/tambah" class="link">
-      <div v-if="!havePostJournalToday" class="alert alert-dark text-center small p-2">
+      <div v-if="pemetaan.length > 0 && peserta?.guru_pembimbing != '' && !havePostJournalToday" class="alert alert-dark text-center small p-2">
         <i class="bi bi-pencil-square"></i> Ayo buat Jurnal hari ini <i class="bi bi-arrow-right"></i>
       </div>
     </nuxt-link>
@@ -60,6 +60,7 @@
                   <span v-else>&#8212;</span>
                 </div>
               </div>
+
               <div class="col-md-3">
                 <div class="mb-3">
                   <nuxt-link to="/iduka" class="link">
@@ -69,16 +70,18 @@
                   <span v-else>Belum pemetaan</span>
                 </div>
               </div>
-              <div class="col-md-3">
-                <div class="mb-3">
-                  <div class="text-muted">Wilayah</div>
-                  <span v-if="iduka" class="fw-bold text-grey">{{ iduka?.items[0].expand.iduka.wilayah.charAt(0).toUpperCase() + iduka?.items[0].expand.iduka.wilayah.slice(1) }} kota</span>
-                  <span v-else>Belum pemetaan</span>
-                </div>
-              </div>
+
               <div class="col-md-3">
                 <div class="mb-3">
                   <div class="text-muted">Guru Pembimbing</div>
+                  <span v-if="peserta?.guru_pembimbing" class="fw-bold text-grey">{{ peserta.expand?.guru_pembimbing?.nama }}</span>
+                  <span v-else>Belum pemetaan</span>
+                </div>
+              </div>
+
+              <div class="col-md-3">
+                <div class="mb-3">
+                  <div class="text-muted">PIC IDUKA</div>
                   <span v-if="emptyPemetaan">Belum pemetaan</span>
                   <span v-if="iduka?.totalItems < 0" class="fw-bold text-grey">Belum pemetaan</span>
                   <span v-else>
@@ -87,6 +90,7 @@
                   </span>
                 </div>
               </div>
+
             </div>
           </div>
         </div>
@@ -110,7 +114,7 @@
       </div>
     </div>
     <div class="mt-3 small">
-      <nuxt-link to="/mood" class="link">Kepoin mood orang laen <i class="bi bi-arrow-right"></i></nuxt-link>
+      <nuxt-link to="/mood" class="link">Kepoin mood orang lain <i class="bi bi-arrow-right"></i></nuxt-link>
     </div>
   </div>
 
@@ -257,12 +261,14 @@ async function getInfo(loading=true) {
   isLoading.value = loading
   client.autoCancellation(false)
   let res_siswa = await client.collection('siswa').getOne(user.user.value.siswa, {
-    expand: "program_keahlian"
+    expand: "program_keahlian, guru_pembimbing"
   })
+
   let res_iduka = await client.collection('pemetaan').getList(1,1, {
     filter: "siswa='"+user.user.value.siswa+"'",
     expand: "iduka, iduka.pembimbing_sekolah, program_keahlian, siswa"
   })
+
   if(res_iduka && res_siswa) {
     peserta.value = res_siswa
     if(res_iduka.items.length > 0) {
@@ -396,6 +402,8 @@ ul li {
   bottom: -90px;
   background-color: #fff;
   border: 2px solid #000;
+  border-radius: 20px !important;
+  corner-shape: squirlce;
 }
 .mood-bubble {
   position: absolute;

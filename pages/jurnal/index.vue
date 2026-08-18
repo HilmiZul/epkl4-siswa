@@ -423,7 +423,7 @@ async function getElemenCp() {
       isLoading.value = false
       pemetaan.value = res_pemetaan
       // currIduka: menyimpan nama IDUKA untuk ditempel kedalam watermark foto
-      currIduka.value = res_pemetaan[0].expand.iduka.nama
+      currIduka.value = res_pemetaan[0]?.expand?.iduka?.nama
       if (res_pemetaan.length > 0) {
         form.value.iduka = res_pemetaan[0].iduka
         form.value.pembimbing = res_pemetaan[0].expand.iduka.pembimbing_sekolah

@@ -53,6 +53,7 @@ let form = ref({
   program_keahlian: user?.user.value.program_keahlian,
   siswa: user?.user.value.siswa,
   iduka: '',
+  pembimbing: '',
 })
 let isProjectCreated = ref(false)
 
@@ -65,19 +66,21 @@ async function createProject() {
 
   try {
     let res_iduka = await client.collection('pemetaan').getFirstListItem(`siswa="${siswa_id}"`, {})
+    let res_siswa = await client.collection('siswa').getOne(siswa_id)
 
-    if(res_iduka) {
+    if(res_iduka && res_siswa) {
       form.value.iduka = res_iduka.iduka
+      form.value.pembimbing = res_siswa.guru_pembimbing
 
-      let response = await client.collection('proyek').create(form.value)
+       let response = await client.collection('proyek').create(form.value)
 
-      if(response) {
-        isLoading.value = false
-        isSending.value = false
-        isError.value = false
-        isSaved.value = true
-        navigateTo("/proyek")
-      }
+       if(response) {
+         isLoading.value = false
+         isSending.value = false
+         isError.value = false
+         isSaved.value = true
+         navigateTo("/proyek")
+       }
     }
   } catch (err) {
     isError.value = true
