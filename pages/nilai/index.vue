@@ -155,7 +155,7 @@
             <div class="text-center fs-4 fw-bold text-muted py-5">
               <i class="bi bi-database fs-1"></i> <br>
               Belum ada nilai
-              <div v-if="meta_pemetaan" class="mt-3">
+              <div v-if="hasMappingIduka && hasMappingTeacher" class="mt-3">
                 <nuxt-link to="/nilai/tambah" class="btn btn-dark border border-2 border-dark"><i class="bi bi-send"></i> Serahkan nilai</nuxt-link>
               </div>
             </div>
@@ -202,6 +202,9 @@ let form = ref({
   "nomor_sertifikat": "",
 })
 
+let hasMappingIduka = ref(false)
+let hasMappingTeacher = ref(false)
+
 async function updateNilai() {
   form.value.iduka = meta_pemetaan.value.iduka
   form.value.siswa = siswa_id
@@ -246,15 +249,28 @@ async function getIdukaByPeserta() {
   isLoadingMetaPemetaan.value = true
   client.autoCancellation(false)
   try {
-    let res = await client.collection('pemetaan').getFirstListItem(`siswa='${siswa_id}'`)
+    let res = await client.collection('pemetaan').getFirstListItem(`siswa='${siswa_id}'`, {
+      expand: `siswa`
+    })
     if(res) {
       meta_pemetaan.value = res
+
+      // jika sudah pemetaan peserta ke IDUKA maka hasMappingIduka harus true agar bisa serahkan nilai
+      hasMappingIduka.value = true
       isLoadingMetaPemetaan.value = false
+
+      let res_pemetaan_pembimbing = await client.collection('pemetaan_pembimbing').getFirstListItem(`pembimbing="${res.expand?.siswa.guru_pembimbing}"`)
+      if(res_pemetaan_pembimbing) {
+        // jika sudah pemetaan peserta ke guru maka hasMappingTeacher harus true agar bisa serahkan nilai
+        hasMappingTeacher.value = true
+      }
     }
   } catch(err) {
     isError.value = true
     isLoadingMetaPemetaan.value = false
     meta_pemetaan.value = ""
+    hasMappingIduka.value = false
+    hasMappingTeacher.value = false
   }
 }
 

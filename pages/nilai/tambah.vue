@@ -116,6 +116,9 @@ let form = ref({
   "pembimbing": ""
 })
 
+let hasMappingTeacher = ref(false)
+let hasMappingIduka = ref(false)
+
 async function buatBaru() {
   form.value.iduka = meta_pemetaan.value.iduka
   form.value.siswa = siswa_id
@@ -174,7 +177,16 @@ async function getIdukaByPeserta() {
     })
     if(res) {
       meta_pemetaan.value = res
+
+      // jika sudah pemetaan peserta ke IDUKA maka hasMappingIduka harus true agar bisa serahkan nilai
+      hasMappingIduka.value = true
       isLoadingMetaPemetaan.value = false
+
+      let res_pemetaan_pembimbing = await client.collection('pemetaan_pembimbing').getFirstListItem(`pembimbing="${res.expand?.siswa.guru_pembimbing}"`)
+      if(res_pemetaan_pembimbing) {
+        // jika sudah pemetaan peserta ke guru maka hasMappingTeacher harus true agar bisa serahkan nilai
+        hasMappingTeacher.value = true
+      }
     }
   } catch(err) {
     navigateTo('/nilai')

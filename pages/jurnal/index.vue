@@ -176,6 +176,7 @@
 
             </div>
           </div>
+
           <div class="row my-3 mb-2">
             <div v-if="!isLoadingJournals" class="col-md-12">
               <loading v-if="isMovingPage" /> 
@@ -195,6 +196,7 @@
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </div>
@@ -391,7 +393,7 @@ async function pagination(page, loading = true) {
       };
       res.items[i].created = new Intl.DateTimeFormat('id-ID', options).format(date);
     }
-    
+
     journals.value.page = res.page
     journals.value.perPage = res.perPage
     journals.value.totalItems = res.totalItems

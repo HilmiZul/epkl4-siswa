@@ -62,8 +62,12 @@ a:hover > li {
 .list-group-item:hover,
 a.list-group-item-active > li {
   /* background-color: #b5d2ad !important; */
-  background-color: #fafa96 !important;
+  /* background-color: #fafa96 !important; */
+  background-color: #2f2f2f !important;
   color: #000;
+}
+.list-group-item:hover {
+  color: #fff !important;
 }
 
 .list-group-item:hover .badge,

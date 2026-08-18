@@ -81,13 +81,28 @@
 
               <div class="col-md-3">
                 <div class="mb-3">
-                  <div class="text-muted">PIC IDUKA</div>
+                  <div class="text-muted" data-bs-toggle="modal" data-bs-target="#pic-iduka">PIC IDUKA <i class="bi bi-info-circle"></i></div>
                   <span v-if="emptyPemetaan">Belum pemetaan</span>
                   <span v-if="iduka?.totalItems < 0" class="fw-bold text-grey">Belum pemetaan</span>
                   <span v-else>
                     <span v-if="iduka?.items[0].expand.iduka?.pembimbing_sekolah == '' || iduka?.items[0].expand.iduka?.pembimbing_sekolah == '-'">Belum pemetaan</span>
                     <span v-else class="fw-bold text-grey">{{ iduka?.items[0].expand.iduka?.expand.pembimbing_sekolah.nama }}</span>
                   </span>
+                </div>
+              </div>
+
+              <!-- modal info pic iduka? -->
+              <div class="modal" id="pic-iduka">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content border border-3 border-dark">
+                    <div class="modal-body">
+                      <i class="bi bi-info-circle"></i> Guru Pembimbing yang melakukan monitoring ke IDUKA (tempat PKL).
+                    </div>
+
+                    <div class="modal-footer">
+                      <button class="btn btn-light btn-sm border border-2 border-dark" data-bs-dismiss="modal">Oke</button>
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -148,6 +163,8 @@
         <div class="col-lg-3">
           <div class="card mb-3">
             <div class="card-body">
+              <div class="float-end" data-bs-toggle="modal" data-bs-target="#info-aktivitas"><i class="bi bi-info-circle"></i></div>
+
               <strong class="fs-4">
                 <span v-if="prosentaseAktivitasJurnal >= 95">👑</span>
                 <span v-else-if="prosentaseAktivitasJurnal > 89">😃</span>
@@ -159,6 +176,21 @@
             </div>
           </div>
         </div>
+
+        <div class="modal" id="info-aktivitas">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border border-3 border-dark">
+              <div class="modal-body">
+                <i class="bi bi-info-circle"></i> Prosentase Aktivitas dihutung dari Jurnal dengan Elemen CP yang sesuai PKL dan sudah divalidasi pembimbing!
+              </div>
+
+              <div class="modal-footer">
+                <button class="btn btn-light btn-sm border border-2 border-dark" data-bs-dismiss="modal">Oke</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
 

@@ -37,6 +37,8 @@
 </template>
 
 <script setup>
+import { navigateTo } from 'nuxt/app'
+
 definePageMeta({ middleware: 'auth' })
 useHead({ title: "Tambah Proyek — e-PKL / SMKN 4 Tasikmalaya." })
 let user = usePocketBaseUser()
@@ -57,6 +59,10 @@ let form = ref({
 })
 let isProjectCreated = ref(false)
 
+let isLoadingMetaPemetaan = ref(true)
+
+let hasMappingTeacher = ref(false)
+let hasMappingIduka = ref(false)
 
 async function createProject() {
   isLoading.value = true
@@ -111,8 +117,36 @@ async function getProject() {
   }
 }
 
+async function getPemetaanByPeserta() {
+  isLoadingMetaPemetaan.value = true
+  client.autoCancellation(false)
+  try {
+    let res = await client.collection('pemetaan').getFirstListItem(`siswa='${siswa_id}'`, {
+      expand: `siswa`
+    })
+    if(res) {
+      isLoadingMetaPemetaan.value = false
+
+      // jika sudah pemetaan peserta ke IDUKA maka hasMappingIduka harus true agar bisa serahkan nilai
+      hasMappingIduka.value = true
+      isLoadingMetaPemetaan.value = false
+
+      let res_pemetaan_pembimbing = await client.collection('pemetaan_pembimbing').getFirstListItem(`pembimbing="${res.expand?.siswa.guru_pembimbing}"`)
+      if(res_pemetaan_pembimbing) {
+        // jika sudah pemetaan peserta ke guru maka hasMappingTeacher harus true agar bisa serahkan nilai
+        hasMappingTeacher.value = true
+      }
+    }
+  } catch(err) {
+    isError.value = true
+    isLoadingMetaPemetaan.value = false
+    navigateTo('/proyek')
+  }
+}
+
 onMounted(() => {
   getProject()
+  getPemetaanByPeserta()
 })
 
 

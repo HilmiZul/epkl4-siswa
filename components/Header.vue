@@ -1,5 +1,5 @@
 <template>
-  <div class="card mb-5 border border-2 border-dark bg-warning">
+  <div class="card mb-5 border border-2 border-dark bg-dark text-white">
     <div class="text-center py-1">
       <span class="fs-1 lexend-mega">e-PKL<span class="text-info dot-stroke">.</span></span>
       <span class="fw-bold smallest ">siswa</span>

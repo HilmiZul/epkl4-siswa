@@ -51,7 +51,7 @@
         <div class="text-center fs-4 fw-bold text-muted py-5">
           <i class="bi bi-database fs-1"></i> <br>
           Belum ada proyek
-          <div class="mt-3">
+          <div v-if="hasMappingIduka && hasMappingTeacher" class="mt-3">
             <nuxt-link to="/proyek/tambah" class="btn btn-dark border border-2 border-dark"><i class="bi bi-send"></i> Serahkan proyek</nuxt-link>
           </div>
         </div>
@@ -80,6 +80,12 @@ let isProjectCreated = ref(false)
 let id_project = ref()
 let catatan_guru = ref('')
 
+let isLoadingMetaPemetaan = ref(true)
+
+let hasMappingIduka = ref(false)
+let hasMappingTeacher = ref(false)
+
+
 async function getProject() {
   isLoading.value = true
   isProjectCreated.value = false
@@ -102,6 +108,32 @@ async function getProject() {
   } catch (err) {
     isProjectCreated.value = false
     isLoading.value = false
+  }
+}
+
+async function getPemetaanByPeserta() {
+  isLoadingMetaPemetaan.value = true
+  client.autoCancellation(false)
+  try {
+    let res = await client.collection('pemetaan').getFirstListItem(`siswa='${siswa_id}'`, {
+      expand: `siswa`
+    })
+    if(res) {
+      // jika sudah pemetaan peserta ke IDUKA maka hasMappingIduka harus true agar bisa serahkan nilai
+      hasMappingIduka.value = true
+      isLoadingMetaPemetaan.value = false
+
+      let res_pemetaan_pembimbing = await client.collection('pemetaan_pembimbing').getFirstListItem(`pembimbing="${res.expand?.siswa.guru_pembimbing}"`)
+      if(res_pemetaan_pembimbing) {
+        // jika sudah pemetaan peserta ke guru maka hasMappingTeacher harus true agar bisa serahkan nilai
+        hasMappingTeacher.value = true
+      }
+    }
+  } catch(err) {
+    isError.value = true
+    isLoadingMetaPemetaan.value = false
+    hasMappingIduka.value = false
+    hasMappingTeacher.value = false
   }
 }
 
@@ -130,6 +162,7 @@ async function updateProject() {
 
 onMounted(() => {
   getProject()
+  getPemetaanByPeserta()
 })
 
 
