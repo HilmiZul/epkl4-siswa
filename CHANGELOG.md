@@ -2,6 +2,7 @@
 
 ### 3.0 (18 Agustus 2026)
 - Major version is here! 🥳
+- Improvement all features
 
 ### 2.10-rc (14 Agustus 2026)
 - Memisahkan Guru Pembimbing dengan guru yang menjadi PIC Sekolah ke IDUKA
