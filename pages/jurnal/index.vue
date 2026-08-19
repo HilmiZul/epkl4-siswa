@@ -14,7 +14,7 @@
       <div v-if="$device.isMobile" class="modal" id="edit-jurnal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content rounded-0 border border-2 border-dark shadow-lg">
-            <div class="modal-header fw-bold bg-warning rounded-0 border-0 border-bottom border-2 border-dark">
+            <div class="modal-header fw-bold rounded-0 border-0 border-bottom border-2 border-dark">
               <i class="bi bi-pencil-square me-2"></i> Edit Jurnal
               <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -57,8 +57,8 @@
                   <span v-if="!isPosting"><i class="bi bi-send"></i> Kirim</span>
                   <span v-else>Sedang mengirim</span>
                 </button>
-                <span class="link small fw-bold text-muted" data-bs-dismiss="modal">Tutup</span>
-                <div @click="buatJurnalBaru(true, true)" v-if="formEdit.foto && formEdit.elemen" data-bs-dismiss="modal" class="float-end pt-2 smallest fw-bold"><i class="bi bi-save"></i> Simpan draft</div>
+                <span class="link small fw-bold text-muted hand-cursor" data-bs-dismiss="modal">Tutup</span>
+                <div @click="buatJurnalBaru(true, true)" v-if="formEdit.foto && formEdit.elemen" data-bs-dismiss="modal" class="float-end pt-2 smallest fw-bold hand-cursor"><i class="bi bi-save"></i> Simpan draft</div>
             </div>
           </div>
         </div>
