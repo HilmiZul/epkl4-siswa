@@ -92,14 +92,17 @@
               </div>
 
               <!-- modal info pic iduka? -->
-              <div class="modal" id="pic-iduka">
+              <div class="modal" id="pic-iduka" tabindex="-1">
                 <div class="modal-dialog modal-dialog-centered">
                   <div class="modal-content border border-3 border-dark">
+                    <div class="modal-header justify-content-start border-bottom border-bottom-0 fw-bold">
+                      <i class="bi bi-info-circle"></i>&nbsp; PIC IDUKA
+                    </div>
                     <div class="modal-body">
-                      <i class="bi bi-info-circle"></i> Guru Pembimbing yang melakukan monitoring ke IDUKA (tempat PKL).
+                      Guru yang monitoring ke tempat PKL.
                     </div>
 
-                    <div class="modal-footer">
+                    <div class="modal-footer border-top border-top-0">
                       <button class="btn btn-light btn-sm border border-2 border-dark" data-bs-dismiss="modal">Oke</button>
                     </div>
                   </div>
@@ -177,14 +180,17 @@
           </div>
         </div>
 
-        <div class="modal" id="info-aktivitas">
+        <div class="modal" id="info-aktivitas" tabindex="-1">
           <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content border border-3 border-dark">
+              <div class="modal-header justify-content-start border-bottom border-bottom-0 fw-bold">
+                <i class="bi bi-info-circle"></i> &nbsp; Prosentase
+              </div>
               <div class="modal-body">
-                <i class="bi bi-info-circle"></i> Prosentase Aktivitas dihutung dari Jurnal dengan Elemen CP yang sesuai PKL dan sudah divalidasi pembimbing!
+                Prosentase Aktivitas dihutung dari Jurnal dengan Elemen CP yang sesuai dan sudah divalidasi pembimbing!
               </div>
 
-              <div class="modal-footer">
+              <div class="modal-footer border-top border-top-0">
                 <button class="btn btn-light btn-sm border border-2 border-dark" data-bs-dismiss="modal">Oke</button>
               </div>
             </div>
