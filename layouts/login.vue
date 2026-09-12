@@ -46,13 +46,13 @@ html, body {
   font-family: 'Romana BT';
 }
 .shadow-lg {
-  box-shadow: 0.5rem 0.5rem 0 #000000 !important;
+  box-shadow: 0.2rem 0.2rem 0 #000000 !important;
 }
 .card {
   border-radius: 32px !important;
   corner-shape: squircle;
   border: 2.5px solid #000000 !important;
-  box-shadow: 0.5rem 0.5rem 0 #000000 !important;
+  box-shadow: 0.2rem 0.2rem 0 #000000 !important;
 }
 .btn {
   font-weight: 600;
