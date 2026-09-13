@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.0 - Upgrade Nuxt and some dependencies (13 September 2026)
+
+- Vapor mode
+- Upgrade Nuxt v4.5.2
+- Update dependencies version
+
 ### 3.0 (18 Agustus 2026)
 - Major version is here! 🥳
 - Improvement all features
