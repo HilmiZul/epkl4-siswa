@@ -1,0 +1,462 @@
+<template>
+  <div class="bg-transparent">
+    <div class="pb-2 ps-0 pe-0 text-center">
+      <Loading v-if="isLoading" />
+      <span v-else-if="!isLoading && peserta">
+        <span @click="() => isOpenEmojis = !isOpenEmojis" class="mood-container hand-cursor">
+          <span v-if="!currentMood" class="emoji">
+            <i class="bi bi-emoji-smile"></i><sup class="text-muted fw-normal"><i class="bi bi-plus"></i></sup>
+          </span>
+          <span v-else class="emoji">
+            <div class="mood-bubble">I feel {{ currentMood.name }}!</div>
+            {{ currentMood.emoji }}
+          </span>
+          <div v-if="isOpenEmojis" class="mood-item shadow-lg">
+            <div class="smallest p-2">Apa mood-mu hari ini?</div>
+            <ul v-for="(emoji, i) in emojis" :key="i">
+              <li @click="handleMood(emoji)" class="hand-cursor">{{ emoji.emoji }}</li>
+            </ul>
+          </div>
+        </span>
+        <div class="fw-bold text-grey">
+          <!--{{ peserta.nama.charAt(0).toUpperCase()+peserta.nama.toLowerCase().slice(1) }}-->
+          {{ peserta.nama }}
+        </div>
+      </span>
+    </div>
+  </div>
+
+  <Loading v-if="isLoadingJournaToday" />
+  <div v-else class="mb-3">
+    <nuxt-link v-if="countDraftJournal > 0" to="/jurnal" class="link">
+      <div class="alert alert-danger text-center small p-2">
+        Ada <span class="fw-bold">{{ countDraftJournal }}</span> draft jurnal. Segera kirim! <i class="bi bi-arrow-right"></i>
+      </div>
+    </nuxt-link>
+    <nuxt-link to="/jurnal/tambah" class="link">
+      <div v-if="pemetaan.length > 0 && peserta?.guru_pembimbing != '' && !havePostJournalToday" class="alert alert-dark text-center small p-2">
+        <i class="bi bi-pencil-square"></i> Ayo buat Jurnal hari ini <i class="bi bi-arrow-right"></i>
+      </div>
+    </nuxt-link>
+    <nuxt-link v-if="countUnreadJournalComment > 0" to="/jurnal" class="link">
+      <div class="text-center small p-2">
+        <i class="bi bi-bell"></i> Kamu punya {{ countUnreadJournalComment }} komentar jurnal <i class="bi bi-arrow-right"></i> 
+      </div>
+    </nuxt-link>
+  </div>
+
+  <!---->
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-12">
+          <Loading v-if="isLoading" />
+          <div v-else>
+            <div class="row">
+              <div class="col-md-3">
+                <div class="mb-3">
+                  <div class="text-muted">Kelas</div>
+                  <span v-if="peserta" class="fw-bold text-grey">{{ peserta.kelas }}</span>
+                  <span v-else>&#8212;</span>
+                </div>
+              </div>
+
+              <div class="col-md-3">
+                <div class="mb-3">
+                  <nuxt-link to="/iduka" class="link">
+                    <div class="text-muted">Tempat PKL <i v-if="iduka" class="bi bi-pencil-square"></i></div>
+                  </nuxt-link>
+                  <span v-if="iduka" class="fw-bold text-grey">{{ iduka?.items[0].expand.iduka.nama }}</span>
+                  <span v-else>Belum pemetaan</span>
+                </div>
+              </div>
+
+              <div class="col-md-3">
+                <div class="mb-3">
+                  <div class="text-muted">Guru Pembimbing</div>
+                  <span v-if="peserta?.guru_pembimbing" class="fw-bold text-grey">{{ peserta.expand?.guru_pembimbing?.nama }}</span>
+                  <span v-else>Belum pemetaan</span>
+                </div>
+              </div>
+
+              <div class="col-md-3">
+                <div class="mb-3">
+                  <div class="text-muted" data-bs-toggle="modal" data-bs-target="#pic-iduka">PIC IDUKA <i class="bi bi-info-circle"></i></div>
+                  <span v-if="emptyPemetaan">Belum pemetaan</span>
+                  <span v-if="iduka?.totalItems < 0" class="fw-bold text-grey">Belum pemetaan</span>
+                  <span v-else>
+                    <span v-if="iduka?.items[0].expand.iduka?.pembimbing_sekolah == '' || iduka?.items[0].expand.iduka?.pembimbing_sekolah == '-'">Belum pemetaan</span>
+                    <span v-else class="fw-bold text-grey">{{ iduka?.items[0].expand.iduka?.expand.pembimbing_sekolah.nama }}</span>
+                  </span>
+                </div>
+              </div>
+
+              <!-- modal info pic iduka? -->
+              <div class="modal" id="pic-iduka" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content border border-3 border-dark">
+                    <div class="modal-header justify-content-start border-bottom border-bottom-0 fw-bold">
+                      <i class="bi bi-info-circle"></i>&nbsp; PIC IDUKA
+                    </div>
+                    <div class="modal-body">
+                      Guru yang monitoring ke tempat PKL.
+                    </div>
+
+                    <div class="modal-footer border-top border-top-0">
+                      <button class="btn btn-light btn-sm border border-2 border-dark" data-bs-dismiss="modal">Oke</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <div class="fw-bold text-grey fs-5 pb-1"><i class="bi bi-people"></i> Temen Satu Tim</div>
+    <Loading v-if="isLoading" />
+    <div v-else class="card">
+      <div class="card-body p-0">
+        <div v-if="pemetaan.length < 1" class="text-center text-muted small p-3">Belum ada temen / kamu PKL sendirian</div>
+        <div v-for="p in pemetaan" :key="p.id" class="list-group list-group-flush">
+          <div class="list-group-item">
+            <div class="float-start fs-4 me-2">{{ p.expand.siswa.currentMood?.emoji }}</div>
+            <span class="small fw-bold text-grey pb-0 mb-0">{{ p.expand.siswa.nama }}</span> <br>
+            <span class="smallest text-muted">{{ p.expand.siswa.kelas }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mt-3 small">
+      <nuxt-link to="/mood" class="link">Kepoin mood orang lain <i class="bi bi-arrow-right"></i></nuxt-link>
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <div class="">
+      <div class="row">
+        <div class="col-lg-3">
+          <nuxt-link class="link" to="/jurnal">
+            <div class="card mb-3">
+              <div class="card-body">
+                <strong class="fs-4">{{ countJournal }}</strong>
+                <div class="small">Jurnal Harian</div>
+                <!-- <span class="small"> halaman</span> -->
+              </div>
+            </div>
+          </nuxt-link>
+        </div>
+
+        <div v-if="countJournalNotValid > 0" class="col-lg-3">
+          <nuxt-link class="link" to="/jurnal">
+            <div class="card bg-warning mb-3">
+              <div class="card-body">
+                <strong class="fs-4">{{ countJournalNotValid }}</strong>
+                <div class="small">Jurnal belum di validasi</div>
+                <!-- <span class="small"> halaman</span> -->
+              </div>
+            </div>
+          </nuxt-link>
+        </div>
+
+        <div class="col-lg-3">
+          <div class="card mb-3">
+            <div class="card-body">
+              <div class="float-end" data-bs-toggle="modal" data-bs-target="#info-aktivitas"><i class="bi bi-info-circle"></i></div>
+
+              <strong class="fs-4">
+                <span v-if="prosentaseAktivitasJurnal >= 95">👑</span>
+                <span v-else-if="prosentaseAktivitasJurnal > 89">😃</span>
+                <span v-else-if="prosentaseAktivitasJurnal > 79">😔</span>
+                <span v-else>😭</span>
+                {{ prosentaseAktivitasJurnal }}%
+              </strong>
+              <div class="small">{{ descAktivitasJurnal }}</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal" id="info-aktivitas" tabindex="-1">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border border-3 border-dark">
+              <div class="modal-header justify-content-start border-bottom border-bottom-0 fw-bold">
+                <i class="bi bi-info-circle"></i> &nbsp; Prosentase
+              </div>
+              <div class="modal-body">
+                Prosentase Aktivitas dihutung dari Jurnal dengan Elemen CP yang sesuai dan sudah divalidasi pembimbing!
+              </div>
+
+              <div class="modal-footer border-top border-top-0">
+                <button class="btn btn-light btn-sm border border-2 border-dark" data-bs-dismiss="modal">Oke</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</template>
+
+<script setup vapor>
+definePageMeta({ middleware: 'auth' })
+useHead({ title: "Overview — e-PKL / SMKN 4 Tasikmalaya." })
+let user = usePocketBaseUser()
+let client = usePocketBaseClient()
+let prokel = user.user.value.program_keahlian
+let isLoading = ref(true)
+let isLoadingJournaToday = ref(true)
+let countJournal = ref(0)
+let countJournalNotValid = ref(0)
+let countJournalSesuaiElemen = ref(0)
+let countJournalTidakSesuaiElemen = ref(0)
+let prosentaseAktivitasJurnal = ref(0)
+let descAktivitasJurnal = ref('')
+let pemetaan = ref([])
+let iduka = ref()
+let peserta = ref()
+let emptyPemetaan = ref(false)
+let isOpenEmojis = ref(false)
+let emojis = ref([
+  {
+    "name": "good", 
+    "emoji": "😊"
+  },
+  {
+    "name": "happy",
+    "emoji": "😃"
+  },
+  {
+    "name": "tired",
+    "emoji": "😔"
+  },
+  {
+    "name": "headache",
+    "emoji": "🤯" 
+  },
+  {
+    "name": "fire",
+    "emoji": "🔥"
+  }
+])
+let currentMood = ref('')
+let today = useServerDay()
+let havePostJournalToday = ref(false)
+let countDraftJournal = ref(0)
+let countUnreadJournalComment = ref(0)
+let isLoadingJournalSesuaiTidakSesuai = ref(true)
+
+async function getCountJournal(loading=true) {
+  isLoading.value = loading
+  client.autoCancellation(false)
+  let res_journal = await client.collection('jurnal').getFullList({
+    filter: "siswa='"+user.user.value.id+"'",
+    fields: "id",
+  })
+  let res_journal2 = await client.collection('jurnal').getFullList({
+    filter: `siswa="${user.user.value.id}" && isValid=false`,
+    fields: `id`
+  })
+  if(res_journal && res_journal2) {
+    isLoading.value = false
+    countJournal.value = res_journal.length
+    countJournalNotValid.value = res_journal2.length
+  }
+}
+
+async function getCountJournalSesuaiTidakSesuai(loading=true) {
+  isLoadingJournalSesuaiTidakSesuai.value = loading
+  let res_sesuai = await client.collection('jurnal').getList(1,1, {
+    filter: `siswa="${user.user.value.id}" && elemen.elemen!="Lain-lain" && isValid=true && isDraft=false`
+  })
+  let res_tidak_sesuai = await client.collection('jurnal').getList(1,1, {
+    filter: `siswa="${user.user.value.id}" && elemen.elemen="Lain-lain" && isValid=true && isDraft=false`
+  })
+  let res_jurnal = await client.collection('jurnal').getList(1,1, {
+    filter: `siswa="${user.user.value.id}" && isValid=true && isDraft=false`
+  })
+
+  if(res_sesuai && res_tidak_sesuai && res_jurnal) {
+    isLoadingJournalSesuaiTidakSesuai.value = false
+    countJournalSesuaiElemen.value = res_sesuai.totalItems
+    countJournalTidakSesuaiElemen.value = res_tidak_sesuai.totalItems
+    
+    prosentaseAktivitasJurnal.value = Math.round((res_sesuai.totalItems / res_jurnal.totalItems) * 100 || 0)
+
+    if(prosentaseAktivitasJurnal.value >= 95) descAktivitasJurnal.value = "Aktivitasmu Sangat Sesuai"
+    else if(prosentaseAktivitasJurnal.value > 89) descAktivitasJurnal.value = "Aktivitasmu Sesuai"
+    else if(prosentaseAktivitasJurnal.value > 79) descAktivitasJurnal.value = "Aktivitasmu Cukup Sesuai"
+    else descAktivitasJurnal.value = "Aktivitasmu Kurang Sesuai"
+  }
+}
+
+async function getInfo(loading=true) {
+  isLoading.value = loading
+  client.autoCancellation(false)
+  let res_siswa = await client.collection('siswa').getOne(user.user.value.siswa, {
+    expand: "program_keahlian, guru_pembimbing"
+  })
+
+  let res_iduka = await client.collection('pemetaan').getList(1,1, {
+    filter: "siswa='"+user.user.value.siswa+"'",
+    expand: "iduka, iduka.pembimbing_sekolah, program_keahlian, siswa"
+  })
+
+  if(res_iduka && res_siswa) {
+    peserta.value = res_siswa
+    if(res_iduka.items.length > 0) {
+      let res_pemetaan = await client.collection('pemetaan').getFullList({
+        filter: "iduka='"+res_iduka?.items[0].iduka+"' && siswa!='"+user.user.value.siswa+"'",
+        expand: "iduka, siswa"
+      })
+      if(res_pemetaan) {
+        isLoading.value = false
+        iduka.value = res_iduka
+        pemetaan.value = res_pemetaan
+        // console.log(res_pemetaan)
+        // console.log(user.user.value.siswa)
+      }
+    } else {
+      emptyPemetaan.value = true
+    }
+  }
+}
+
+async function isTodayPostJournal() {
+  try {
+    isLoadingJournaToday.value = true
+    let response = await client.collection('jurnal').getFirstListItem(`siswa="${user.user.value.id}"`, {
+      sort: "-created"
+    })
+    if(response) {
+      let res = response
+      const date = new Date(res.created)
+      const options = {
+        dateStyle: "long"
+      }
+      res.created = new Intl.DateTimeFormat('id-ID', options).format(date)
+      if(res.created == today) havePostJournalToday.value = true
+      isLoadingJournaToday.value = false
+    }
+  } catch(error) {
+    isLoadingJournaToday.value = false
+  }
+}
+
+async function handleMood(emoji) {
+  currentMood.value = emoji
+  isOpenEmojis.value ? false : true
+  let res = await client.collection('siswa').update(user.user.value.siswa, {
+    "currentMood": currentMood.value
+  })
+}
+
+async function getCurrentMood() {
+  let res = await client.collection('siswa').getOne(user.user.value.siswa, {})
+  if(res) {
+    currentMood.value = res.currentMood
+  }
+}
+
+async function getCountDraftJournal() {
+  let res = await client.collection('jurnal').getFullList({
+    filter: `siswa="${user.user.value.id}" && isDraft=true`
+  })
+  if(res) {
+    countDraftJournal.value = res.length
+  }
+}
+
+async function getCountUnreadJournalComment() {
+  let res = await client.collection('jurnal_komentar').getList(1,1, {
+    filter: `idJurnal.siswa.id="${user.user.value.id}" && isOpen=false`
+  })
+  if(res) {
+    countUnreadJournalComment.value = res.totalItems
+  }
+}
+
+onMounted(() => {
+  getCountJournal()
+  getInfo()
+  getCurrentMood()
+  isTodayPostJournal()
+  getCountDraftJournal()
+  getCountUnreadJournalComment()
+  getCountJournalSesuaiTidakSesuai()
+  client.autoCancellation(false)
+  client.collection('pemetaan').subscribe('*', function(e){
+    if(e.action == 'create' || e.action == 'update') getInfo(false)
+  }, {})
+  client.collection('jurnal').subscribe('*', function(e){
+    if(e.action == 'create' || e.action == 'update') {
+      getCountJournal()
+      isTodayPostJournal()
+      getCountDraftJournal()
+      getCountJournalSesuaiTidakSesuai(false)
+    } 
+  }, {})
+  client.collection('siswa').subscribe('*', function(e) {
+    if(e.action == 'update') getCurrentMood()
+  }, {})
+  client.collection('jurnal_komentar').subscribe('*', function(e){
+    if(e.action == 'create' || e.action == 'update') getCountUnreadJournalComment()
+  },{})
+})
+</script>
+
+<style scoped>
+.small, .small table {
+  font-size: 14px !important;
+}
+.card .card-header {
+  font-size: 1.2rem;
+  background-color: transparent;
+  border-bottom: none !important;
+}
+ul {
+  padding: 0 7px 0 7px;
+  list-style-type: none;
+  display: inline-block !important;
+}
+ul li {
+  font-size: 1.5rem;
+}
+.mood-container {
+  position: relative;
+  padding-bottom: 0 !important;
+  padding-top: 5px;
+  display: block;
+  z-index: 1
+}
+.mood-item {
+  position: absolute; 
+  left: 40%;
+  bottom: -90px;
+  background-color: #fff;
+  border: 2px solid #000;
+  border-radius: 20px !important;
+  corner-shape: squirlce;
+}
+.mood-bubble {
+  position: absolute;
+  left: 53%;
+  top: 0%;
+  background-color: #000;
+  border-radius: 10px;
+  color: #fff;
+  padding: 7px;
+  font-size: .8rem 
+}
+.emoji {
+  font-size: 3rem
+}
+.smallest {
+  font-size: 10pt
+}
+</style>
