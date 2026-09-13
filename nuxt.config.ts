@@ -1,3 +1,4 @@
+import { defineNuxtConfig } from 'nuxt/config'
 import pkg from './package.json'
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -26,5 +27,8 @@ export default defineNuxtConfig({
       appVersion: pkg.version,
       author: pkg.author,
     }
-  }
+  },
+  vue: {
+    vapor: true,
+  },
 })
