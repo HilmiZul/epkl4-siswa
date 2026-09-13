@@ -15,9 +15,9 @@
             {{ m.nama.charAt(0).toUpperCase() + m.nama.slice(1).toLowerCase() }} 
             <span class="fw-normal">feels {{ m.currentMood?.name }} &#8212;</span> {{ m.currentMood?.emoji }}
           </div>
-          <!--<div data-bs-toggle="modal" data-bs-target="#openModalEmoji" @click="setModalEmoji(m)" class="hand-cursor smallest text-muted mt-2">
-            <i class="bi bi-emoji-smile"></i><sup><i class="bi bi-plus"></i></sup>
-          </div>-->
+          <!-- <div data-bs-toggle="modal" data-bs-target="#openModalEmoji" @click="setModalEmoji(m)" class="hand-cursor smallest text-muted mt-2"> -->
+          <!--   <i class="bi bi-emoji-smile"></i><sup><i class="bi bi-plus"></i></sup> -->
+          <!-- </div> -->
         </div>
       </div>
 
@@ -28,29 +28,43 @@
         </button>
       </div>
 
-      <!-- single modal: emoji motivations -->
-      <div class="modal" id="openModalEmoji">
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content rounded-0 border border-2 border-dark shadow-lg">
-            <div class="modal-body text-center">
-              <h1>👀</h1>
-              Nothing to see here &#8212; yet.
-            </div>
-          </div>
-        </div>
-      </div>
+      <!-- single modal: emoji reactions -->
+      <!-- <div class="modal" id="openModalEmoji" tabindex="-1"> -->
+      <!--   <div class="modal-dialog modal-dialog-centered"> -->
+      <!--     <div class="modal-content rounded-0 border border-2 border-dark shadow-lg"> -->
+      <!--       <div class="modal-header border-bottom border-bottom-0"> -->
+      <!--         Reaction -->
+      <!--         <button class="btn-close smallest" label="Close" data-bs-dismiss="modal"></button> -->
+      <!--       </div> -->
+      <!---->
+      <!--       <div class="modal-body text-center"> -->
+      <!---->
+      <!--         <div v-if="isOpenEmojis" class="mood-item"> -->
+      <!--           <ul v-for="(emoji, i) in reactions" :key="i"> -->
+      <!--             <li @click="handleMood(emoji)" class="hand-cursor" data-bs-dismiss="modal">{{ emoji.emoji }}</li> -->
+      <!--           </ul> -->
+      <!--         </div> -->
+ 
+              <!-- <h1>👀</h1> -->
+              <!-- Nothing to see here &#8212; yet. -->
+      <!--       </div> -->
+      <!--     </div> -->
+      <!--   </div> -->
+      <!-- </div> -->
+
     </div>
   </div>
 </template>
 
-<script setup>
+<script setup vapor>
 useHead({ title: "Mood — e-PKL / SMKN 4 Tasikmalaya." })
 definePageMeta({ middleware: 'auth' })
 const client = usePocketBaseClient()
 const isLoading = ref(true)
 let moods = ref([])
 const tempStudent = ref({})
-const motivations = ref([
+
+const reactions = ref([
   {
     "name": "semangat",
     "emoji": "💪🏻"
@@ -58,24 +72,44 @@ const motivations = ref([
   {
     "name": "gua juga",
     "emoji": "✋🏻",
-  }
+  },
+  {
+    "name": "love",
+    "emoji": "❤️",
+  },
+  {
+    "name": "fire",
+    "emoji": "🔥",
+  },
+  {
+    "name": "smile",
+    "emoji": "😁",
+  },
+  {
+    "name": "like",
+    "emoji": "👍🏻",
+  },
 ])
 
 let perPage = 40
 let isMovingPage = ref(false)
 
+let isOpenEmojis = ref(false)
+
+
 function setModalEmoji(mood) {
   tempStudent.value = mood
+  isOpenEmojis.value = true
 }
 
 function formatTanggal(date) {
 }
 
-// TODO: Create table called `student_mood`
+// TODO: Create table called `student_reaction`
 // add some field: 
-// - siswa (FK to siswa)
-// - siswaMotivator (FK to siswa)
-// - currentMotivation JSON
+// - toStudent (FK to siswa)
+// - fromStudent (FK to siswa)
+// - currentReaction JSON
 async function getAllMood(loading=true) {
   isLoading.value = loading 
 
@@ -130,6 +164,12 @@ async function loadMore(page, loading=true) {
   }
 }
 
+
+function handleMood(emoji) {
+  console.log(emoji)
+}
+
+
 onMounted(() => {
   getAllMood()
 })
@@ -138,5 +178,13 @@ onMounted(() => {
 <style scoped>
 .smallest {
   font-size: 11px;
+}
+ul {
+  padding: 0 9px 0 9px;
+  list-style-type: none;
+  display: inline-block !important;
+}
+ul li {
+  font-size: 1.5rem;
 }
 </style>
