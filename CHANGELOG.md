@@ -1,6 +1,6 @@
 # Changelog
 
-## 3.0 - Upgrade Nuxt and some dependencies (13 September 2026)
+## 3.1 (13 September 2026)
 
 - Vapor mode
 - Upgrade Nuxt v4.5.2
