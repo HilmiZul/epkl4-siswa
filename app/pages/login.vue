@@ -8,11 +8,11 @@
         </div>
         <div class="mb-4">
           <label for="email">Username</label>
-          <input v-model="username" type="text" class="form form-control form-control-lg mb-2" name="email" id="email" placeholder="gunakan NIPD" required autofocus>
+          <input v-model="username" type="text" class="form form-control form-control-lg mb-2" name="email" id="email" placeholder="masukkan username" required autofocus>
         </div>
         <div class="mb-4">
           <label for="password">Password</label>
-          <input v-model="password" :disabled="username.length < 3" type="password" class="form form-control form-control-lg" name="password" id="password" placeholder="jangan lupa password-nya" autocomplete="off" required>
+          <input v-model="password" :disabled="username.length < 3" type="password" class="form form-control form-control-lg" name="password" id="password" placeholder="masukkan password" autocomplete="off" required>
         </div>
         <div class="d-grid gap-2 mt-5">
           <button :disabled="sending || username.length < 3 || password.length < 8" class="btn btn-dark btn-lg border border-3 border-dark">
