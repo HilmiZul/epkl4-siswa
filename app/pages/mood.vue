@@ -4,9 +4,12 @@
     <div class="card-body pt-0 pb-3 ps-2 pe-2">
       <div class="list-group list-group-flush">
         <Loading v-if="isLoading" />
-        <div v-else-if="!isLoading && moods.length < 1" class="text-center text-muted pt-3">
-          <h1>🧐</h1>
-          Yaah belom pada ngupdate~
+        <div v-else-if="!isLoading && moods.totalItems < 1" class="text-center text-muted pt-3">
+          <h1><i class="bi bi-eyeglasses"></i></h1>
+          Belum ada <em>update</em>
+          <div class="mt-3">
+            <NuxtLink to="/" class="btn btn-dark"><i class="bi bi-arrow-left"></i> kembali</NuxtLink>
+          </div>
         </div>
 
         <div v-else v-for="m in moods.items" :key="m.id" class="list-group-item ps-0 pe-0 mt-2">
