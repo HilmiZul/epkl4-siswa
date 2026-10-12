@@ -3,7 +3,7 @@
     <div class="card-header">
       <span class="h5 fw-bold"><i class="bi bi-journals"></i> Jurnal</span>
       <span v-if="$device.isMobile">
-        <span v-if="pemetaan.length > 0 && !havePostJournalToday" class="float-end journal-button">
+        <span v-if="pemetaan.length > 0 && !havePostJournalToday && pemetaan[0]?.expand?.iduka?.pembimbing_sekolah" class="float-end journal-button">
           <NuxtLink to="/jurnal/tambah" class="btn btn-dark btn-sm border border-2 border-dark"><i class="bi bi-pencil-square"></i> Buat</NuxtLink>
         </span>
       </span>

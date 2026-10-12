@@ -182,9 +182,9 @@ async function getElemenCp() {
       // currIduka: menyimpan nama IDUKA untuk ditempel kedalam watermark foto
       currIduka.value = res_pemetaan[0]?.expand.iduka.nama
 
-      // apabila sudah pemeetaan PKL ke IDUKA dan pemetaan pembimbing sekolah
+      // apabila sudah pemeetaan PKL ke IDUKA, pengisian PIC/Pembim.sekolah ke IDUKA dan pemetaan pembimbing sekolah
       // maka pembuatan jurnal bisa dilakukan
-      if (res_pemetaan.length > 0 && res_pemetaan_pembimbing.length > 0) {
+      if (res_pemetaan.length > 0 && res_pemetaan[0]?.expand?.iduka?.pembimbing_sekolah && res_pemetaan_pembimbing.length > 0) {
         form.value.iduka = res_pemetaan[0].iduka
         form.value.pembimbing = res_user.expand.siswa.guru_pembimbing
         // form.value.pembimbing = res_pemetaan[0].expand.iduka.pembimbing_sekolah
@@ -193,7 +193,7 @@ async function getElemenCp() {
         // console.log(res_pemetaan[0].expand.iduka.pembimbing_sekolah)
       }
 
-      // kalau belum pemetaan PKL dan pembimbing sekolah, 
+      // kalau belum pemetaan PKL, pengisian PIC sekolah ke IDUKA dan pembimbing sekolah, 
       // maka redir ke halaman jurnal
       else {
         navigateTo('/jurnal')
