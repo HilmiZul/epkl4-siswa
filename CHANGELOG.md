@@ -2,6 +2,7 @@
 
 ## 3.2 (12 Oktober 2026)
 
+- Bug fixes
 - UX Improvement
 
 ## 3.1 (13 September 2026)
