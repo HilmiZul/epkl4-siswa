@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.2 (12 Oktober 2026)
+
+- UX Improvement
+
 ## 3.1 (13 September 2026)
 
 - Vapor mode
