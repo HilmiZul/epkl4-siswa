@@ -18,7 +18,7 @@
             </ul>
           </div>
         </span>
-        <div class="fw-bold text-grey">
+        <div class="fw-bold text-grey text-uppercase">
           <!--{{ peserta.nama.charAt(0).toUpperCase()+peserta.nama.toLowerCase().slice(1) }}-->
           {{ peserta.nama }}
         </div>
@@ -99,7 +99,7 @@
                       <i class="bi bi-info-circle"></i>&nbsp; PIC IDUKA
                     </div>
                     <div class="modal-body">
-                      Guru yang monitoring ke tempat PKL.
+                      Guru yang melakukan monitoring dan bertanggungjawab terhadap tempat PKL (IDUKA).
                     </div>
 
                     <div class="modal-footer border-top border-top-0">
@@ -116,90 +116,83 @@
     </div>
   </div>
 
-  <div class="mt-4">
-    <div class="fw-bold text-grey fs-5 pb-1"><i class="bi bi-people"></i> Temen Satu Tim</div>
-    <Loading v-if="isLoading" />
-    <div v-else class="card">
-      <div class="card-body p-0">
-        <div v-if="pemetaan.length < 1" class="text-center text-muted small p-3">Belum ada temen / kamu PKL sendirian</div>
-        <div v-for="p in pemetaan" :key="p.id" class="list-group list-group-flush">
-          <div class="list-group-item">
-            <div class="float-start fs-4 me-2">{{ p.expand.siswa.currentMood?.emoji }}</div>
-            <span class="small fw-bold text-grey pb-0 mb-0">{{ p.expand.siswa.nama }}</span> <br>
-            <span class="smallest text-muted">{{ p.expand.siswa.kelas }}</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="mt-3 small">
-      <nuxt-link to="/mood" class="link">Kepoin mood orang lain <i class="bi bi-arrow-right"></i></nuxt-link>
-    </div>
-  </div>
-
-  <div class="mt-4">
-    <div class="">
-      <div class="row">
-        <div class="col-lg-3">
-          <nuxt-link class="link" to="/jurnal">
-            <div class="card mb-3">
-              <div class="card-body">
-                <strong class="fs-4">{{ countJournal }}</strong>
-                <div class="small">Jurnal Harian</div>
-                <!-- <span class="small"> halaman</span> -->
-              </div>
-            </div>
-          </nuxt-link>
-        </div>
-
-        <div v-if="countJournalNotValid > 0" class="col-lg-3">
-          <nuxt-link class="link" to="/jurnal">
-            <div class="card bg-warning mb-3">
-              <div class="card-body">
-                <strong class="fs-4">{{ countJournalNotValid }}</strong>
-                <div class="small">Jurnal belum di validasi</div>
-                <!-- <span class="small"> halaman</span> -->
-              </div>
-            </div>
-          </nuxt-link>
-        </div>
-
-        <div class="col-lg-3">
+  <div class="mt-3">
+    <div class="row">
+      <div class="col-lg-3">
+        <nuxt-link class="link" to="/jurnal">
           <div class="card mb-3">
             <div class="card-body">
-              <div class="float-end" data-bs-toggle="modal" data-bs-target="#info-aktivitas"><i class="bi bi-info-circle"></i></div>
+              <strong class="fs-4">{{ countJournal }}</strong>
+              <div class="small">Jurnal Harian</div>
+              <!-- <span class="small"> halaman</span> -->
+            </div>
+          </div>
+        </nuxt-link>
+      </div>
 
-              <strong class="fs-4">
-                <span v-if="prosentaseAktivitasJurnal >= 95">👑</span>
-                <span v-else-if="prosentaseAktivitasJurnal > 89">😃</span>
-                <span v-else-if="prosentaseAktivitasJurnal > 79">😔</span>
-                <span v-else>😭</span>
-                {{ prosentaseAktivitasJurnal }}%
-              </strong>
-              <div class="small">{{ descAktivitasJurnal }}</div>
+      <div v-if="countJournalNotValid > 0" class="col-lg-3">
+        <nuxt-link class="link" to="/jurnal">
+          <div class="card bg-warning mb-3">
+            <div class="card-body">
+              <strong class="fs-4">{{ countJournalNotValid }}</strong>
+              <div class="small">Jurnal belum di validasi</div>
+              <!-- <span class="small"> halaman</span> -->
+            </div>
+          </div>
+        </nuxt-link>
+      </div>
+
+      <div class="col-lg-3">
+        <div class="card mb-3">
+          <div class="card-body">
+            <div class="float-end" data-bs-toggle="modal" data-bs-target="#info-aktivitas"><i class="bi bi-info-circle"></i></div>
+
+            <strong class="fs-4">
+              {{ prosentaseAktivitasJurnal }}%
+            </strong>
+            <div class="small">{{ descAktivitasJurnal }}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal" id="info-aktivitas" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content border border-3 border-dark">
+            <div class="modal-header justify-content-start border-bottom border-bottom-0 fw-bold">
+              <i class="bi bi-info-circle"></i> &nbsp; Prosentase
+            </div>
+            <div class="modal-body">
+              Prosentase Aktivitas dihutung dari Jurnal dengan Elemen CP yang sesuai dan sudah divalidasi pembimbing!
+            </div>
+
+            <div class="modal-footer border-top border-top-0">
+              <button class="btn btn-light btn-sm border border-2 border-dark" data-bs-dismiss="modal">Oke</button>
             </div>
           </div>
         </div>
+      </div>
 
-        <div class="modal" id="info-aktivitas" tabindex="-1">
-          <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content border border-3 border-dark">
-              <div class="modal-header justify-content-start border-bottom border-bottom-0 fw-bold">
-                <i class="bi bi-info-circle"></i> &nbsp; Prosentase
-              </div>
-              <div class="modal-body">
-                Prosentase Aktivitas dihutung dari Jurnal dengan Elemen CP yang sesuai dan sudah divalidasi pembimbing!
-              </div>
+    </div>
 
-              <div class="modal-footer border-top border-top-0">
-                <button class="btn btn-light btn-sm border border-2 border-dark" data-bs-dismiss="modal">Oke</button>
-              </div>
+    <div class="mb-3">
+      <Loading v-if="isLoading" />
+      <div v-else class="card">
+        <div class="card-body p-0">
+          <div v-if="pemetaan.length < 1" class="text-center text-muted small p-3">Belum ada temen / kamu PKL sendirian</div>
+          <div v-for="p in pemetaan" :key="p.id" class="list-group list-group-flush">
+            <div class="list-group-item">
+              <div class="float-start fs-4 me-2">{{ p.expand.siswa.currentMood?.emoji }}</div>
+              <span class="small fw-bold text-grey pb-0 mb-0 text-uppercase">{{ p.expand.siswa.nama }}</span> <br>
+              <span class="smallest text-muted">{{ p.expand.siswa.kelas }}</span>
             </div>
           </div>
         </div>
-
       </div>
     </div>
 
+    <div class="text-center small">
+      <nuxt-link to="/mood" class="btn btn-light border border-1 border-dark">Kepoin mood orang lain <i class="bi bi-arrow-right"></i></nuxt-link>
+    </div>
   </div>
 </template>
 
