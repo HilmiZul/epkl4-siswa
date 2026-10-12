@@ -14,7 +14,7 @@
       <div v-if="$device.isMobile" class="modal" id="edit-jurnal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content rounded-0 border border-2 border-dark shadow-lg">
-            <div class="modal-header fw-bold rounded-0 border-0 border-bottom border-2 border-dark">
+            <div class="modal-header fw-bold rounded-0 border-bottom border-bottom-0">
               <i class="bi bi-pencil-square me-2"></i> Edit Jurnal
               <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -37,7 +37,7 @@
                   </select>
                 </div>
                 <div class="mb-4">
-                  <label for="deskripsi">Ceritain Kegiatan Lu!</label>
+                  <label for="deskripsi">Ceritakan Kegiatanmu!</label>
                   <textarea v-model="formEdit.deskripsi" :disabled="formEdit.foto && formEdit.elemen.length < 1"
                     @input="removeSingleSpaceIfEmpty" id="deskripsi" class="form form-control mb-2"
                     placeholder="Gunakan bahasa indonesia baik dan benar. Sesuaikan dengan tujuan yang dipilih, boleh ditulis paragraf atau daftar urutan. Asal jangan curhat..."
@@ -49,7 +49,7 @@
                   </span>
                 </div>
                 <div class="mb-4 smallest text-muted">
-                  Saya udah baca dan setuju dengan <nuxt-link to="/privacy" target="_blank"
+                  Saya setuju dengan <nuxt-link to="/privacy" target="_blank"
                     class="link text-muted">kebijakan privasi & syarat penggunaan</nuxt-link>.
                 </div>
                 <button @click="buatJurnalBaru(false, true)" :disabled="isPosting || (formEdit.foto && formEdit.deskripsi.length < 125)"
@@ -83,12 +83,6 @@
                 <!-- <span v-if="journals.totalItems">Menampilkan {{ journals.items.length }}  dari {{ journals.totalItems }} Jurnal</span> -->
                 <span v-if="journals.totalItems" class="badge border border-dark text-dark">{{ journals.totalItems }} Jurnal</span>
               </div>
-              <div v-if="!isLoadingJournals" class="text-center text-muted fw-bold fs-4">
-                <span v-if="journals.totalItems == 0">
-                  <div class="fs-1 pt-5"><i class="bi bi-database"></i></div>
-                  Belum ada jurnal
-                </span>
-              </div>
 
               <!-- Filter by elemen / tujuan pembelajaran -->
               <div class="mx-3 mt-2 sticky">
@@ -98,6 +92,13 @@
                   <option value="sesuai">Sesuai Elemen</option>
                   <option value="Lain-lain">Tidak Sesuai Elemen</option>
                 </select> 
+              </div>
+
+              <div v-if="!isLoadingJournals" class="text-center text-muted fw-bold fs-4">
+                <span v-if="journals.totalItems == 0">
+                  <div class="fs-1 pt-5"><i class="bi bi-database"></i></div>
+                  Belum ada jurnal
+                </span>
               </div>
 
               <Loading class="py-3" v-if="isLoadingJournals" />
@@ -164,7 +165,7 @@
                       <loading-placeholder v-if="isLoadingKomentar" row="1" col="12" /> 
                       <div v-else>
                         <div v-if="pratinjauKomentar" class="text-muted small">{{ pratinjauKomentar.created }}</div>
-                        <div v-if="pratinjauKomentar" class="my-2">
+                        <div v-if="pratinjauKomentar" class="pre-text small my-2">
                           {{ pratinjauKomentar.komentar }}
                         </div>
                       </div>
