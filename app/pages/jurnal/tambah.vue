@@ -1,7 +1,7 @@
 <template>
   <div v-if="isMobile" class="card">
     <div class="card-header">
-      <span class="h5 fw-bold">Jurnal / Buat baru</span>
+      <span class="h5 fw-bold">Buat Jurnal</span>
       <NuxtLink to="/jurnal" class="float-end btn btn-light btn-sm border border-2 border-dark">Kembali</NuxtLink>
     </div>
     <div class="card-body">
@@ -32,7 +32,7 @@
         </span>
       </div>
       <div class="mb-4 smallest text-muted">
-        Saya udah baca dan setuju dengan <nuxt-link to="/privacy" target="_blank"
+        Saya setuju dengan <nuxt-link to="/privacy" target="_blank"
           class="link text-muted">kebijakan privasi & syarat penggunaan</nuxt-link>.
       </div>
       <button @click="buatJurnalBaru(false)" :disabled="isPosting || (form.foto && form.deskripsi.length < 125)"
