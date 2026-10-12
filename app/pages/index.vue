@@ -5,7 +5,7 @@
       <span v-else-if="!isLoading && peserta">
         <span @click="() => isOpenEmojis = !isOpenEmojis" class="mood-container hand-cursor">
           <span v-if="!currentMood" class="emoji">
-            <i class="bi bi-emoji-smile"></i><sup class="text-muted fw-normal"><i class="bi bi-plus"></i></sup>
+            <i class="bi bi-emoji-smile"></i><sup class="fw-normal"><i class="bi bi-chat-dots"></i></sup>
           </span>
           <span v-else class="emoji">
             <div class="mood-bubble">I feel {{ currentMood.name }}!</div>
@@ -191,7 +191,7 @@
     </div>
 
     <div class="text-center small">
-      <nuxt-link to="/mood" class="btn btn-light border border-1 border-dark">Kepoin mood orang lain <i class="bi bi-arrow-right"></i></nuxt-link>
+      <nuxt-link to="/mood" class="btn btn-light border border-2 border-dark">Kepoin mood orang lain <i class="bi bi-arrow-right"></i></nuxt-link>
     </div>
   </div>
 </template>
