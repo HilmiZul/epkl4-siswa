@@ -69,14 +69,16 @@ body {
 }
 
 .shadow-lg {
-  box-shadow: 0.2rem 0.2rem 0 #000000 !important;
+  /* box-shadow: 0.2rem 0.2rem 0 #000000 !important; */
+  box-shadow: none !important;
 }
 
 .card {
   border-radius: 32px !important;
   corner-shape: squircle;
   border: 2.5px solid #000000 !important;
-  box-shadow: 0.2rem 0.2rem 0 #000000 !important;
+  /* box-shadow: 0.2rem 0.2rem 0 #000000 !important; */
+  box-shadow: none !important;;
 }
 
 .card .card-header {
@@ -117,7 +119,8 @@ body {
   border: 2px solid #000000;
   border-radius: 32px !important;
   corner-shape: squircle;
-  box-shadow: 0.2rem 0.2rem 0 #000000 !important;
+  /* box-shadow: 0.2rem 0.2rem 0 #000000 !important; */
+  box-shadow: none !important;
 }
 
 .form:focus {
@@ -299,6 +302,8 @@ input[type="checkbox"]:not(:checked) {
 .label-berkas {
   width: 100%;
   border: 2px dashed #4f4f4f !important;
+  border-radius: 32px;
+  corner-shape: squircle;
 }
 
 .smallest {

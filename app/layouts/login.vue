@@ -46,13 +46,15 @@ html, body {
   font-family: 'Romana BT';
 }
 .shadow-lg {
-  box-shadow: 0.2rem 0.2rem 0 #000000 !important;
+  /* box-shadow: 0.2rem 0.2rem 0 #000000 !important; */
+  box-shadow: none !important;
 }
 .card {
   border-radius: 32px !important;
   corner-shape: squircle;
   border: 2.5px solid #000000 !important;
-  box-shadow: 0.2rem 0.2rem 0 #000000 !important;
+  /* box-shadow: 0.2rem 0.2rem 0 #000000 !important; */
+  box-shadow: none !important;
 }
 .btn {
   font-weight: 600;
@@ -77,7 +79,8 @@ html, body {
   border: 2px solid #000000;
   border-radius: 32px !important;
   corner-shape: squircle;
-  box-shadow: 0.2rem 0.2rem 0 #000000 !important;
+  /* box-shadow: 0.2rem 0.2rem 0 #000000 !important; */
+  box-shadow: none !important;
 }
 .form:focus {
   border-color: #000000;
