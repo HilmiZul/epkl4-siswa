@@ -34,7 +34,7 @@
       </div>
     </nuxt-link>
     <nuxt-link to="/jurnal/tambah" class="link">
-      <div v-if="pemetaan.length > 0 && peserta?.guru_pembimbing != '' && !havePostJournalToday" class="alert alert-dark text-center small p-2">
+      <div v-if="pemetaan.length > 0 && peserta?.guru_pembimbing != '' && !havePostJournalToday && iduka?.items[0]?.expand?.iduka?.pembimbing_sekolah" class="alert alert-dark text-center small p-2">
         <i class="bi bi-pencil-square"></i> Ayo buat Jurnal hari ini <i class="bi bi-arrow-right"></i>
       </div>
     </nuxt-link>
