@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.3 (24 Oktober 2026)
+
+- Upgrade Nuxt version
+- Upgrade runtime: Node and Bun
+
 ## 3.2 (12 Oktober 2026)
 
 - Bug fixes
