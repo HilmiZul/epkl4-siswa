@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.3.1 (5 November 2026)
+
+Upgrade Nuxt version 4.6.4
+
 ## 3.3 (24 Oktober 2026)
 
 - Upgrade Nuxt version
