@@ -162,7 +162,7 @@
               <i class="bi bi-info-circle"></i> &nbsp; Prosentase
             </div>
             <div class="modal-body">
-              Prosentase Aktivitas dihutung dari Jurnal dengan Elemen CP yang sesuai dan sudah divalidasi pembimbing!
+              Prosentase Aktivitas dihitung dari Jurnal dengan Elemen CP yang sesuai dan sudah divalidasi pembimbing!
             </div>
 
             <div class="modal-footer border-top border-top-0">
