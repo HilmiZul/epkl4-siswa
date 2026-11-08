@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.3.2 (8 November 2026)
+
+- Fix UX writing: prosentase info
+
 ## 3.3.1 (5 November 2026)
 
 Upgrade Nuxt version 4.6.4
