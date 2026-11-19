@@ -1,8 +1,9 @@
 # Changelog
 
-## 3.3.3 (19 November 2026)
+## 3.3.4 (19 November 2026)
 
 - Disable vapor mode (enable soon)
+- Update dependency: js-sdk v0.29.0
 
 ## 3.3.2 (8 November 2026)
 
