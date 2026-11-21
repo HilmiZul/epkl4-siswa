@@ -6,9 +6,6 @@
     <div class="card-body">
       <div class="row">
         <div class="col-md-6">
-          <div class="alert alert-info small">
-            Kalo berhasil ubah password, sistem akan logout dan kamu diminta login lagi.
-          </div>
           <div class="text-muted hand-cursor mb-3" @click="showHidePassword">
             <span v-if="isShowPassword"><i class="bi bi-eye-slash"></i> Sembunyiin password</span>
             <span v-else><i class="bi bi-eye"></i> Tampilin password</span>
@@ -72,9 +69,6 @@ async function ubahPassword() {
         isSending.value = false
         isSaved.value = true
         isError.value = false
-        client.authStore.clear()
-        client.realtime.unsubscribe()
-        navigateTo('/login')
       }
     } catch {
       isSending.value = false
