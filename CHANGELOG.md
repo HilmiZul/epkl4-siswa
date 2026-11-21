@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.3.5 (21 November 2026)
+
+docs(UI/X): 
+- user don't logout after udpate password
+- change ux writing on elemen page to describe `elemen PKL`
+
 ## 3.3.4 (19 November 2026)
 
 - Disable vapor mode (enable soon)
