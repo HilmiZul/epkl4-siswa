@@ -4,11 +4,8 @@
       <span class="h4 fw-bold"><i class="bi bi-journal-bookmark-fill"></i> Elemen</span>
     </div>
     <div class="card-body">
-      <div class="alert alert-warning pb-0 small">
-        <ul class="px-2">
-          <li>Elemen berikut berkaitan dengan <nuxt-link to="/jurnal" class="link">Jurnal</nuxt-link></li>
-          <li><code>Lain-lain</code> adalah opsi di luar konteks elemen</li>
-        </ul>
+      <div class="alert alert-secondary small">
+        Berikut elemen mapel PKL yang digunakan untuk Jurnal harian.
       </div>
 
       <loading v-if="isLoading" />
