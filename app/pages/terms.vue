@@ -40,16 +40,16 @@
           <table class="table text-muted small mt-3">
             <tbody>
               <tr>
-                <td><i class="bi bi-bookmark-fill text-primary"></i> Pita Biru</td>
-                <td>: Sesuai dengan elemen yang dipilih</td>
+                <td><i class="bi bi-bookmark"></i> Pita Putih</td>
+                <td>Sesuai dengan elemen yang dipilih</td>
               </tr>
               <tr>
-                <td><i class="bi bi-bookmark-fill text-primary"></i> Pita Biru</td>
-                <td>: Ada hubungannya dengan elemen yang dipilih</td>
+                <td><i class="bi bi-bookmark"></i> Pita Putih</td>
+                <td>Ada hubungannya dengan elemen yang dipilih</td>
               </tr>
               <tr>
-                <td> <i class="bi bi-bookmark-fill text-danger"></i> Pita Merah</td>
-                <td>: Lintas konsentrasi keahlian atau aktivitas masih berhubungan dengan pekerjaan</td>
+                <td> <i class="bi bi-bookmark-fill text-dark"></i> Pita Hitam</td>
+                <td>Lintas konsentrasi keahlian atau aktivitas masih berhubungan dengan pekerjaan</td>
               </tr>
             </tbody>
           </table>

@@ -111,8 +111,8 @@
                   </div> -->
                   <div class="mb-1 smallest fw-bold text-muted">
                     <span v-if="journal.expand.elemen.elemen == 'Lain-lain'"><i
-                        class="bi bi-bookmark-fill text-danger"></i> {{ journal.expand.elemen.elemen }}</span>
-                    <span v-else><i class="bi bi-bookmark-fill text-info"></i> {{ journal.expand.elemen.elemen }}</span>
+                        class="bi bi-bookmark-fill text-dark"></i> {{ journal.expand.elemen.elemen }}</span>
+                    <span v-else><i class="bi bi-bookmark"></i> {{ journal.expand.elemen.elemen }}</span>
                   </div>
                   <span class="text-muted smallest"><i class="bi bi-calendar2-date"></i> {{ journal.created }}</span>
                   <article class="my-3 pre-text">
