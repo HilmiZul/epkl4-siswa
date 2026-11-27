@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.3.6 (27 November 2026)
+
+- Update pita tanda jurnal sesuai dan tidak sesuai:
+  - `putih` sesuai
+  - `hitam` tidak sesuai
+
 ## 3.3.5 (21 November 2026)
 
 docs(UI/X): 
